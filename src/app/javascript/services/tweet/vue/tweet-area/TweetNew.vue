@@ -44,7 +44,7 @@ const onSubmit = async () => {
   <div>
     <h3 class="app-h3">新規ツイート</h3>
 
-    <form @submit.prevent="onSubmit" class="mb-4 mt-10" id="tweetForm">
+    <form @submit.prevent="onSubmit" class="mb-4 mt-10">
       <textarea
         rows="3"
         class="w-full border rounded p-2"

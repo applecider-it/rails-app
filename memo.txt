@@ -18,6 +18,8 @@ websocket: 3030
 
 Rails
 
+cd ~/workspace/github/rails-app/src
+
 foreman start -f Procfile.dev
 
 -------
