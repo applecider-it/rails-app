@@ -37,7 +37,6 @@ onMounted(() => {
         <div
           v-for="tweetContainer in tweetContainers"
           :key="tweetContainer.tweet.id"
-          :tweetContainer="tweetContainer"
           class="border rounded p-4"
         >
           <p class="text-gray-800">
