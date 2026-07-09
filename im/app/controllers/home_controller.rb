@@ -10,4 +10,8 @@ class HomeController < ApplicationController
 
   def click
   end
+
+  def wait
+    sleep(3)
+  end
 end
