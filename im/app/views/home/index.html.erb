@@ -7,7 +7,17 @@
 <p>
   <div data-controller="hello"
     data-all="<%= {
-      testValue: 'テスト' + Time.now.to_s,
+      testValue: 'テスト - ' + Time.now.to_s,
+      }.to_json %>"
+  >
+    元の文字
+  </div>
+</p>
+
+<p>
+  <div data-controller="hello2"
+    data-all="<%= {
+      testValue2: 'テスト2 - ' + Time.now.to_s,
       }.to_json %>"
   >
     元の文字

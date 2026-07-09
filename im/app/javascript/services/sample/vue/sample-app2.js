@@ -1,6 +1,6 @@
-const SampleApp = {
+const SampleApp2 = {
   props: {
-    testValue: {
+    testValue2: {
       type: String,
     },
   },
@@ -8,14 +8,14 @@ const SampleApp = {
     return { count: 0 };
   },
   template: `
-    <h3>SampleApp</h3>
+    <h3>SampleApp2</h3>
     <button @click="count++">
       カウント: {{ count }}
     </button>
     <div>
-      testValue: {{ testValue }}
+      testValue2: {{ testValue2 }}
     </div>
   `,
 };
 
-export default SampleApp;
+export default SampleApp2;
