@@ -1,10 +1,11 @@
 console.log('load: /controllers/click_controller.js');
 
 import { Controller } from '@hotwired/stimulus';
+import { SampleFunction } from 'services/sample/sample';
 
 export default class extends Controller {
   onclick() {
-    console.log('Clicked!!')
+    console.log(SampleFunction('Clicked!!'))
   }
   connect() {
     console.log('/controllers/click_controller.js connect()');
