@@ -14,5 +14,6 @@ src/ <- Railsモノリス
 appli/ <- アプリ
   documents/ <- アプリ固有のドキュメント
 selenium/ <- セレニウム
+im/ <- Importmapを使った実装例
 documents/ <- 全体のドキュメント
 ```
