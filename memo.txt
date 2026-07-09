@@ -70,6 +70,7 @@ npx cap open android
 
 npx cap open ios
 
+
 -----------------------------------
 
 
@@ -88,6 +89,17 @@ admin@example.com / adminadmin
 管理者追加
 
 bin/rails db:seed
+
+
+-----------------------------------
+
+Rails Importmap実装例
+
+cd ~/workspace/github/rails-app/im
+
+rails serve
+
+http://localhost:3000/
 
 
 -----------------------------------
