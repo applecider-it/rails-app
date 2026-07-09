@@ -1,4 +1,4 @@
-console.log('load: /controllers/hello_controller.js');
+console.log('load: /controllers/hello2_controller.js');
 
 import { Controller } from '@hotwired/stimulus';
 import { createApp } from 'vue';
