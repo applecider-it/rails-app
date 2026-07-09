@@ -1,3 +1,9 @@
+<% content_for :head do %>
+    <%# 古い日時が表示されないようにするために必要 %>
+    <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
 <h1>Home#wait</h1>
 <p>
+  <%= Time.now.to_s %>
 </p>
