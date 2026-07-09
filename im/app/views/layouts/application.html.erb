@@ -23,6 +23,11 @@
   </head>
 
   <body>
+    <div>
+      <%= link_to 'Top', root_path %>
+      <%= link_to 'About', home_about_path %>
+      <%= link_to 'Contact', home_contact_path %>
+    </div>
     <%= yield %>
   </body>
 </html>
