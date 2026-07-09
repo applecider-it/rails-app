@@ -97,7 +97,7 @@ Rails Importmap実装例
 
 cd ~/workspace/github/rails-app/im
 
-rails serve
+rails server
 
 http://localhost:3000/
 
