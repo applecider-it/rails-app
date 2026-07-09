@@ -5,7 +5,11 @@
 
 <h1>Home#index</h1>
 <p>
-  <div data-controller="hello">
+  <div data-controller="hello"
+    data-all="<%= {
+      testValue: 'テスト' + Time.now.to_s,
+      }.to_json %>"
+  >
     元の文字
   </div>
 </p>
