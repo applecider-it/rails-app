@@ -1,9 +1,5 @@
 # Rails Importmap実装例
 
-上手に使えば、ある程度まとまりがある形にはなる。
-
-ただし、importmapは実装が難しくなり、turboは副作用があり、stimulusは潰しがきかないという側面もある。
-
 ## 実装内容
 
 - stimulusコントローラーの動作確認
@@ -29,3 +25,6 @@ The resource http://localhost:3000/assets/application-???????.css was preloaded 
 ただし、この警告が出る場合と、でない場合がある。
 
 出現条件は不明。
+## その他
+
+- [評価](./evaluation.md)
