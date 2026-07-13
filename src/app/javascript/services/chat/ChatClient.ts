@@ -75,14 +75,14 @@ export default class ChatClient {
   }
 
   /** メッセージ送信 */
-  sendMessage(message: string, type: SendType) {
+  async sendMessage(message: string, type: SendType) {
     console.log('sendMessage', message, type);
-    if (!message) return;
+    if (!message && type !== 'pusher') return;
 
     if (type === 'websocket') {
       this.send(message);
     } else {
-      this.sendApi(message, type);
+      await this.sendApi(message, type);
     }
   }
 

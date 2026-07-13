@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 
-import { ChatMessage, SendType } from '../types'
-import type ChatClient from '../ChatClient'
+import { ChatMessage, SendType } from '../types';
+import type ChatClient from '../ChatClient';
+import { showToast } from '@/services/ui/message';
 
 const props = defineProps<{
   chatClient: ChatClient;
@@ -22,11 +23,15 @@ const onKeydown = (e: KeyboardEvent): void => {
 };
 
 /** メッセージ送信 */
-const sendMessage = (type: SendType): void => {
-  if (!message.value.trim()) return;
-
-  props.chatClient.sendMessage(message.value, type);
-  message.value = '';
+const sendMessage = async (type: SendType) => {
+  try {
+    await props.chatClient.sendMessage(message.value.trim(), type);
+    message.value = '';
+  } catch (error: any) {
+    if (error.response?.status === 422) {
+      showToast(error.response.data.errors.message[0]);
+    }
+  }
 };
 
 /** 初期化 */
