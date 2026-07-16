@@ -6,7 +6,6 @@ import UIArea from './test-area-vue/UIArea.vue';
 import FormArea from './test-area-vue/FormArea.vue';
 
 interface Props {
-  testValue?: number;
   formData: any;
 }
 

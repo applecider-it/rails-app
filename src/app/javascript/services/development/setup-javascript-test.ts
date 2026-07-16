@@ -15,8 +15,7 @@ if (el) {
   console.log('vue all', all);
 
   const app = createApp(TestAreaVue, {
-    testValue: all.testValue,
     formData: all.formData,
   });
-  app.mount('#vue-test-root');
+  app.mount(el);
 }
