@@ -4,7 +4,7 @@ import Pusher from 'pusher-js';
 export const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
   wsHost: import.meta.env.VITE_PUSHER_HOST,
   wsPort: import.meta.env.VITE_PUSHER_PORT,
-  forceTLS: false,
+  forceTLS: import.meta.env.VITE_PUSHER_FORCE_TLS === 'true',
   disableStats: true,
   cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER, // ← ★必須（Pusher互換だから、実際には使われない）
 });
