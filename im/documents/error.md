@@ -14,3 +14,26 @@ The resource http://localhost:3000/assets/application-???????.css was preloaded 
 
 出現条件は不明。
 
+## turbo特有の不具合対応
+
+### ページ遷移時に古い状態を一時表示する処理を止めたいとき
+
+```ruby
+<% content_for :head do %>
+    <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+```
+
+### stimulusコントローラーのconnect()が２回動かないようにするための措置
+
+```ruby
+<% content_for :head do %>
+    <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+```
+
+### 日時情報などがあり、prefetchでデータが生成されると都合が悪いとき
+
+```ruby
+<%= link_to 'Wait', home_wait_path, data: { turbo_prefetch: false } %>
+```
