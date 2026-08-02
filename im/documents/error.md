@@ -18,6 +18,8 @@ The resource http://localhost:3000/assets/application-???????.css was preloaded 
 
 ### ページ遷移時に古い状態を一時表示する処理を止めたいとき
 
+対象ページのviewにこれを追加。
+
 ```ruby
 <% content_for :head do %>
     <meta name="turbo-cache-control" content="no-cache">
@@ -26,6 +28,8 @@ The resource http://localhost:3000/assets/application-???????.css was preloaded 
 
 ### stimulusコントローラーのconnect()が２回動かないようにするための措置
 
+対象ページのviewにこれを追加。
+
 ```ruby
 <% content_for :head do %>
     <meta name="turbo-cache-control" content="no-cache">
@@ -33,6 +37,8 @@ The resource http://localhost:3000/assets/application-???????.css was preloaded 
 ```
 
 ### 日時情報などがあり、prefetchでデータが生成されると都合が悪いとき
+
+対象ページへのリンクをすべてこうする。
 
 ```ruby
 <%= link_to 'Wait', home_wait_path, data: { turbo_prefetch: false } %>
