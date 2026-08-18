@@ -41,3 +41,9 @@ services/
       post.rb <- これが対象になる
     regist_service.rb
 ```
+
+## リンク
+
+Railsで利用しているオートロードのライブラリー
+
+https://github.com/fxn/zeitwerk
