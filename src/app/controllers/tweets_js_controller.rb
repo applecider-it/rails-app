@@ -4,6 +4,7 @@
 # /documents/features/tweet.md
 class TweetsJsController < ApplicationController
   before_action :authenticate_user!
+  wrap_parameters false
 
   def index
     @user = current_user
@@ -22,26 +23,19 @@ class TweetsJsController < ApplicationController
   def create
     websocket_service = TweetServices::WebsocketService.new
 
-    commit = params[:commit]
-
     @tweet = UserTweet.new(tweet_params)
     @tweet.user = current_user
 
     if @tweet.valid?
       # エラーがないとき
 
-      if commit
-        # 確定ボタンの時
-        
-        @tweet.save
+      @tweet.save
 
-        websocket_service.broadcast(@tweet)
+      websocket_service.broadcast(@tweet)
 
-        render json: {status: true}
-      end
+      render json: {status: true}
     else
       # エラーがあるとき
-      # 全てのボタンで共通
       
       render json: {errors: @tweet.errors}, status: :unprocessable_entity
     end
@@ -49,6 +43,6 @@ class TweetsJsController < ApplicationController
 
   # 変更可能な項目だけを絞り込む
   private def tweet_params
-    params.expect(tweet: [ :content ])
+    params.permit(:content)
   end
 end

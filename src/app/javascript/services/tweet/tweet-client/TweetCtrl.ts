@@ -18,10 +18,7 @@ export default class TweetCtrl {
   async sendTweet(content) {
     const headers = jsonRequestHeaders();
 
-    const tweet = { content };
-    const data: any = { tweet };
-
-    data.commit = true;
+    const data: any = { content };
 
     const response = await axios.post('/tweets_js', data, {
       headers: headers,
