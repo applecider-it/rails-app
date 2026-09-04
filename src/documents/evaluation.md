@@ -42,6 +42,16 @@ services/
     regist_service.rb
 ```
 
+## respond_to, jbuilder
+
+respond_toは、普通は使わない。
+
+一応実装するという考えは、余計なメンテナンスコストになるので、必要な時だけ使うほうがいいと思う。
+
+jbuilderより、as_jsonのほうがいいと思う。
+
+railsの機能の中には、このような微妙なものもあるので、取捨選択は必須だと思う。
+
 ## リンク
 
 Railsで利用しているオートロードのライブラリー

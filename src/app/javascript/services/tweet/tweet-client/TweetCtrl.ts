@@ -18,11 +18,12 @@ export default class TweetCtrl {
   async sendTweet(content) {
     const headers = jsonRequestHeaders();
 
-    const data: any = { content };
+    const tweet = { content };
+    const data: any = { tweet };
 
     data.commit = true;
 
-    const response = await axios.post('/tweets', data, {
+    const response = await axios.post('/tweets_js', data, {
       headers: headers,
     });
     console.log('response.data', response.data);
@@ -33,7 +34,7 @@ export default class TweetCtrl {
   async getList() {
     const headers = jsonRequestHeaders();
 
-    const response = await axios.get('/tweets', {
+    const response = await axios.get('/tweets_js/list', {
       headers: headers,
     });
 

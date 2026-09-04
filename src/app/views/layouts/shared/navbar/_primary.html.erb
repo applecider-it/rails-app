@@ -15,7 +15,7 @@ link_style = "hover:text-indigo-500"
   <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
     <%= link_to 'Top', root_path, class: link_style %>
     <%= link_to 'Tweet', tweets_path, class: link_style %>
-    <%= link_to 'Tweet(JS)', tweets_js_index_path, class: link_style %>
+    <%= link_to 'Tweet(JS)', tweets_js_path, class: link_style %>
     <%= link_to 'Chat', chat_index_path, class: link_style %>
     <% if user_signed_in? %>
       <%= link_to current_user.email, edit_user_registration_path, class: link_style %>

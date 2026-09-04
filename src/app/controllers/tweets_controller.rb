@@ -28,38 +28,34 @@ class TweetsController < ApplicationController
     @tweet = UserTweet.new(tweet_params)
     @tweet.user = current_user
 
-    respond_to do |format|
-      if @tweet.valid?
-        # エラーがないとき
+    if @tweet.valid?
+      # エラーがないとき
 
-        if commit
-          # 確定ボタンの時
-          
-          @tweet.save
-
-          websocket_service.broadcast(@tweet)
-
-          format.html { redirect_to tweets_path, notice: "作成しました。" }
-          format.json { render json: {status: true} }
-        else
-          if confirm
-            # 確認ボタンの時
-            # 確認画面に遷移
-            
-            format.html { render :new_confirm }
-          else
-            # 戻るボタンの時
-            
-            format.html { render :new }
-          end
-        end
-      else
-        # エラーがあるとき
-        # 全てのボタンで共通
+      if commit
+        # 確定ボタンの時
         
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: {errors: @tweet.errors}, status: :unprocessable_entity }
+        @tweet.save
+
+        websocket_service.broadcast(@tweet)
+
+        redirect_to tweets_path, notice: "作成しました。"
+      else
+        if confirm
+          # 確認ボタンの時
+          # 確認画面に遷移
+          
+          render :new_confirm
+        else
+          # 戻るボタンの時
+          
+          render :new
+        end
       end
+    else
+      # エラーがあるとき
+      # 全てのボタンで共通
+      
+      render :new, status: :unprocessable_entity
     end
   end
 

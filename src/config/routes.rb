@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   post "chat/store_p"
 
   # ツイート
-  get "tweets_js/index"
   resources :tweets, only: [:index, :new, :create]
+  resources :tweets_js, only: [:index, :create] do
+    get :list, on: :collection
+  end
   get "api/appli/tweets/index"
 
   # ユーザー関連
