@@ -60,6 +60,14 @@ class DevelopmentController < ApplicationController
     @name = "Test!!"
   end
 
+  # respond_to動作確認
+  def respond_to_test
+    respond_to do |format|
+      format.html { render plain: "Test" }
+      format.json { render json: {status: true} }
+    end
+  end
+ 
   private def view_test_params
     params.expect(view_test_form: [ :list_val, :radio_val, :datetime_val ])
   end

@@ -4,6 +4,7 @@
 import ModalArea from './test-area-vue/ModalArea.vue';
 import UIArea from './test-area-vue/UIArea.vue';
 import FormArea from './test-area-vue/FormArea.vue';
+import RespondToArea from './test-area-vue/RespondToArea.vue';
 
 interface Props {
   formData: any;
@@ -35,6 +36,10 @@ const blockStyle = 'border-gray-400 border-2 p-3';
           :listVals="formData.list_vals"
           :radioVals="formData.radio_vals"
         />
+      </div>
+
+      <div :class="blockStyle">
+        <RespondToArea />
       </div>
     </div>
   </div>
