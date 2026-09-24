@@ -1,0 +1,248 @@
+
+git clone https://github.com/applecider-it/rails_test.git
+
+rails new myapp
+cd myapp
+
+bin/rails db:create
+bin/rails db:migrate
+
+-----------------------------------
+
+rails generate devise:install
+
+===============================================================================
+
+Depending on your application's configuration some manual setup may be required:
+
+  1. Ensure you have defined default url options in your environments files. Here
+     is an example of default_url_options appropriate for a development environment
+     in config/environments/development.rb:
+
+       config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+     In production, :host should be set to the actual host of your application.
+
+     * Required for all applications. *
+
+  2. Ensure you have defined root_url to *something* in your config/routes.rb.
+     For example:
+
+       root to: "home#index"
+
+     * Not required for API-only Applications *
+
+  3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+     For example:
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+     * Not required for API-only Applications *
+
+  4. You can copy Devise views (for customization) to your app by running:
+
+       rails g devise:views
+
+     * Not required *
+
+===============================================================================
+
+rails generate controller home index
+
+rails generate devise User
+
+rails generate devise:views
+
+rails generate devise:controllers users
+
+-----------------------------------
+
+bundle exec vite install
+
+
+npm install -D tailwindcss@^3.4.18 postcss autoprefixer
+
+npx tailwindcss init -p
+
+npm install -D typescript @types/node
+
+-----------------------------------
+
+rails generate controller test index
+
+-----------------------------------
+
+rails generate active_admin:install
+
+bin/rails db:seed
+
+-----------------------------------
+
+
+npm install react react-dom
+# TypeScript を使う場合
+npm install --save-dev @types/react @types/react-dom
+
+npm install @vitejs/plugin-react
+
+-----------------------------------
+
+
+rails generate active_admin:resource User
+
+-----------------------------------
+
+rails g scaffold UserTweet user:references content:text
+
+rails db:migrate
+
+
+rails g kaminari:views default
+
+-----------------------------------
+
+
+
+rails generate migration AddDiscardedAtToUsers discarded_at:datetime:index
+
+rails db:migrate
+
+rails generate migration AddDiscardedAtToUserTweets discarded_at:datetime:index
+
+-----------------------------------
+
+
+
+go get github.com/gorilla/websocket
+go get github.com/gorilla/mux
+
+go mod init myapp
+
+
+go run main.go
+
+rails generate controller chat index
+
+go get github.com/joho/godotenv
+
+go get github.com/golang-jwt/jwt/v5
+
+air init
+
+-----------------------------------
+
+npm install vue @vitejs/plugin-vue
+
+-----------------------------------
+
+
+go get github.com/go-redis/redis/v8
+
+go get github.com/SherClockHolmes/webpush-go
+
+-----------------------------------
+
+
+
+npm install react-router-dom
+
+npm uninstall react-router-dom
+
+npm install axios
+
+-----------------------------------
+
+
+rails g channel Chat
+
+npm install @rails/actioncable
+
+-----------------------------------
+
+
+rails db:drop db:create db:migrate db:seed
+
+rails generate devise:views admin_users
+
+rails generate devise:controllers admin_users
+
+-----------------------------------
+
+
+npm install -D @tailwindcss/forms
+
+-----------------------------------
+
+gem 'pusher'
+
+npm install pusher-js
+
+-----------------------------------
+
+
+gem 'gretel'
+
+-----------------------------------
+
+
+npm install vue-router
+
+npm uninstall vue-router
+
+
+npm uninstall vue @vitejs/plugin-vue
+
+-----------------------------------
+
+
+npm install vue @vitejs/plugin-vue
+
+npm install @vitejs/plugin-vue --save-dev
+
+
+
+npm uninstall react react-dom
+
+npm uninstall --save-dev @types/react @types/react-dom
+
+npm uninstall @vitejs/plugin-react
+
+
+npm install alpinejs
+
+-----------------------------------
+
+
+python3 -m venv venv
+
+pip install selenium
+
+sudo apt update
+sudo apt install -y chromium-browser
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+sudo apt install -y fonts-noto-cjk
+
+-----------------------------------
+
+npm create vue@latest
+
+
+npm install -D tailwindcss@^3.4.18 postcss autoprefixer
+
+npx tailwindcss init -p
+
+npm install axios
+
+npm install @capacitor/core @capacitor/cli
+
+npx cap init
+
+npm install @capacitor/android
+npx cap add android
+
+npm install @capacitor/ios
+npx cap add ios

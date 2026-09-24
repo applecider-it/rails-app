@@ -1,0 +1,25 @@
+<title><%= content_for(:title) || "Myapp" %></title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%= yield :head %>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+<link rel="icon" href="/icon.png" type="image/png">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon.png">
+
+<%= vite_client_tag %>
+
+<%= vite_typescript_tag 'admin___application' %>
+<%= vite_stylesheet_tag 'admin' %>
+
+<% if admin_user_signed_in? %>
+  <meta name="admin-user" data-json="<%= current_admin_user.to_json %>">
+<% end %>

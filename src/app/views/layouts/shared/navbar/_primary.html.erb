@@ -1,0 +1,37 @@
+<%
+link_style = "hover:text-indigo-500"
+%>
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <!-- Logo -->
+  <a href="/">
+    <div
+      class="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent"
+    >
+      MySite
+    </div>
+  </a>
+
+  <!-- Desktop Menu -->
+  <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+    <%= link_to 'Top', root_path, class: link_style %>
+    <%= link_to 'Tweet', tweets_path, class: link_style %>
+    <%= link_to 'Tweet(JS)', tweets_js_path, class: link_style %>
+    <%= link_to 'Chat', chat_index_path, class: link_style %>
+    <% if user_signed_in? %>
+      <%= link_to current_user.email, edit_user_registration_path, class: link_style %>
+      <%= button_to 'Logout',
+        destroy_user_session_path,
+        method: :delete,
+        class: link_style,
+        onclick: "return confirm('ログアウトしますか？');" %>
+    <% else %>
+      <%= link_to 'Login', new_user_session_path, class: link_style %>
+      <%= link_to 'Sign up', new_user_registration_path, class: link_style %>
+    <% end %>
+  </nav>
+
+  <!-- Mobile Button -->
+  <button @click="open = !open" class="md:hidden text-2xl">
+    ☰
+  </button>
+</div>

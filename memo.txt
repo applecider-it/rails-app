@@ -1,0 +1,256 @@
+
+cd ~/workspace/github/rails-app/src
+
+-----------------------------------
+
+port
+
+rails: 3000
+vite: 3036
+websocket: 3030
+アプリ開発環境: 5173
+
+-----------------------------------
+
+開発サーバーを起動
+
+-------
+
+Rails
+
+cd ~/workspace/github/rails-app/src
+
+foreman start -f Procfile.dev
+
+-------
+
+go
+
+websocketサーバー起動
+
+cd ~/workspace/github/rails-app/go
+
+go run ./cmd/websocket-server
+
+
+まとめてpush通知
+
+go run ./cmd/push-sender
+
+
+
+本番環境
+
+go build -o ./bin/websocket-server ./cmd/websocket-server
+
+./bin/websocket-server
+
+
+go build -o ./bin/push-sender ./cmd/push-sender
+
+./bin/push-sender
+
+-------
+
+アプリ
+
+cd ~/workspace/github/rails-app/appli
+
+npm run dev
+
+
+http://localhost:5173/
+
+
+実行
+
+npm run build && npx cap sync
+
+npx cap open android
+
+npx cap open ios
+
+
+-----------------------------------
+
+
+http://localhost:3000/
+
+test@localhost.com / testtest
+
+test2@localhost.com / test2test2
+
+
+http://localhost:3000/admin_secret/
+
+admin@example.com / adminadmin
+
+
+管理者追加
+
+bin/rails db:seed
+
+
+-----------------------------------
+
+Rails Importmap実装例
+
+cd ~/workspace/github/rails-app/im
+
+rails server
+
+http://localhost:3000/
+
+
+-----------------------------------
+
+セットアップ
+
+
+Rails
+
+bundle install
+
+npm ci
+
+cp _env.example .env
+
+
+bin/rails db:create
+
+bin/rails db:migrate
+
+bin/rails db:seed
+
+
+----
+
+Go
+
+go mod tidy
+
+cp .env.example .env
+
+
+----
+
+selenium
+
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+cp .env.example .env
+
+pip install --upgrade pip
+
+pip install -r requirements.txt
+
+
+----
+
+アプリ
+
+npm ci
+
+
+-----------------------------------
+
+ポスグレ接続
+
+win
+
+sudo -u postgres psql
+
+mac
+
+psql postgres
+
+
+DB一覧
+\l
+
+DB切り替え
+\c db_name
+
+テーブル一覧
+dt
+
+-----------------------------------
+
+本番環境
+
+DB
+
+RAILS_ENV=production bin/rails db:create
+
+RAILS_ENV=production bin/rails db:migrate
+
+RAILS_ENV=production bin/rails db:seed
+
+
+RAILS_ENV=production bin/rails console
+
+AdminUser.create!(email: 'prod@example.com', password: 'prodprod', password_confirmation: 'prodprod')
+
+
+ビルド
+
+RAILS_ENV=production rails assets:precompile
+
+
+foreman start -f Procfile.prod
+
+
+-----------------------------------
+
+コマンド
+
+
+WebSocket動作確認
+
+bin/rails app:websocket_test[redis]
+
+-----------------------------------
+
+セレニウム
+
+
+cd ~/workspace/github/rails-app/selenium
+
+source venv/bin/activate
+
+python -m app.entrypoints.main sample
+
+python -m app.entrypoints.main sample2
+
+
+ログイン
+
+python -m app.entrypoints.main
+
+通常のログインをすると、状態が維持される
+
+-----------------------------------
+
+カスタムジェネレーター
+
+
+有効化
+
+ln -s ../app/views/custom_generators lib/templates
+
+
+無効化
+
+rm lib/templates
+
+
+動作例
+
+rails generate scaffold Post title:string body:text --force
+
+
+-----------------------------------
+
