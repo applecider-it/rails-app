@@ -1,0 +1,113 @@
+import { ChatMessage, SendType } from './types';
+
+import consumer from '@/channels/consumer';
+import { pusher } from '@/services/application/pusher';
+
+import axios from 'axios';
+
+import { jsonRequestHeaders } from '@/services/api/http';
+
+/**
+ * チャットクライアント
+ */
+export default class ChatClient {
+  private ws;
+  private room;
+
+  addMessage: Function;
+
+  constructor(host, token, room) {
+    this.room = room;
+
+    console.log('this.room', this.room);
+
+    // WebSocket 接続
+    this.ws = new WebSocket(`ws://${host}/ws?token=${token}`);
+    this.ws.onmessage = (event) => this.onMessage(event);
+
+    // ActionCable 接続
+    consumer.subscriptions.create(
+      { channel: 'ChatChannel', room: this.room },
+      {
+        received: (data) => this.onMessageAC(data),
+      },
+    );
+
+    // pusher 接続
+    const channel = pusher.subscribe(`rails-chat-channel-${this.room}`);
+
+    channel.bind('new-message', (data) => this.onMessageP(data));
+  }
+
+  /** WebSocketメッセージ受信 */
+  private onMessage(event) {
+    // result = { data: { json }, sender: { user_id, email } }
+    const result = JSON.parse(event.data);
+    console.log('onmessage', result);
+
+    const data = JSON.parse(result.data.json);
+
+    this.addMessage({
+      message: data.message,
+      userId: result.sender.user_id,
+      email: result.sender.email,
+    } as ChatMessage);
+  }
+
+  /** ActionCableメッセージ受信 */
+  private onMessageAC(data) {
+    console.log('受信:', data);
+    this.addMessage({
+      message: data.message,
+      userId: data.user_id,
+      email: data.email,
+    } as ChatMessage);
+  }
+
+  /** Pusherメッセージ受信 */
+  private onMessageP(data) {
+    console.log('受信:', data);
+    this.addMessage({
+      message: data.message,
+      userId: data.user_id,
+      email: data.email,
+    } as ChatMessage);
+  }
+
+  /** メッセージ送信 */
+  async sendMessage(message: string, type: SendType) {
+    console.log('sendMessage', message, type);
+    if (!message && type !== 'pusher') return;
+
+    if (type === 'websocket') {
+      this.send(message);
+    } else {
+      await this.sendApi(message, type);
+    }
+  }
+
+  /** WebSocketメッセージ送信 */
+  private async send(message: string) {
+    const json = JSON.stringify({ message });
+    this.ws.send(JSON.stringify({ json }));
+  }
+
+  /** APIでメッセージ送信 */
+  private async sendApi(message: string, type: SendType) {
+    const headers = jsonRequestHeaders();
+
+    const data: any = { message, room: this.room };
+    console.log(data);
+
+    const url = {
+      actioncable: '/chat/store_ac',
+      pusher: '/chat/store_p',
+      redis: '/chat/store_redis',
+    }[type];
+
+    const response = await axios.post(url, data, {
+      headers: headers,
+    });
+    console.log('response.data', response.data);
+  }
+}

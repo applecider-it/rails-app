@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <%= render 'admin/layouts/shared/head' %>
+  </head>
+
+  <body class="bg-gradient-to-br from-indigo-100 via-white to-blue-100 min-h-screen">
+    <%= render 'shared/application/container' %>
+    <%= render 'admin/layouts/shared/navbar' %>
+
+    <main>
+      <%= render 'shared/message/message' %>
+      <%= render 'shared/nav/breadcrumbs' %>
+
+      <%= yield %>
+    </main>
+
+  </body>
+</html>

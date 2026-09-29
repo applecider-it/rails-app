@@ -1,0 +1,11 @@
+<% content_for :head do %>
+    <%# stimulusコントローラーのconnect()が２回動かないようにするために必要 %>
+    <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<h1>Home#click</h1>
+<p>
+  <div data-controller="click">
+    元の文字
+  </div>
+</p>
