@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get "development/javascript_test"
   post "development/respond_to_test"
   post "api/development/go_api_test"
+  get "development/headless_cms_test"
 
   # 管理画面
   scope "/admin_secret" do
