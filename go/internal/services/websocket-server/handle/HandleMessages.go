@@ -55,10 +55,6 @@ func send(client *types.Client, receivedData types.ReceivedData) error {
 		Data struct {
 			Json string `json:"json"`
 		} `json:"data"`
-		Sender struct {
-			UserID int    `json:"user_id"`
-			Email  string `json:"email"`
-		} `json:"sender"`
 	}{
 		Data: struct {
 			Json string `json:"json"`
