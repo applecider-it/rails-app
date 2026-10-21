@@ -13,10 +13,10 @@ import (
 func RedisProcessMain(h *WSHandler) {
 	fmt.Println("begin redisProcess")
 
-	pubsub := h.Rdb.Subscribe(h.Ctx, h.Config.RedisPubSubChannel)
-	defer pubsub.Close()
+	redisSub := h.Rdb.Subscribe(h.Ctx, h.Config.RedisPubSubChannel)
+	defer redisSub.Close()
 
-	ch := pubsub.Channel()
+	ch := redisSub.Channel()
 
 	roopProccessRedis(h, ch)
 }

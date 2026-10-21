@@ -60,6 +60,7 @@ func roopProccessWebSocket(h *WSHandler, ws *websocket.Conn, client *types.Clien
 		fmt.Printf("Received data: json=%s, userID=%d, email=%s\n",
 			receivedData.Json, client.UserID, client.Email)
 
+		// WebSocket からの送信は無効化
 		fmt.Printf("suspended")
 	}
 }
