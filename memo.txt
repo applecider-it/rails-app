@@ -50,26 +50,6 @@ go build -o ./bin/push-sender ./cmd/push-sender
 
 ./bin/push-sender
 
--------
-
-アプリ
-
-cd ~/workspace/github/rails-app/appli
-
-npm run dev
-
-
-http://localhost:5173/
-
-
-実行
-
-npm run build && npx cap sync
-
-npx cap open android
-
-npx cap open ios
-
 
 -----------------------------------
 
@@ -146,13 +126,6 @@ cp .env.example .env
 pip install --upgrade pip
 
 pip install -r requirements.txt
-
-
-----
-
-アプリ
-
-npm ci
 
 
 -----------------------------------

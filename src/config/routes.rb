@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   resources :tweets_js, only: [:index, :create] do
     get :list, on: :collection
   end
-  get "api/appli/tweets/index"
 
   # ユーザー関連
   devise_for :users, controllers: {
