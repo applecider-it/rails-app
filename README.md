@@ -5,7 +5,6 @@
   - [Goマイクロサービス](./documents/websocket.md)
   - [ActionCable](./documents/websocket-ac.md)
   - [Pusher](./documents/websocket-pusher.md)
-- [Push通知](./documents/push.md)
 
 ## リンク
 

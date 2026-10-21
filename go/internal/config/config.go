@@ -8,7 +8,6 @@ import (
 // アプリケーションの設定
 type Config struct {
 	WebSocket WebSocketConfig
-	Push      PushConfig
 	JwtSecret string
 	Redis     RedisConfig
 	RailsHost string
@@ -21,14 +20,6 @@ type Config struct {
 // WebSocket設定
 type WebSocketConfig struct {
 	Url string
-}
-
-// Push通知設定
-type PushConfig struct {
-	PublicKey  string
-	PrivateKey string
-	RedisKey   string
-	Mailto     string
 }
 
 // Redis設定
@@ -44,13 +35,6 @@ func Load() *Config {
 	return &Config{
 		WebSocket: WebSocketConfig{
 			Url: ":3030",
-		},
-
-		Push: PushConfig{
-			PublicKey:  os.Getenv("APP_VAPID_PUBLIC_KEY"),
-			PrivateKey: os.Getenv("APP_VAPID_PRIVATE_KEY"),
-			RedisKey:   "laravel-test-database-push_queue",
-			Mailto:     "you@example.com",
 		},
 
 		JwtSecret: os.Getenv("APP_JWT_SECRET"),
