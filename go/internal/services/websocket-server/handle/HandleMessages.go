@@ -27,7 +27,7 @@ func HandleMessagesMain(h *WSHandler) {
 
 				fmt.Println("send")
 
-				err := send(client, receivedData, sender)
+				err := send(client, receivedData)
 
 				if err != nil {
 					log.Printf("error: WriteJSON: %v", err)
@@ -40,7 +40,7 @@ func HandleMessagesMain(h *WSHandler) {
 }
 
 // メッセージを送信
-func send(client *types.Client, receivedData types.ReceivedData, sender types.ClientSimple) error {
+func send(client *types.Client, receivedData types.ReceivedData) error {
 	// 送信内容
 	//{
 	//	data: {
@@ -64,13 +64,6 @@ func send(client *types.Client, receivedData types.ReceivedData, sender types.Cl
 			Json string `json:"json"`
 		}{
 			Json: receivedData.Json,
-		},
-		Sender: struct {
-			UserID int    `json:"user_id"`
-			Email  string `json:"email"`
-		}{
-			UserID: sender.UserID,
-			Email:  sender.Email,
 		},
 	})
 

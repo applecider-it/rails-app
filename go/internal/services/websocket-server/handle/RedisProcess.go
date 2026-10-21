@@ -40,10 +40,7 @@ func roopProccessRedis(h *WSHandler, ch <-chan *redis.Message) {
 
 		// 送信用ユーザー情報に変換
 		sender := types.ClientSimple{
-			UserID:      0,
-			Email:       h.Config.WsRedisSystemEmail,
-			TokenString: "",
-			Channel:     redisData.Channel,
+			Channel: redisData.Channel,
 		}
 
 		receivedData := types.ReceivedData{

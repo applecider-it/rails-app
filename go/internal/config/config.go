@@ -13,8 +13,6 @@ type Config struct {
 	RailsHost string
 	// ブロードキャスト用Redis pub/subチャンネル
 	RedisPubSubChannel string
-	// WebSocket RedisのシステムのEMAIL
-	WsRedisSystemEmail string
 }
 
 // WebSocket設定
@@ -47,7 +45,5 @@ func Load() *Config {
 		RailsHost: os.Getenv("APP_RAILS_HOST"),
 
 		RedisPubSubChannel: "broadcast",
-
-		WsRedisSystemEmail: "System (redis)",
 	}
 }

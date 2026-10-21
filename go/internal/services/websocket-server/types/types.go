@@ -13,12 +13,9 @@ type Client struct {
 	Channel     string
 }
 
-// Redis, Websocker両方で利用できるユーザー情報
+// ブロードキャスト用のシンプルなユーザー情報
 type ClientSimple struct {
-	UserID      int
-	Email       string
-	TokenString string
-	Channel     string
+	Channel string
 }
 
 // 受信データの型定義
