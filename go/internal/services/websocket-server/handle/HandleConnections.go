@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"myapp/internal/services/websocket-server/auth"
-	"myapp/internal/services/websocket-server/test"
 	"myapp/internal/services/websocket-server/types"
 	mywebsocket "myapp/internal/services/websocket-server/websocket"
 
@@ -60,9 +59,6 @@ func roopProccessWebSocket(h *WSHandler, ws *websocket.Conn, client *types.Clien
 
 		fmt.Printf("Received data: json=%s, userID=%d, email=%s\n",
 			receivedData.Json, client.UserID, client.Email)
-
-		// Railsへのテスト送信
-		test.TestSend(client.TokenString, receivedData.Json, h.Config)
 
 		// 送信用ユーザー情報に変換
 		sender := types.ClientSimple{
