@@ -73,17 +73,6 @@ bin/rails db:seed
 
 -----------------------------------
 
-Rails Importmap実装例
-
-cd ~/workspace/github/rails-app/im
-
-rails server
-
-http://localhost:3000/
-
-
------------------------------------
-
 セットアップ
 
 

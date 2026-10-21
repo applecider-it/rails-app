@@ -11,4 +11,3 @@
 
 - [Railsモノリスのドキュメント](./src/documents/index.md)
 - [Goマイクロサービスのドキュメント](./go/documents/index.md)
-- [Rails Importmap実装例のドキュメント](./im/documents/index.md)
