@@ -26,21 +26,6 @@ Redis Pub/Sub連携のみで動作する。
 | exp | 有効期限 | integer |  |
 | iat | 現在日時 | integer |  |
 
-
-## ブロードキャスト時
-
-```
-{
-  data: {
-    json: string
-  },
-  sender: {
-    user_id: int, <- システムからの送信は 0
-    email: string
-  }
-}
-```
-
 ## Redis Pub/Sub連携
 
 Pub/Subのチャンネル名: broadcast
@@ -72,6 +57,17 @@ Pub/Subのチャンネル名: broadcast
 {
   content: string,
   user_id: integer,
+}
+```
+
+
+## ブロードキャスト時
+
+```
+{
+  data: {
+    json: string
+  },
 }
 ```
 
