@@ -55,17 +55,17 @@ onMounted(() => {
       />
 
       <button
-        @click="sendMessage('websocket')"
+        @click="sendMessage('redis')"
         class="app-btn-primary w-auto ml-2 mt-2"
       >
         Send
       </button>
 
       <button
-        @click="sendMessage('redis')"
+        @click="sendMessage('websocket')"
         class="app-btn-primary w-auto ml-2 mt-2"
       >
-        Send(R)
+        Send(動かない)
       </button>
 
       <button

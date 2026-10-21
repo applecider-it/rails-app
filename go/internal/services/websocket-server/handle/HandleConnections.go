@@ -60,18 +60,6 @@ func roopProccessWebSocket(h *WSHandler, ws *websocket.Conn, client *types.Clien
 		fmt.Printf("Received data: json=%s, userID=%d, email=%s\n",
 			receivedData.Json, client.UserID, client.Email)
 
-		// 送信用ユーザー情報に変換
-		sender := types.ClientSimple{
-			UserID:      client.UserID,
-			Email:       client.Email,
-			TokenString: client.TokenString,
-			Channel:     client.Channel,
-		}
-
-		// チャネル broadcast にメッセージを送る（送信処理へ渡す）
-		h.Broadcast <- types.BroadcastPayload{
-			Received: receivedData,
-			Sender:   sender,
-		}
+		fmt.Printf("suspended")
 	}
 }
