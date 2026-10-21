@@ -50,7 +50,7 @@ class ChatController < ApplicationController
     room = params[:room]
     message = params[:message]
 
-    redis_service.broadcast(room, message)
+    redis_service.broadcast(room, message, current_user)
 
     render json: { status: 'OK' }
   end

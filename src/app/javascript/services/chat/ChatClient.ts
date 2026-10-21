@@ -49,8 +49,8 @@ export default class ChatClient {
 
     this.addMessage({
       message: data.message,
-      userId: result.sender.user_id,
-      email: result.sender.email,
+      userId: data.user_id,
+      email: data.email,
     } as ChatMessage);
   }
 

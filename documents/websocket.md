@@ -61,6 +61,8 @@ Pub/Subのチャンネル名: broadcast
 ```
 {
   message: string,
+  user_id: integer,
+  email: string,
 }
 ```
 
