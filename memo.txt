@@ -8,7 +8,6 @@ port
 rails: 3000
 vite: 3036
 websocket: 3030
-アプリ開発環境: 5173
 
 -----------------------------------
 
@@ -154,16 +153,6 @@ RAILS_ENV=production rails assets:precompile
 
 
 foreman start -f Procfile.prod
-
-
------------------------------------
-
-コマンド
-
-
-WebSocket動作確認
-
-bin/rails app:websocket_test[redis]
 
 -----------------------------------
 
