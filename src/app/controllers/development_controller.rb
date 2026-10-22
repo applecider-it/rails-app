@@ -1,5 +1,7 @@
 # 開発者向けページ
 class DevelopmentController < ApplicationController
+  before_action :authenticate_user!, only: [:ruby_test]
+
   def index
   end
 

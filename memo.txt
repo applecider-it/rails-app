@@ -8,7 +8,6 @@ port
 rails: 3000
 vite: 3036
 websocket: 3030
-ヘッドレスCMS用wordpress: 8080
 
 -----------------------------------
 
@@ -39,25 +38,6 @@ go run ./cmd/websocket-server
 go build -o ./bin/websocket-server ./cmd/websocket-server
 
 ./bin/websocket-server
-
-
-
-----
-
-ヘッドレスCMS用wordpress
-
-
-cd ~/workspace/github/rails-app/wordpress
-
-docker compose up
-
-  最初は何度か起動しないといけない場合がある
-
-http://localhost:8080
-
-admin / admin
-
-パーマリンク設定を「日付と投稿名」にしないとAPIが使えない
 
 -----------------------------------
 
