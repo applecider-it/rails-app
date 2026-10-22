@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+  get "home/info"
+  get "home/info_detail"
 
   # 開発者向けページ
   get "development/index"
@@ -41,7 +43,6 @@ Rails.application.routes.draw do
   post "development/view_test_post"
   get "development/javascript_test"
   post "development/respond_to_test"
-  get "development/headless_cms_test"
 
   # 管理画面
   scope "/admin_secret" do

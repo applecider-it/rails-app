@@ -67,15 +67,6 @@ class DevelopmentController < ApplicationController
       format.json { render json: {status: true} }
     end
   end
- 
-  # ヘッドレスCMS動作確認
-  def headless_cms_test
-    post_service = CmsServices::PostService.new
-    
-    @page = params.fetch(:page, 1).to_i.clamp(1, 1000)
-    
-    @result = post_service.posts(1, @page)
-  end
 
   private def view_test_params
     params.expect(view_test_form: [ :list_val, :radio_val, :datetime_val ])
