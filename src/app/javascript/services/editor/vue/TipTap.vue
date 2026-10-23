@@ -7,6 +7,7 @@ import { ref, onBeforeUnmount, watch } from 'vue';
 import { useEditor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
+import { TextStyle, Color } from '@tiptap/extension-text-style';
 
 import { formatHtml } from '@/services/data/html';
 
@@ -30,14 +31,28 @@ watch(htmlContent, (html) => {
   props.callback(html);
 });
 
+/** スタイルの変更を有効にするためのカスタムイメージ */
+const CustomImage = Image.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      style: {
+        default: 'width: 20rem;',
+        parseHTML: (element) => element.getAttribute('style'),
+        renderHTML: (attributes) => ({ style: attributes.style }),
+      },
+    };
+  },
+});
+
 // Tiptapエディタの初期化
 const editor = useEditor({
   content: htmlContent.value,
   extensions: [
     StarterKit.configure({}),
-    Image.configure({
-      HTMLAttributes: { style: 'width: 20rem;' },
-    }),
+    CustomImage.configure({}),
+    TextStyle,
+    Color,
   ],
   onUpdate: async ({ editor }) => {
     htmlContent.value = await formatHtml(editor.getHTML());
@@ -58,6 +73,21 @@ const addImage = () => {
   const url = window.prompt('画像のURLを入力してください');
   if (!url) return;
   editor.value.chain().focus().setImage({ src: url }).run();
+};
+
+// 色の選択肢
+const colors = [
+  { label: '赤', value: '#dc2626' },
+  { label: '青', value: '#2563eb' },
+  { label: '緑', value: '#16a34a' },
+];
+
+const setColor = (color: string) => {
+  editor.value?.chain().focus().setColor(color).run();
+};
+
+const resetColor = () => {
+  editor.value?.chain().focus().unsetColor().run();
 };
 
 onBeforeUnmount(() => {
@@ -121,6 +151,30 @@ onBeforeUnmount(() => {
         >
           画像
         </button>
+        <div class="flex items-center gap-1">
+          <button
+            v-for="c in colors"
+            :key="c.value"
+            @click="setColor(c.value)"
+            :title="c.label"
+            class="w-6 h-6 rounded-full border border-gray-300"
+            :style="{ backgroundColor: c.value }"
+            type="button"
+          ></button>
+          <input
+            type="color"
+            class="w-8 h-8 p-0 border border-gray-300 rounded-sm cursor-pointer"
+            :value="editor.getAttributes('textStyle').color || '#000000'"
+            @input="setColor(($event.target as HTMLInputElement).value)"
+          />
+          <button
+            @click="resetColor"
+            :class="[btnClass, btnUnactiveClass]"
+            type="button"
+          >
+            色をリセット
+          </button>
+        </div>
       </div>
 
       <!-- 表示切り替えボタン -->
