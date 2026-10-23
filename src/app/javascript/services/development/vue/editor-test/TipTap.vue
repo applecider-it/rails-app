@@ -13,7 +13,7 @@ const htmlContent = ref(
 );
 
 const btnClass =
-  'px-3 py-1.5 text-sm font-medium rounded border transition-colors';
+  'px-3 py-1.5 text-sm font-medium rounded-sm border transition-colors';
 const btnActiveClass = 'bg-blue-600 text-white border-blue-600';
 const btnUnactiveClass =
   'bg-white text-gray-700 border-gray-300 hover:bg-gray-100';
@@ -59,7 +59,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    class="max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-sm overflow-hidden bg-white"
+    class="max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-xs overflow-hidden bg-white"
   >
     <!-- ツールバー ＆ 切り替えボタン -->
     <div
@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
       <!-- 表示切り替えボタン -->
       <button
         @click="toggleView"
-        class="px-3 py-1.5 text-sm font-medium bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors ml-auto"
+        class="px-3 py-1.5 text-sm font-medium bg-gray-200 text-gray-700 rounded-sm hover:bg-gray-300 transition-colors ml-auto"
         type="button"
       >
         {{ isCodeView ? '✏️ エディターに戻る' : '💻 HTMLを表示' }}
@@ -103,18 +103,18 @@ onBeforeUnmount(() => {
       <EditorContent
         v-if="!isCodeView"
         :editor="editor"
-        class="prose max-w-none focus:outline-none min-h-[140px]"
+        class="prose max-w-none focus:outline-hidden min-h-[140px]"
       />
       <textarea
         v-else
         v-model="htmlContent"
-        class="w-full min-h-[140px] font-mono text-sm p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="w-full min-h-[140px] font-mono text-sm p-2 border border-gray-300 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
         placeholder="HTMLを入力..."
       ></textarea>
     </div>
 
     <!-- 確認用：リアルタイムHTML出力 -->
-    <div class="mt-4 p-4 bg-gray-100 rounded text-xs font-mono break-all">
+    <div class="mt-4 p-4 bg-gray-100 rounded-sm text-xs font-mono break-all">
       <strong>出力HTML:</strong> {{ htmlContent }}
     </div>
   </div>

@@ -23,7 +23,7 @@ const toggleMode = () => {
       <h2 class="text-lg font-bold">リッチテキストエディター</h2>
       <button
         @click="toggleMode"
-        class="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition-colors"
+        class="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-sm transition-colors"
       >
         {{ isHtmlMode ? 'WYSIWYG表示に戻す' : 'HTMLソースを表示・編集' }}
       </button>
@@ -42,12 +42,12 @@ const toggleMode = () => {
     <textarea
       v-else
       v-model="content"
-      class="w-full h-[250px] p-3 font-mono text-sm bg-gray-900 text-green-400 rounded border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      class="w-full h-[250px] p-3 font-mono text-sm bg-gray-900 text-green-400 rounded-sm border border-gray-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
       placeholder="HTMLタグを編集できます"
     ></textarea>
 
     <!-- 確認用：リアルタイムHTML出力（常に下部に表示する場合） -->
-    <div class="mt-4 p-4 bg-gray-100 rounded text-xs font-mono break-all">
+    <div class="mt-4 p-4 bg-gray-100 rounded-sm text-xs font-mono break-all">
       <strong>現在のデータ (content):</strong> {{ content }}
     </div>
   </div>

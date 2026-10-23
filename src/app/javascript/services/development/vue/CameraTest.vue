@@ -107,7 +107,7 @@ onUnmounted(() => {
         <div
           v-for="(imgSrc, index) in capturedImages"
           :key="index"
-          class="border p-2 rounded shadow"
+          class="border p-2 rounded-sm shadow-sm"
         >
           <img
             :src="imgSrc"

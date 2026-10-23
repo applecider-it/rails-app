@@ -129,7 +129,7 @@ onUnmounted(() => {
       <button
         @click="moveToCurrentLocation"
         :disabled="isLocating"
-        class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow transition duration-200 disabled:opacity-50 cursor-pointer"
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition duration-200 disabled:opacity-50 cursor-pointer"
       >
         <!-- 取得中のスピナーアイコン -->
         <svg

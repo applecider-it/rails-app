@@ -1,87 +1,106 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
+@config '../../../tailwind.config.js';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility app-btn {
   /* ボタン */
+  @apply font-semibold px-4 py-2 rounded-sm transition;
+}
 
-  .app-btn {
-    @apply font-semibold px-4 py-2 rounded transition;
-  }
-  .app-btn-primary {
-    @apply app-btn bg-blue-500 hover:bg-blue-600 text-white;
-  }
-  .app-btn-secondary {
-    @apply app-btn bg-gray-500 hover:bg-gray-600 text-white;
-  }
-  .app-btn-danger {
-    @apply app-btn bg-red-500 hover:bg-red-600 text-white;
-  }
+@utility app-btn-primary {
+  @apply app-btn bg-blue-500 hover:bg-blue-600 text-white;
+}
 
+@utility app-btn-secondary {
+  @apply app-btn bg-gray-500 hover:bg-gray-600 text-white;
+}
+
+@utility app-btn-danger {
+  @apply app-btn bg-red-500 hover:bg-red-600 text-white;
+}
+
+@utility app-h2 {
   /* タイトル */
+  @apply text-4xl font-bold mb-12;
+}
 
-  .app-h2 {
-    @apply text-4xl font-bold mb-12;
-  }
-  .app-h3 {
-    @apply text-2xl font-bold mb-12;
-  }
-  .app-h4 {
-    @apply text-xl font-bold mb-12;
-  }
+@utility app-h3 {
+  @apply text-2xl font-bold mb-12;
+}
 
+@utility app-h4 {
+  @apply text-xl font-bold mb-12;
+}
+
+@utility app-form-input {
   /* テキストボックス */
-  .app-form-input {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
-  }
+  @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
+}
 
+@utility app-form-label {
   /* フォームのラベル */
-  .app-form-label {
-    @apply block font-medium text-gray-700;
-  }
+  @apply block font-medium text-gray-700;
+}
 
+@utility app-link-normal {
   /* 通常のリンク */
-  .app-link-normal {
-    @apply text-blue-600 hover:underline;
-  }
+  @apply text-blue-600 hover:underline;
+}
 
+@utility app-link-active {
   /* アクティブなリンク */
-  .app-link-active {
-    @apply text-gray-400 hover:no-underline;
-  }
+  @apply text-gray-400 hover:no-underline;
+}
 
+@utility app-container-normal {
   /* 通常のコンテナ */
-  .app-container-normal {
-    @apply max-w-5xl mx-auto px-6 py-10;
-  }
+  @apply max-w-5xl mx-auto px-6 py-10;
+}
 
+@utility app-table-container {
   /* テーブルをレスポンシブ対応させるためのコンテナ */
-  .app-table-container {
-    @apply overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg;
-  }
+  @apply overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg;
+}
 
+@utility app-table {
   /* tableタグ用 */
-  .app-table {
-    @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
-  }
+  @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
+}
 
+@utility app-table-thead {
   /* テーブルのtheadタグ用 */
-  .app-table-thead {
-    @apply bg-gray-50 dark:bg-gray-700;
-  }
+  @apply bg-gray-50 dark:bg-gray-700;
+}
 
+@utility app-table-tbody {
   /* テーブルのtbodyタグ用 */
-  .app-table-tbody {
-    @apply bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700;
-  }
+  @apply bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700;
+}
 
+@utility app-table-th {
   /* テーブルのthタグ用 */
-  .app-table-th {
-    @apply px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 tracking-wider;
-  }
+  @apply px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 tracking-wider;
+}
 
+@utility app-table-td {
   /* テーブルのtdタグ用 */
-  .app-table-td {
-    @apply px-6 py-4 whitespace-nowrap;
-  }
+  @apply px-6 py-4 whitespace-nowrap;
 }

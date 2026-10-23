@@ -47,7 +47,7 @@ const onSubmit = async () => {
     <form @submit.prevent="onSubmit" class="mb-4 mt-10">
       <textarea
         rows="3"
-        class="w-full border rounded p-2"
+        class="w-full border rounded-sm p-2"
         placeholder="What's happening?"
         name="content"
         v-model="content"
