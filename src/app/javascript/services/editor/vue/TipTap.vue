@@ -80,6 +80,26 @@ onBeforeUnmount(() => {
         >
           斜体 (Italic)
         </button>
+        <button
+          @click="editor.chain().focus().toggleBulletList().run()"
+          :class="[
+            btnClass,
+            editor.isActive('bulletList') ? btnActiveClass : btnUnactiveClass,
+          ]"
+          type="button"
+        >
+          箇条書き
+        </button>
+        <button
+          @click="editor.chain().focus().toggleOrderedList().run()"
+          :class="[
+            btnClass,
+            editor.isActive('orderedList') ? btnActiveClass : btnUnactiveClass,
+          ]"
+          type="button"
+        >
+          番号付き
+        </button>
       </div>
 
       <!-- 表示切り替えボタン -->
@@ -93,16 +113,16 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- エディタ本体 または HTMLコード表示 -->
-    <div class="p-4 min-h-[160px]">
+    <div class="p-4">
       <EditorContent
         v-if="!isCodeView"
         :editor="editor"
-        class="prose prose-slate max-w-none focus:outline-hidden min-h-[300px]"
+        class="prose prose-slate max-w-none focus:outline-hidden h-[300px] overflow-y-auto"
       />
       <textarea
         v-else
         v-model="htmlContent"
-        class="w-full min-h-[300px] font-mono text-sm p-2 border border-gray-300 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+        class="w-full h-[300px] resize-none font-mono text-sm p-2 border border-gray-300 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
         placeholder="HTMLを入力..."
       ></textarea>
     </div>
