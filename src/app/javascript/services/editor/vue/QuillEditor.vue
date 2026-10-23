@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill';
+
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 import {
@@ -10,14 +11,24 @@ import {
   imageCtrl,
   applyTooltips,
   ToolbarModule,
-} from '../../quill-editor';
+  normalizeLists
+} from '../quill-editor';
 
-const content = ref(
-  '<h1>見出し</h1><p>こんにちは！<strong>Quill</strong>へようこそ。</p><ul><li>項目1</li><li>項目2</li></ul>',
-);
+interface Props {
+  initialValue: string;
+  callback: (val: string) => void;
+}
+
+const props = defineProps<Props>();
+
+const content = ref(props.initialValue);
 const contentHtml = ref('');
 const isHtmlMode = ref(false);
 const editor = ref<InstanceType<typeof QuillEditor> | null>(null);
+
+watch(content, (html) => {
+  props.callback(normalizeLists(html));
+});
 
 watch(contentHtml, (html) => {
   // HTMLモード中の編集を、そのまま content に反映する
@@ -91,10 +102,6 @@ const options = {
       class="w-full h-62.5 p-3 font-mono text-sm bg-gray-900 text-green-400 rounded-sm border border-gray-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
       placeholder="HTMLタグを編集できます"
     ></textarea>
-
-    <div class="mt-4 p-4 bg-gray-100 rounded-sm text-xs font-mono break-all">
-      <strong>現在のデータ (content):</strong> {{ content }}
-    </div>
   </div>
 </template>
 

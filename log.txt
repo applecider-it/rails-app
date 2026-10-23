@@ -263,3 +263,5 @@ npm i prettier
 
 npm uninstall @tiptap/vue-3 @tiptap/pm @tiptap/starter-kit
 
+
+npm install -D @tailwindcss/typography
