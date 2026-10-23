@@ -2,7 +2,6 @@
 /** エディターテスト用コンポーネント */
 
 import QuillEditor from './editor-test/QuillEditor.vue';
-import TipTap from './editor-test/TipTap.vue';
 
 const blockStyle = 'border-gray-400 border-2 p-3';
 </script>
@@ -17,13 +16,6 @@ const blockStyle = 'border-gray-400 border-2 p-3';
           QuillEditor
         </div>
         <QuillEditor />
-      </div>
-
-      <div :class="blockStyle">
-        <div>
-          TipTap
-        </div>
-        <TipTap />
       </div>
     </div>
   </div>
