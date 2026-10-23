@@ -70,6 +70,10 @@ class DevelopmentController < ApplicationController
     end
   end
 
+  # カメラ動作確認
+  def camera_test
+  end
+
   private def view_test_params
     params.expect(view_test_form: [ :list_val, :radio_val, :datetime_val ])
   end
