@@ -76,6 +76,13 @@ class DevelopmentController < ApplicationController
 
   # エディター動作確認
   def editor_test
+    @val = '<h1>見出し</h1>
+<p>こんにちは！<strong>リッチテキストエディタ</strong>へようあこそ。</p>
+<ol>
+  <li><p>箇条書き１</p></li>
+  <li><p>箇条書き２</p></li>
+</ol>
+<p></p>'
   end
 
   # 地図動作確認

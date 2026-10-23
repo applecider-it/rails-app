@@ -2,18 +2,12 @@
 
 <div class="app-container-normal">
   <div id="editor-test" data-all="<%= {
-    'val':
-      '<h1>見出し</h1>
-<p>こんにちは！<strong>リッチテキストエディタ</strong>へようあこそ。</p>
-<ol>
-  <li><p>箇条書き１</p></li>
-  <li><p>箇条書き２</p></li>
-</ol>
-<p></p>'
+    'val': @val
   }.to_json %>">
     <%= render 'shared/message/loading' %>
   </div>
 
   <div class="my-5">結果：</div>
-  <div id="trace" class="mt-4 p-5 border-4 prose prose-slate"></div>
+  <div id="trace" class="mt-4 p-5 border-4 prose prose-slate max-w-none h-[400px] overflow-y-auto"><%= raw @val %></div>
+  <textarea id="output" class="w-full h-[400px]"><%= @val %></textarea>
 </div>

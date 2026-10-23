@@ -12,13 +12,12 @@ if (el) {
 
   console.log('vue all', all);
 
-  document.getElementById('trace').innerHTML = all.val;
-
   const app = createApp(TipTap, {
     initialValue: all.val,
     callback: (val) => {
       console.log('結果', val);
       document.getElementById('trace').innerHTML = val;
+      (document.getElementById('output') as HTMLTextAreaElement).value = val;
     },
   });
   app.mount(el);
