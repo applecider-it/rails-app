@@ -3,8 +3,9 @@ import { useEditor } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import { TextStyle, Color } from '@tiptap/extension-text-style';
 
-import { CustomImage } from './parts';
 import { formatHtml } from '@/services/data/html';
+
+import { CustomImage, HEADING_LEVELS } from './parts';
 
 /**
  * TipTapエディタのロジックをまとめたcomposable。
@@ -75,6 +76,24 @@ export function useHtmlEditor(
     editor.value?.chain().focus().unsetAllMarks().clearNodes().run();
   };
 
+  /** カーソル位置のブロック種別（paragraph または 見出しレベル）を返す */
+  const currentBlock = (): string => {
+    for (const level of HEADING_LEVELS) {
+      if (editor.value?.isActive('heading', { level })) return String(level);
+    }
+    return 'paragraph';
+  };
+
+  /** セレクトボックスの選択に応じて、見出し／通常の段落に変換する */
+  const changeBlock = (value: string) => {
+    const chain = editor.value?.chain().focus();
+    if (value === 'paragraph') {
+      chain.setParagraph().run();
+    } else {
+      chain.setHeading({ level: Number(value) as 2 | 3 | 4 }).run();
+    }
+  };
+
   // コンポーネント破棄時にエディタを破棄し、メモリリークを防ぐ
   onBeforeUnmount(() => {
     editor.value?.destroy();
@@ -88,6 +107,8 @@ export function useHtmlEditor(
     addImage,
     setColor,
     resetColor,
-    clearFormat
+    clearFormat,
+    currentBlock,
+    changeBlock,
   };
 }

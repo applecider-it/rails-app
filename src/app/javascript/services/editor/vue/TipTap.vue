@@ -19,6 +19,8 @@ const {
   setColor,
   resetColor,
   clearFormat,
+  currentBlock,
+  changeBlock
 } = useHtmlEditor(props.initialValue, props.callback);
 </script>
 
@@ -29,11 +31,13 @@ const {
     <Toolbar
       :editor="editor"
       :is-code-view="isCodeView"
+      :currentBlock="currentBlock"
       @toggle-view="toggleView"
       @add-image="addImage"
       @set-color="setColor"
       @reset-color="resetColor"
       @clear-format="clearFormat"
+      @change-block="changeBlock"
     />
 
     <div class="p-4">

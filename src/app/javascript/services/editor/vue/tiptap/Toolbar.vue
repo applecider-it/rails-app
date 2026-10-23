@@ -2,7 +2,7 @@
 import type { Editor } from '@tiptap/vue-3';
 import {
   COLORS,
-  HEADING_LEVELS,
+  BLOCK_OPTIONS,
   btnClass,
   btnActiveClass,
   btnUnactiveClass,
@@ -11,9 +11,10 @@ import {
 interface Props {
   editor: Editor | undefined;
   isCodeView: boolean;
+  currentBlock: Function;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'toggle-view'): void;
@@ -21,34 +22,8 @@ const emit = defineEmits<{
   (e: 'set-color', color: string): void;
   (e: 'reset-color'): void;
   (e: 'clear-format'): void;
+  (e: 'change-block', value: string): void;
 }>();
-
-/** ブロック種別のセレクトボックスの選択肢 */
-const BLOCK_OPTIONS = [
-  ...HEADING_LEVELS.map((level) => ({
-    label: `見出し${level}`,
-    value: String(level),
-  })),
-  { label: '通常', value: 'paragraph' },
-];
-
-/** カーソル位置のブロック種別（paragraph または 見出しレベル）を返す */
-const currentBlock = (editor: Editor): string => {
-  for (const level of HEADING_LEVELS) {
-    if (editor.isActive('heading', { level })) return String(level);
-  }
-  return 'paragraph';
-};
-
-/** セレクトボックスの選択に応じて、見出し／通常の段落に変換する */
-const changeBlock = (editor: Editor, value: string) => {
-  const chain = editor.chain().focus();
-  if (value === 'paragraph') {
-    chain.setParagraph().run();
-  } else {
-    chain.setHeading({ level: Number(value) as 2 | 3 | 4 }).run();
-  }
-};
 </script>
 
 <template>
@@ -57,10 +32,8 @@ const changeBlock = (editor: Editor, value: string) => {
   >
     <div v-if="!isCodeView && editor" class="flex gap-2">
       <select
-        :value="currentBlock(editor)"
-        @change="
-          changeBlock(editor, ($event.target as HTMLSelectElement).value)
-        "
+        :value="currentBlock()"
+        @change="emit('change-block', ($event.target as HTMLSelectElement).value)"
         class="text-sm border border-gray-300 rounded-sm bg-white text-gray-700"
       >
         <option v-for="o in BLOCK_OPTIONS" :key="o.value" :value="o.value">

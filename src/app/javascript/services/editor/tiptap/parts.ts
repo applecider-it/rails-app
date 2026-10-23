@@ -43,3 +43,12 @@ export const btnUnactiveClass =
 
   /** 見出しボタンに表示するレベル */
 export const HEADING_LEVELS = [1, 2, 3, 4] as const;
+
+/** ブロック種別のセレクトボックスの選択肢 */
+export const BLOCK_OPTIONS = [
+  ...HEADING_LEVELS.map((level) => ({
+    label: `見出し${level}`,
+    value: String(level),
+  })),
+  { label: '通常', value: 'paragraph' },
+];
