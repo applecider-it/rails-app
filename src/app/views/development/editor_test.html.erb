@@ -3,10 +3,17 @@
 <div class="app-container-normal">
   <div id="editor-test" data-all="<%= {
     'val':
-      '<h1>見出し</h1><p><br></p><p>こんにちは！<strong>Quill</strong>へようあこそ。</p><p><br></p><ol><li>１１１１１１</li><li>２２２２２２</li></ol>'
+      '<h1>見出し</h1>
+<p>こんにちは！<strong>リッチテキストエディタ</strong>へようあこそ。</p>
+<ol>
+  <li><p>１１１１１１</p></li>
+  <li><p>２２２２２２</p></li>
+</ol>
+<p></p>'
   }.to_json %>">
     <%= render 'shared/message/loading' %>
   </div>
 
-  <div id="trace" class="prose prose-slate"></div>
+  <div class="my-5">結果：</div>
+  <div id="trace" class="mt-4 p-5 border-4 prose prose-slate"></div>
 </div>

@@ -3,7 +3,7 @@
  */
 
 import { createApp } from 'vue';
-import QuillEditor from '@/services/editor/vue/QuillEditor.vue';
+import TipTap from '@/services/editor/vue/TipTap.vue';
 
 const el = document.getElementById('editor-test');
 
@@ -12,7 +12,9 @@ if (el) {
 
   console.log('vue all', all);
 
-  const app = createApp(QuillEditor, {
+  document.getElementById('trace').innerHTML = all.val;
+
+  const app = createApp(TipTap, {
     initialValue: all.val,
     callback: (val) => {
       console.log('結果', val);
