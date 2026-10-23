@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   post "development/respond_to_test"
   get "development/camera_test"
   get "development/editor_test"
+  get "development/map_test"
 
   # 管理画面
   scope "/admin_secret" do

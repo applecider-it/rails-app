@@ -78,6 +78,10 @@ class DevelopmentController < ApplicationController
   def editor_test
   end
 
+  # 地図動作確認
+  def map_test
+  end
+
   private def view_test_params
     params.expect(view_test_form: [ :list_val, :radio_val, :datetime_val ])
   end
