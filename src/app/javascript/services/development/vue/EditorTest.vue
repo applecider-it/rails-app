@@ -13,10 +13,16 @@ const blockStyle = 'border-gray-400 border-2 p-3';
 
     <div class="space-y-4">
       <div :class="blockStyle">
+        <div>
+          QuillEditor
+        </div>
         <QuillEditor />
       </div>
 
       <div :class="blockStyle">
+        <div>
+          TipTap
+        </div>
         <TipTap />
       </div>
     </div>

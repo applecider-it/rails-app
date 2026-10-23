@@ -58,9 +58,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
-    TipTap
-  </div>
   <div
     class="max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-sm overflow-hidden bg-white"
   >
