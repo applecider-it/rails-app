@@ -2,6 +2,7 @@
 import type { Editor } from '@tiptap/vue-3';
 import {
   COLORS,
+  HEADING_LEVELS,
   btnClass,
   btnActiveClass,
   btnUnactiveClass,
@@ -19,7 +20,35 @@ const emit = defineEmits<{
   (e: 'add-image'): void;
   (e: 'set-color', color: string): void;
   (e: 'reset-color'): void;
+  (e: 'clear-format'): void;
 }>();
+
+/** ブロック種別のセレクトボックスの選択肢 */
+const BLOCK_OPTIONS = [
+  ...HEADING_LEVELS.map((level) => ({
+    label: `見出し${level}`,
+    value: String(level),
+  })),
+  { label: '通常', value: 'paragraph' },
+];
+
+/** カーソル位置のブロック種別（paragraph または 見出しレベル）を返す */
+const currentBlock = (editor: Editor): string => {
+  for (const level of HEADING_LEVELS) {
+    if (editor.isActive('heading', { level })) return String(level);
+  }
+  return 'paragraph';
+};
+
+/** セレクトボックスの選択に応じて、見出し／通常の段落に変換する */
+const changeBlock = (editor: Editor, value: string) => {
+  const chain = editor.chain().focus();
+  if (value === 'paragraph') {
+    chain.setParagraph().run();
+  } else {
+    chain.setHeading({ level: Number(value) as 2 | 3 | 4 }).run();
+  }
+};
 </script>
 
 <template>
@@ -27,6 +56,18 @@ const emit = defineEmits<{
     class="flex justify-between items-center px-4 py-2 bg-gray-50 border-b border-gray-200"
   >
     <div v-if="!isCodeView && editor" class="flex gap-2">
+      <select
+        :value="currentBlock(editor)"
+        @change="
+          changeBlock(editor, ($event.target as HTMLSelectElement).value)
+        "
+        class="text-sm border border-gray-300 rounded-sm bg-white text-gray-700"
+      >
+        <option v-for="o in BLOCK_OPTIONS" :key="o.value" :value="o.value">
+          {{ o.label }}
+        </option>
+      </select>
+
       <button
         @click="editor.chain().focus().toggleBold().run()"
         :class="[
@@ -37,6 +78,7 @@ const emit = defineEmits<{
       >
         B
       </button>
+
       <button
         @click="editor.chain().focus().toggleItalic().run()"
         :class="[
@@ -47,6 +89,7 @@ const emit = defineEmits<{
       >
         I
       </button>
+
       <button
         @click="editor.chain().focus().toggleBulletList().run()"
         :class="[
@@ -57,6 +100,7 @@ const emit = defineEmits<{
       >
         List
       </button>
+
       <button
         @click="editor.chain().focus().toggleOrderedList().run()"
         :class="[
@@ -67,6 +111,7 @@ const emit = defineEmits<{
       >
         Num
       </button>
+
       <button
         @click="emit('add-image')"
         :class="[btnClass, btnUnactiveClass]"
@@ -74,6 +119,7 @@ const emit = defineEmits<{
       >
         画像
       </button>
+
       <div class="flex items-center gap-1">
         <button
           v-for="c in COLORS"
@@ -84,20 +130,30 @@ const emit = defineEmits<{
           :style="{ backgroundColor: c.value }"
           type="button"
         ></button>
+
         <input
           type="color"
           class="w-8 h-8 p-0 border border-gray-300 rounded-sm cursor-pointer"
           :value="editor.getAttributes('textStyle').color || '#000000'"
           @input="emit('set-color', ($event.target as HTMLInputElement).value)"
         />
+
         <button
           @click="emit('reset-color')"
           :class="[btnClass, btnUnactiveClass]"
           type="button"
         >
-          Reset
+          色リセット
         </button>
       </div>
+
+      <button
+        @click="emit('clear-format')"
+        :class="[btnClass, btnUnactiveClass]"
+        type="button"
+      >
+        書式クリア
+      </button>
     </div>
 
     <button

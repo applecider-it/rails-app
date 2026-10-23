@@ -18,6 +18,7 @@ const {
   addImage,
   setColor,
   resetColor,
+  clearFormat,
 } = useHtmlEditor(props.initialValue, props.callback);
 </script>
 
@@ -32,6 +33,7 @@ const {
       @add-image="addImage"
       @set-color="setColor"
       @reset-color="resetColor"
+      @clear-format="clearFormat"
     />
 
     <div class="p-4">
