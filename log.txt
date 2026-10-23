@@ -246,3 +246,10 @@ npx cap add android
 
 npm install @capacitor/ios
 npx cap add ios
+
+-----------------------------------
+
+
+npm install @tiptap/vue-3 @tiptap/pm @tiptap/starter-kit
+
+
