@@ -6,8 +6,9 @@
 import { ref, onBeforeUnmount, watch } from 'vue';
 import { useEditor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
+import Image from '@tiptap/extension-image';
 
-import { formatHtml } from '@/services/data/html'; 
+import { formatHtml } from '@/services/data/html';
 
 interface Props {
   initialValue: string;
@@ -32,7 +33,12 @@ watch(htmlContent, (html) => {
 // Tiptapエディタの初期化
 const editor = useEditor({
   content: htmlContent.value,
-  extensions: [StarterKit.configure({})],
+  extensions: [
+    StarterKit.configure({}),
+    Image.configure({
+      HTMLAttributes: { style: 'width: 20rem;' },
+    }),
+  ],
   onUpdate: async ({ editor }) => {
     htmlContent.value = await formatHtml(editor.getHTML());
   },
@@ -44,6 +50,14 @@ const toggleView = () => {
     editor.value.commands.setContent(htmlContent.value);
   }
   isCodeView.value = !isCodeView.value;
+};
+
+// 画像URLを入力して挿入
+const addImage = () => {
+  if (!editor.value) return;
+  const url = window.prompt('画像のURLを入力してください');
+  if (!url) return;
+  editor.value.chain().focus().setImage({ src: url }).run();
 };
 
 onBeforeUnmount(() => {
@@ -99,6 +113,13 @@ onBeforeUnmount(() => {
           type="button"
         >
           番号付き
+        </button>
+        <button
+          @click="addImage"
+          :class="[btnClass, btnUnactiveClass]"
+          type="button"
+        >
+          画像
         </button>
       </div>
 
