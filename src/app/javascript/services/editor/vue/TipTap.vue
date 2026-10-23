@@ -54,4 +54,7 @@ const {
 :deep(.tiptap) {
   outline: none;
 }
+:deep(.tiptap > :first-child) {
+  margin-top: 0;
+}
 </style>
