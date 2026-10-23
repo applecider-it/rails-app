@@ -16,9 +16,6 @@ const {
   htmlContent,
   toggleView,
   addImage,
-  setColor,
-  resetColor,
-  clearFormat,
   currentBlock,
   changeBlock
 } = useHtmlEditor(props.initialValue, props.callback);
@@ -34,9 +31,6 @@ const {
       :currentBlock="currentBlock"
       @toggle-view="toggleView"
       @add-image="addImage"
-      @set-color="setColor"
-      @reset-color="resetColor"
-      @clear-format="clearFormat"
       @change-block="changeBlock"
     />
 

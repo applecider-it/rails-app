@@ -19,9 +19,6 @@ const props = defineProps<Props>();
 const emit = defineEmits<{
   (e: 'toggle-view'): void;
   (e: 'add-image'): void;
-  (e: 'set-color', color: string): void;
-  (e: 'reset-color'): void;
-  (e: 'clear-format'): void;
   (e: 'change-block', value: string): void;
 }>();
 </script>
@@ -33,7 +30,9 @@ const emit = defineEmits<{
     <div v-if="!isCodeView && editor" class="flex gap-2">
       <select
         :value="currentBlock()"
-        @change="emit('change-block', ($event.target as HTMLSelectElement).value)"
+        @change="
+          emit('change-block', ($event.target as HTMLSelectElement).value)
+        "
         class="text-sm border border-gray-300 rounded-sm bg-white text-gray-700"
       >
         <option v-for="o in BLOCK_OPTIONS" :key="o.value" :value="o.value">
@@ -97,7 +96,7 @@ const emit = defineEmits<{
         <button
           v-for="c in COLORS"
           :key="c.value"
-          @click="emit('set-color', c.value)"
+          @click="editor.chain().focus().setColor(c.value).run()"
           :title="c.label"
           class="w-6 h-6 rounded-full border border-gray-300"
           :style="{ backgroundColor: c.value }"
@@ -108,11 +107,17 @@ const emit = defineEmits<{
           type="color"
           class="w-8 h-8 p-0 border border-gray-300 rounded-sm cursor-pointer"
           :value="editor.getAttributes('textStyle').color || '#000000'"
-          @input="emit('set-color', ($event.target as HTMLInputElement).value)"
+          @input="
+            editor
+              .chain()
+              .focus()
+              .setColor(($event.target as HTMLInputElement).value)
+              .run()
+          "
         />
 
         <button
-          @click="emit('reset-color')"
+          @click="editor.chain().focus().unsetColor().run()"
           :class="[btnClass, btnUnactiveClass]"
           type="button"
         >
@@ -121,7 +126,7 @@ const emit = defineEmits<{
       </div>
 
       <button
-        @click="emit('clear-format')"
+        @click="editor.chain().focus().unsetAllMarks().clearNodes().run()"
         :class="[btnClass, btnUnactiveClass]"
         type="button"
       >

@@ -61,21 +61,6 @@ export function useHtmlEditor(
     editor.value.chain().focus().setImage({ src: url }).run();
   };
 
-  /** 選択範囲の文字色を変更する */
-  const setColor = (color: string) => {
-    editor.value?.chain().focus().setColor(color).run();
-  };
-
-  /** 選択範囲の文字色を解除してデフォルトに戻す */
-  const resetColor = () => {
-    editor.value?.chain().focus().unsetColor().run();
-  };
-
-  /** 選択範囲の書式（太字・斜体・文字色・リストなど）をすべて解除する */
-  const clearFormat = () => {
-    editor.value?.chain().focus().unsetAllMarks().clearNodes().run();
-  };
-
   /** カーソル位置のブロック種別（paragraph または 見出しレベル）を返す */
   const currentBlock = (): string => {
     for (const level of HEADING_LEVELS) {
@@ -105,9 +90,6 @@ export function useHtmlEditor(
     htmlContent,
     toggleView,
     addImage,
-    setColor,
-    resetColor,
-    clearFormat,
     currentBlock,
     changeBlock,
   };
