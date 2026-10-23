@@ -253,3 +253,9 @@ npx cap add ios
 npm install @tiptap/vue-3 @tiptap/pm @tiptap/starter-kit
 
 npm install @vueup/vue-quill@latest
+
+-----------------------------------
+
+
+npx @tailwindcss/upgrade@latest
+
