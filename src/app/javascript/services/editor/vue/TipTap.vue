@@ -7,7 +7,7 @@ import { ref, onBeforeUnmount, watch } from 'vue';
 import { useEditor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 
-import { formatHtml } from '../tiptap';
+import { formatHtml } from '@/services/data/html'; 
 
 interface Props {
   initialValue: string;
@@ -29,7 +29,7 @@ watch(htmlContent, (html) => {
   props.callback(html);
 });
 
-// Tiptapエディタの初期化（boldとitalicのみ許可）
+// Tiptapエディタの初期化
 const editor = useEditor({
   content: htmlContent.value,
   extensions: [StarterKit.configure({})],

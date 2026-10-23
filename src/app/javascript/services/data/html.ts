@@ -2,6 +2,9 @@
  * HTML関連
  */
 
+import { format } from 'prettier/standalone';
+import * as htmlPlugin from 'prettier/plugins/html';
+
 /** HTMLエスケープ */
 export function escapeHtml(str) {
   str = String(str);
@@ -28,3 +31,12 @@ export function getMetaJson(name: string) {
 
   return null;
 }
+
+/** HTMLをフォーマット */
+export const formatHtml = async (val: string) => {
+  return await format(val, {
+    parser: 'html',
+    plugins: [htmlPlugin],
+    printWidth: 80,
+  });
+};
