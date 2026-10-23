@@ -1,24 +1,70 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill';
-// Quill標準のテーマCSSを読み込み
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
-// HTML文字列を保持する変数
-const content = ref('<p>こんにちは！<strong>Quill</strong>へようこそ。</p>');
+import {
+  toolbar,
+  minifyHtml,
+  formatHtml,
+  imageCtrl,
+  applyTooltips,
+  ToolbarModule,
+} from '../../quill-editor';
 
-// HTML表示モードの切り替えフラグ
+const content = ref(
+  '<h1>見出し</h1><p>こんにちは！<strong>Quill</strong>へようこそ。</p><ul><li>項目1</li><li>項目2</li></ul>',
+);
+const contentHtml = ref('');
 const isHtmlMode = ref(false);
+const editor = ref<InstanceType<typeof QuillEditor> | null>(null);
 
-// モード切り替え関数
-const toggleMode = () => {
+watch(contentHtml, (html) => {
+  // HTMLモード中の編集を、そのまま content に反映する
+  content.value = minifyHtml(html);
+});
+
+const toggleMode = async () => {
+  if (!isHtmlMode.value) {
+    try {
+      contentHtml.value = await formatHtml(content.value);
+    } catch (e) {
+      console.error('HTMLの整形に失敗しました', e);
+    }
+  } else {
+    content.value = minifyHtml(contentHtml.value);
+  }
   isHtmlMode.value = !isHtmlMode.value;
+};
+
+/** 初期化処理 */
+const onReady = () => {
+  const toolbar = editor.value?.getQuill().getModule('toolbar') as
+    ToolbarModule | undefined;
+
+  applyTooltips(toolbar);
+};
+
+// 画像ボタンハンドラー
+const imageHandler = () => {
+  const quill = editor.value?.getQuill();
+  if (!quill) return;
+
+  imageCtrl(quill);
+};
+
+const options = {
+  modules: {
+    toolbar: {
+      container: toolbar,
+      handlers: { image: imageHandler },
+    },
+  },
 };
 </script>
 
 <template>
   <div class="max-w-2xl mx-auto my-6">
-    <!-- 切替ボタンとタイトル -->
     <div class="flex justify-between items-center mb-2">
       <h2 class="text-lg font-bold">リッチテキストエディター</h2>
       <button
@@ -29,24 +75,23 @@ const toggleMode = () => {
       </button>
     </div>
 
-    <!-- WYSIWYG エディター（通常表示） -->
     <QuillEditor
       v-if="!isHtmlMode"
+      ref="editor"
       v-model:content="content"
       contentType="html"
       theme="snow"
-      toolbar="essential"
+      :options="options"
+      @ready="onReady"
     />
 
-    <!-- HTML ソースコード直接編集（HTMLモード時） -->
     <textarea
       v-else
-      v-model="content"
-      class="w-full h-[250px] p-3 font-mono text-sm bg-gray-900 text-green-400 rounded-sm border border-gray-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+      v-model="contentHtml"
+      class="w-full h-62.5 p-3 font-mono text-sm bg-gray-900 text-green-400 rounded-sm border border-gray-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
       placeholder="HTMLタグを編集できます"
     ></textarea>
 
-    <!-- 確認用：リアルタイムHTML出力（常に下部に表示する場合） -->
     <div class="mt-4 p-4 bg-gray-100 rounded-sm text-xs font-mono break-all">
       <strong>現在のデータ (content):</strong> {{ content }}
     </div>
@@ -54,8 +99,11 @@ const toggleMode = () => {
 </template>
 
 <style scoped>
-/* エディターの最小高さを調整 */
 :deep(.ql-container) {
   min-height: 200px;
+}
+/* 大きい画像がはみ出さないように */
+:deep(.ql-editor img) {
+  max-width: 100%;
 }
 </style>

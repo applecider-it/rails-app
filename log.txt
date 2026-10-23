@@ -259,3 +259,4 @@ npm install @vueup/vue-quill@latest
 
 npx @tailwindcss/upgrade@latest
 
+npm i prettier
