@@ -44,5 +44,11 @@ module Myapp
 
     # RedisのURL
     config.x.redis_url = ''
+
+    # ヘッドレスCMS用APIのベースURL
+    config.x.cms_api_base_url = ''
+
+    # お知らせでnewを表示する日数
+    config.x.info_new_days = 3
   end
 end

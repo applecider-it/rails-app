@@ -1,0 +1,21 @@
+<div class="app-container-normal">
+  <header class="mb-10">
+    <h2 class="app-h2"><%= sanitize(@post["title"]["rendered"], tags: []) %></h2>
+  </header>
+
+  <article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs transition hover:shadow-md">
+    <div class="border-b border-slate-100 bg-linear-to-r from-indigo-50 to-white px-6 py-5">
+      <div class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-700">
+        <%= Time.zone.parse(@post["date"]).strftime("%Y/%m/%d") %>
+      </div>
+    </div>
+
+    <div class="prose prose-slate max-w-none px-6 py-6 prose-a:text-indigo-600 prose-img:rounded-xl">
+      <%= sanitize(
+        @post["content"]["rendered"],
+        tags: CmsServices::PostService::ALLOWED_TAGS,
+        attributes: CmsServices::PostService::ALLOWED_ATTRIBUTES
+      ) %>
+    </div>
+  </article>
+</div>

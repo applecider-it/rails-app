@@ -34,6 +34,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
+  # お知らせページ
+  get "info", to: "home#info"
+
+  # ブログ
+  resources :posts, path: 'blog', only: [:index, :show]
+
   # 開発者向けページ
   get "development/index"
   get "development/ruby_test"

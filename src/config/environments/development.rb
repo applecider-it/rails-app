@@ -92,4 +92,7 @@ Rails.application.configure do
 
   # RedisのURL
   config.x.redis_url = 'redis://127.0.0.1:6379/0'
+
+  # ヘッドレスCMS用APIのベースURL
+  config.x.cms_api_base_url = 'http://localhost:8080'
 end
