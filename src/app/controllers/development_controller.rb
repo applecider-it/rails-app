@@ -33,6 +33,7 @@ class DevelopmentController < ApplicationController
 
   # View動作確認
   def view_test
+    @address_form = AddressForm.new
     setup_form_data
   end
 

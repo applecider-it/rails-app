@@ -1,0 +1,39 @@
+<div class="space-y-3">
+  <div>
+    <%= form.label :postal_code, class: "block" %>
+    <div class="flex items-center gap-2">
+      <div>
+        <%= form.text_field :postal_code, class: "app-form-input w-32" %>
+      </div>
+
+      <div>
+        <button data-app-element-postal-code="<%= {
+          postal_code: "address_form_postal_code",
+          prefecture: "address_form_prefecture",
+          city: "address_form_city",
+          address_line1: "address_form_address_line1",
+        }.to_json %>" type="button" class="app-btn-secondary">郵便番号検索</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :prefecture, class: "block" %>
+    <%= form.select :prefecture, DataServices::FixeddataService.prefectures.invert, { include_blank: "選択してください" }, class: "app-form-input w-64" %>
+  </div>
+
+  <div>
+    <%= form.label :city, class: "block" %>
+    <%= form.text_field :city, class: "app-form-input" %>
+  </div>
+
+  <div>
+    <%= form.label :address_line1, class: "block" %>
+    <%= form.text_field :address_line1, class: "app-form-input" %>
+  </div>
+
+  <div>
+    <%= form.label :address_line2, class: "block" %>
+    <%= form.text_field :address_line2, class: "app-form-input" %>
+  </div>
+</div>
