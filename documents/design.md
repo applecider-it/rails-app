@@ -12,5 +12,6 @@ go/ <- goマイクロサービス
 src/ <- Railsモノリス
   documents/ <- Railsモノリス固有のドキュメント
 selenium/ <- セレニウム
+wordpress/ <- ヘッドレスCMS用wordpress
 documents/ <- 全体のドキュメント
 ```
