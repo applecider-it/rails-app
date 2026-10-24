@@ -1,0 +1,21 @@
+- title: "新作が入荷しました!!"
+  description: |
+    新作が入荷しました。
+    <img src="{{asset:campaign/2026-03-13/Block.png}}" alt="新作" class="w-20">
+    ぜひご覧ください。
+  date: 2026-10-22
+  visible: true
+
+- title: "サマーセール開催中"
+  description: "期間限定で人気商品が最大30%OFF。数量限定の商品もございますので、お早めにご利用ください。"
+  date: 2026-01-13
+
+- title: "配送遅延のお知らせ"
+  description: "現在ご注文が集中しているため、一部地域で配送に遅れが発生する場合がございます。ご理解のほどよろしくお願いいたします。"
+  date: 2026-05-13
+  visible: false
+
+- title: "新商品入荷のお知らせ"
+  description: "人気ブランドの新作アイテムが入荷しました。ぜひ商品ページより最新ラインナップをご覧ください。"
+  date: 2026-04-13
+  visible: true

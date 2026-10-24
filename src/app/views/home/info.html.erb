@@ -1,0 +1,26 @@
+<div class="app-container-normal">
+  <h2 class="app-h2">お知らせ</h2>
+
+  <div class="space-y-4">
+    <% @infos.each do |info| %>
+      <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
+
+        <div class="text-sm text-gray-500 flex items-center gap-2">
+          <span><%= info[:date].strftime("%Y/%m/%d") %></span>
+          <% if info[:is_new] %>
+            <span class="inline-block rounded-full bg-red-500 px-2 py-0.5 text-xs font-bold text-white">NEW</span>
+          <% end %>
+        </div>
+
+        <div class="mt-1 text-lg font-semibold text-gray-800">
+          <%= sanitize info[:title], tags: [] %>
+        </div>
+
+        <div class="mt-3 prose prose-slate max-w-none prose-a:text-indigo-600 prose-img:rounded-xl">
+          <%= sanitize info[:description] %>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>
