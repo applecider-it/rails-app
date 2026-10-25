@@ -97,3 +97,8 @@
 @utility app-table-td {
   @apply px-6 py-4 whitespace-nowrap;
 }
+
+/* .prose（Tailwind CSSのTypographyプラグイン）のスタイルが優先されてしまい、<strong> タグの文字色が固定されてしまう問題対応 */
+.prose strong {
+  color: var(--my-custom-color) !important;
+}
