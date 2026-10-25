@@ -16,6 +16,6 @@
   visible: false
 
 - title: "新商品入荷のお知らせ"
-  description: "人気ブランドの新作アイテムが入荷しました。ぜひ商品ページより最新ラインナップをご覧ください。"
+  description: "<span style='color: red; font-weight: bold;'>人気ブランド</span>の新作アイテムが入荷しました。ぜひ商品ページより最新ラインナップをご覧ください。"
   date: 2026-04-13
   visible: true

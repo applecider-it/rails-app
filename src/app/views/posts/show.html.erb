@@ -11,11 +11,7 @@
     </div>
 
     <div class="prose prose-slate max-w-none px-6 py-6 prose-a:text-indigo-600 prose-img:rounded-xl">
-      <%= sanitize(
-        @post["content"]["rendered"],
-        tags: CmsServices::PostService::ALLOWED_TAGS,
-        attributes: CmsServices::PostService::ALLOWED_ATTRIBUTES
-      ) %>
+      <%= output_richtext(@post["content"]["rendered"]) %>
     </div>
   </article>
 </div>

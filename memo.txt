@@ -51,7 +51,7 @@ docker compose up
 
   最初は何度か起動しないといけない場合がある
 
-http://localhost:8080
+http://localhost:8080/wp-admin/
 
 admin / admin
 

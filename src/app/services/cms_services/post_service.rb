@@ -3,18 +3,6 @@ require "json"
 
 # ワードプレスAPIの投稿管理
 class CmsServices::PostService
-  # HTML上に表示するのを許可しているタグ
-  ALLOWED_TAGS = (
-    ActionView::Base.sanitized_allowed_tags.to_a +
-    %w[figure figcaption iframe]
-  ).freeze
-
-  # HTML上に表示するのを許可しているアトリビュート
-  ALLOWED_ATTRIBUTES = (
-    ActionView::Base.sanitized_allowed_attributes.to_a +
-    %w[style srcset sizes loading decoding width height]
-  ).freeze
-
   def initialize
     @cms_service = CmsServices::CmsService.new
   end
