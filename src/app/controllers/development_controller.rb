@@ -71,8 +71,8 @@ class DevelopmentController < ApplicationController
     end
   end
 
-  # カメラ動作確認
-  def camera_test
+  # メディア動作確認
+  def media_test
   end
 
   # エディター動作確認
