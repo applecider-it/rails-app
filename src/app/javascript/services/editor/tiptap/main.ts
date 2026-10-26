@@ -6,7 +6,7 @@ import { TextStyle, Color } from '@tiptap/extension-text-style';
 import { formatHtml } from '@/services/data/html';
 
 import { CustomImage, HEADING_LEVELS } from './parts';
-import { useImageModal } from '../vue-hook/useImageModal';
+import { useModal } from '@/services/ui/vue-hook/useModal';
 
 /**
  * TipTapエディタのロジックをまとめたcomposable。
@@ -27,7 +27,7 @@ export function useHtmlEditor(
   const htmlContent = ref(initialValue);
 
   /** 画像用モーダル */
-  const imageModal = useImageModal<string>();
+  const imageModal = useModal<string>();
 
   // HTMLが変わるたびに、親へ最新の値を通知する
   watch(htmlContent, (html) => onChange(html));

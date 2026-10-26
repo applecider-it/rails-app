@@ -2,10 +2,10 @@
 import { ref, onMounted, type Ref } from 'vue';
 /** モーダルウィンドウ動作確認 */
 import Modal from '@/services/ui/vue/popup/Modal.vue';
-import { useImageModal } from '../../vue-hook/useImageModal';
+import { useModal } from '@/services/ui/vue-hook/useModal';
 
 interface Props {
-  modal: ReturnType<typeof useImageModal<string>>;
+  modal: ReturnType<typeof useModal<string>>;
 }
 
 const props = defineProps<Props>();

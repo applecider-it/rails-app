@@ -1,9 +1,9 @@
 import { ref } from 'vue';
 
 /**
- * 画像モーダルウィンドウ用composable
+ * シンプルなモーダルウィンドウ用フック(composable)
  */
-export function useImageModal<T = string>() {
+export function useModal<T = string>() {
   const isOpen = ref<boolean>(false);
   const value = ref<T | null>(null);
 

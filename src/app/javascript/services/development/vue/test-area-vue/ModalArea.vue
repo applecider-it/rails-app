@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /** モーダルウィンドウ動作確認 */
 import Modal from '@/services/ui/vue/popup/Modal.vue';
-import { useModal } from '../../vue-hook/useModal';
+import { useModal } from '@/services/ui/vue-hook/useModal';
 
 // Composable の呼び出し
 const modal = useModal<string>();
