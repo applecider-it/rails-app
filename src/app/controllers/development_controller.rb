@@ -33,7 +33,6 @@ class DevelopmentController < ApplicationController
 
   # View動作確認
   def view_test
-    @address_form = AddressForm.new
     setup_form_data
   end
 
@@ -55,6 +54,7 @@ class DevelopmentController < ApplicationController
     @form = ret[:form]
     @list_vals = ret[:list_vals]
     @radio_vals = ret[:radio_vals]
+    @address_form = AddressForm.new
   end
 
   # Javascript動作確認
@@ -88,6 +88,20 @@ class DevelopmentController < ApplicationController
 
   # 地図動作確認
   def map_test
+  end
+
+  # アップロードテスト
+  def upload_test
+    uploaded_file = params[:attachment]
+    
+    file_name = uploaded_file.original_filename
+    file_content = uploaded_file.read
+    
+    File.open(Rails.root.join('tmp', 'upload_test___' + file_name), 'wb') do |file|
+      file.write(file_content)
+    end
+
+    redirect_to development_view_test_path, notice: "アップロードが完了しました！"
   end
 
   private def view_test_params

@@ -1,0 +1,18 @@
+<%= form_with url: development_upload_test_path, method: :post, multipart: true do |form| %>
+  <div data-app-element-drag-and-drop="<%= {
+    target: "attachment",
+    info: "dd-info",
+    dragover_class: "bg-gray-300"
+  }.to_json %>">
+    <div class="border-4 p-10">
+      ここにファイルをドラッグ＆ドロップしてください
+    </div>
+  </div>
+  <div id="dd-info"></div>
+
+  <%= form.file_field :attachment %>
+
+  <div class="mt-5">
+    <%= form.submit "アップロード", class: "app-btn-primary" %>
+  </div>
+<% end %>
