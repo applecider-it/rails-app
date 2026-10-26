@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { EditorContent } from '@tiptap/vue-3';
 import { useHtmlEditor } from '../tiptap/main';
 import Toolbar from './tiptap/Toolbar.vue';
+import ImageModal from './tiptap/ImageModal.vue';
 
 interface Props {
   initialValue: string;
@@ -17,8 +19,13 @@ const {
   toggleView,
   addImage,
   currentBlock,
-  changeBlock
+  changeBlock,
+  imageModal,
 } = useHtmlEditor(props.initialValue, props.callback);
+
+onMounted(() => {
+  //addImage(); // 画像処理実装時に有効化すると便利
+})
 </script>
 
 <template>
@@ -47,6 +54,10 @@ const {
         placeholder="HTMLを入力..."
       ></textarea>
     </div>
+  </div>
+
+  <div>
+    <ImageModal :modal="imageModal" />
   </div>
 </template>
 

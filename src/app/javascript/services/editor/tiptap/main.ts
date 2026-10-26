@@ -6,6 +6,7 @@ import { TextStyle, Color } from '@tiptap/extension-text-style';
 import { formatHtml } from '@/services/data/html';
 
 import { CustomImage, HEADING_LEVELS } from './parts';
+import { useImageModal } from '../vue-hook/useImageModal';
 
 /**
  * TipTapエディタのロジックをまとめたcomposable。
@@ -24,6 +25,9 @@ export function useHtmlEditor(
 
   /** 常に最新のHTML。エディタとtextareaの両方がこれを参照・更新する */
   const htmlContent = ref(initialValue);
+
+  /** 画像用モーダル */
+  const imageModal = useImageModal<string>();
 
   // HTMLが変わるたびに、親へ最新の値を通知する
   watch(htmlContent, (html) => onChange(html));
@@ -54,9 +58,9 @@ export function useHtmlEditor(
   };
 
   /** URLを入力させて、カーソル位置に画像を挿入する */
-  const addImage = () => {
+  const addImage = async () => {
     if (!editor.value) return;
-    const url = window.prompt('画像のURLを入力してください');
+    const url = await imageModal.open('');
     if (!url) return;
     editor.value.chain().focus().setImage({ src: url }).run();
   };
@@ -92,5 +96,6 @@ export function useHtmlEditor(
     addImage,
     currentBlock,
     changeBlock,
+    imageModal,
   };
 }
