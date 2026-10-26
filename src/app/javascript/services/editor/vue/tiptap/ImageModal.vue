@@ -19,9 +19,10 @@ const onSelectImage = (src: string) => {
 };
 
 onMounted(() => {
-  images.value.push('http://localhost:3000/icon.svg');
-  images.value.push('http://localhost:3000/icon.svg');
-  images.value.push('http://localhost:3000/icon.svg');
+  Array.from({ length: 5 }).forEach((_, index) => {
+    images.value.push('http://localhost:3000/icon.svg');
+    images.value.push('http://localhost:3000/icon.png');
+  });
 });
 </script>
 
