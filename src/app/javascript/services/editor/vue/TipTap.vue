@@ -25,7 +25,7 @@ const {
 
 onMounted(() => {
   //addImage(); // 画像処理実装時に有効化すると便利
-})
+});
 </script>
 
 <template>
@@ -62,9 +62,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/** エディタの枠を非表示にする */
 :deep(.tiptap) {
   outline: none;
 }
+/** prose prose-slateのH2～が先頭にあるときにスペースができるのを防ぐ */
 :deep(.tiptap > :first-child) {
   margin-top: 0;
 }
