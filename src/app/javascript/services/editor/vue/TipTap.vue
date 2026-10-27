@@ -45,12 +45,12 @@ onMounted(() => {
       <EditorContent
         v-if="!isCodeView"
         :editor="editor"
-        class="prose prose-slate max-w-none focus:outline-hidden h-[300px] overflow-y-auto"
+        class="prose prose-slate max-w-none focus:outline-hidden h-75 overflow-y-auto"
       />
       <textarea
         v-else
         v-model="htmlContent"
-        class="w-full h-[300px] resize-none font-mono text-sm p-2 border border-gray-300 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+        class="w-full h-75 resize-none font-mono text-sm p-2 border border-gray-300 rounded-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
         placeholder="HTMLを入力..."
       ></textarea>
     </div>
