@@ -1,13 +1,14 @@
 <div class="app-container-normal">
-  <div data-all="<%= {
-    'val': @val,
-  }.to_json %>" id="editor">
+  <div data-val="<%= @val %>" id="editor">
     <%= render 'shared/message/loading' %>
   </div>
 
   <script type="module">
+    const editor = document.getElementById('editor');
+
     window.App.funcs.setupEditor(
-      document.getElementById('editor'),
+      editor,
+      editor.dataset.val,
       (val) => {
         console.log('結果', val);
         document.getElementById('trace').innerHTML = val;
