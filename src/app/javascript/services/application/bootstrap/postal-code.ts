@@ -5,8 +5,15 @@ const elements = document.querySelectorAll<HTMLElement>(
   '[data-app-element-postal-code]',
 );
 
+type Props = {
+  postal_code: string;
+  prefecture: string;
+  city: string;
+  address_line1: string;
+};
+
 elements.forEach((el) => {
-  const all = JSON.parse(el.dataset.appElementPostalCode);
+  const all = JSON.parse(el.dataset.appElementPostalCode) as Props;
   console.log(all);
 
   const postalCodeEl = document.getElementById(
@@ -17,9 +24,7 @@ elements.forEach((el) => {
     all.prefecture,
   ) as HTMLInputElement;
 
-  const cityEl = document.getElementById(
-    all.city,
-  ) as HTMLInputElement;
+  const cityEl = document.getElementById(all.city) as HTMLInputElement;
 
   const addressLine1El = document.getElementById(
     all.address_line1,
