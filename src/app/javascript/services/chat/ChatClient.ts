@@ -16,7 +16,7 @@ export default class ChatClient {
 
   addMessage: Function;
 
-  constructor(host, token, room) {
+  constructor(host: string, token: string, room: string) {
     this.room = room;
 
     console.log('this.room', this.room);
