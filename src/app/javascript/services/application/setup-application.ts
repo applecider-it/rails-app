@@ -3,6 +3,7 @@ import './bootstrap/container';
 import './bootstrap/postal-code';
 import './bootstrap/drag-and-drop';
 import './bootstrap/window';
+import './bootstrap/htmx';
 
 // 動作確認
 import { showToast, setIsLoading } from '@/services/ui/message';

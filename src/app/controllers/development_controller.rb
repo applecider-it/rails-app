@@ -104,6 +104,11 @@ class DevelopmentController < ApplicationController
     redirect_to development_view_test_path, notice: "アップロードが完了しました！"
   end
 
+  # HTMXからのGet
+  def htmx_get
+    render partial: 'htmx_get', locals: { val: 123 }
+  end
+
   private def view_test_params
     params.expect(view_test_form: [ :list_val, :radio_val, :datetime_val ])
   end

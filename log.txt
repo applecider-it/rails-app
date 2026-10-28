@@ -271,3 +271,9 @@ npm uninstall @vueup/vue-quill
 http://localhost:3000/icon.svg
 
 npm install @tiptap/extension-text-style @tiptap/extension-color
+
+-----------------------------------
+
+
+npm install htmx.org
+
