@@ -104,18 +104,6 @@ class DevelopmentController < ApplicationController
     redirect_to development_view_test_path, notice: "アップロードが完了しました！"
   end
 
-  # HTMXからの送信
-  def htmx_post
-    # 送信中の動作確認用
-    sleep 1
-
-    page = params.fetch(:page, 1).to_i.clamp(1, 1000)
-    page_count = 10
-    search = params[:search]
-    category = params[:category]
-    render partial: 'htmx_post', locals: { page: page, page_count: page_count, search: search, category: category }
-  end
-
   private def view_test_params
     params.expect(view_test_form: [ :list_val, :radio_val, :datetime_val ])
   end

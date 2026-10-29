@@ -277,3 +277,5 @@ npm install @tiptap/extension-text-style @tiptap/extension-color
 
 npm install htmx.org
 
+
+npm uninstall htmx.org
