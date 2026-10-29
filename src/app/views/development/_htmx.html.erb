@@ -15,12 +15,11 @@ search = nil
 <div class="border-4 p-10 space-y-5">
   <form
     <%= tag.attributes(
+      id: "htmx_search_form",
       "hx-post": development_htmx_post_path,
       "hx-target": "#htmx_result",
       "hx-swap": "innerHTML",
       "hx-disabled-elt": "find input, find select, find button",
-      "hx-on::before-request": "console.log('送信開始！');window.App.funcs.setIsLoading(true);",
-      "hx-on::after-request": "console.log('送信終了！');window.App.funcs.setIsLoading(false);",
       class: "flex gap-3 flex-wrap",
     ) %>
   >

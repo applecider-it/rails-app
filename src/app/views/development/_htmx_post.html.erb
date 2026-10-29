@@ -1,5 +1,19 @@
+<% 
+base_attrs = {
+  class: "app-btn-secondary",
+  "hx-target": "#htmx_result",
+  "hx-swap": "innerHTML",
+  "hx-include": "#htmx_search_form",
+}
+%>
 <div class="space-y-5">
   <div>サーバーから送信された部品</div>
+  <div>ページ: 「<%= page %>」</div>
   <div>検索文字列: 「<%= search %>」</div>
   <div>カテゴリー: 「<%= category %>」</div>
+  <div class="space-x-3">
+    改ページ例：
+    <%= link_to "前のページ", "", base_attrs.merge("hx-post": development_htmx_post_path(page: page - 1)) %>
+    <%= link_to "次のページ", "", base_attrs.merge("hx-post": development_htmx_post_path(page: page + 1)) %>
+  </div>
 </div>

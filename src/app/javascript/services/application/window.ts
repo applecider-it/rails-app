@@ -3,11 +3,9 @@
  */
 
 import { setupEditor } from '@/services/editor/editor';
-import { setIsLoading } from '@/services/ui/message';
 
 export const App = {
   funcs: {
     setupEditor,
-    setIsLoading,
   },
 };
