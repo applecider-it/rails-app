@@ -19,7 +19,9 @@ search = nil
       "hx-target": "#htmx_result",
       "hx-swap": "innerHTML",
       "hx-disabled-elt": "find input, find select, find button",
-      class: "flex gap-3 flex-wrap"
+      "hx-on::before-request": "console.log('送信開始！');window.App.funcs.setIsLoading(true);",
+      "hx-on::after-request": "console.log('送信終了！');window.App.funcs.setIsLoading(false);",
+      class: "flex gap-3 flex-wrap",
     ) %>
   >
     <%= select_tag :category, options_for_select([["選択してください", ""]] + htmx_categories.map { |k, v| [v, k] }, category) %>
