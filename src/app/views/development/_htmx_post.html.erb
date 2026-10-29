@@ -1,11 +1,3 @@
-<% 
-base_attrs = {
-  class: "app-btn-secondary",
-  "hx-target": "#htmx_result",
-  "hx-swap": "innerHTML",
-  "hx-include": "#htmx_search_form",
-}
-%>
 <div class="space-y-5">
   <div>サーバーから送信された部品</div>
   <div>ページ: 「<%= page %>」</div>
@@ -13,7 +5,20 @@ base_attrs = {
   <div>カテゴリー: 「<%= category %>」</div>
   <div class="space-x-3">
     改ページ例：
-    <%= link_to "前のページ", "", base_attrs.merge("hx-post": development_htmx_post_path(page: page - 1)) %>
-    <%= link_to "次のページ", "", base_attrs.merge("hx-post": development_htmx_post_path(page: page + 1)) %>
+    <form
+      <%= tag.attributes(
+        "hx-post": development_htmx_post_path,
+        "hx-target": "#htmx_result",
+        "hx-swap": "innerHTML",
+      ) %>
+    >
+      <%= hidden_field_tag :search, search %>
+      <%= hidden_field_tag :category, category %>
+
+      <div class="space-x-3">
+        <%= button_tag "前のページ", name: "page", value: page - 1, class: "app-btn-secondary" %>
+        <%= button_tag "次のページ", name: "page", value: page + 1, class: "app-btn-secondary" %>
+      </div>
+    </form>
   </div>
 </div>
