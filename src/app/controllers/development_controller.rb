@@ -104,9 +104,14 @@ class DevelopmentController < ApplicationController
     redirect_to development_view_test_path, notice: "アップロードが完了しました！"
   end
 
-  # HTMXからのGet
-  def htmx_get
-    render partial: 'htmx_get', locals: { val: 123 }
+  # HTMXからの送信
+  def htmx_post
+    # 送信中の動作確認用
+    sleep 3
+
+    search = params[:search]
+    category = params[:category]
+    render partial: 'htmx_post', locals: { search: search, category: category }
   end
 
   private def view_test_params

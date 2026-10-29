@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   get "development/editor_test"
   get "development/map_test"
   post "development/upload_test"
-  get "development/htmx_get"
+  post "development/htmx_post"
 
   # 管理画面
   scope "/admin_secret" do
