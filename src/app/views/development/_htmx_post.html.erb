@@ -18,6 +18,7 @@
       <div class="space-x-3">
         <%= button_tag "前のページ", name: "page", value: page - 1, class: "app-btn-secondary" %>
         <%= button_tag "次のページ", name: "page", value: page + 1, class: "app-btn-secondary" %>
+        <span class="hidden in-[.htmx-request]:inline-block">送信中...</span>
       </div>
     </form>
   </div>
