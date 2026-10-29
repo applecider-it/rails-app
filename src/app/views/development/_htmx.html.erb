@@ -29,8 +29,8 @@ search = nil
     <%= text_field_tag :search, search, placeholder: "検索キーワードを入力...", class: "app-form-input w-auto" %>
 
     <%= button_tag type: "submit", class: "app-btn-primary" do %>
-      <span class="app-htmx-request-hidden">検索</span>
-      <span class="hidden app-htmx-request-inline-block">検索中...</span>
+      <span class="in-[.htmx-request]:hidden">検索</span>
+      <span class="hidden in-[.htmx-request]:inline-block">検索中...</span>
     <% end %>
   </form>
   

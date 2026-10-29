@@ -98,15 +98,6 @@
   @apply px-6 py-4 whitespace-nowrap;
 }
 
-/* HTMX用クラス */
-
-.htmx-request .app-htmx-request-hidden {
-  @apply hidden;
-}
-.htmx-request .app-htmx-request-inline-block {
-  @apply inline-block;
-}
-
 /* .prose（Tailwind CSSのTypographyプラグイン）のスタイルが優先されてしまい、<strong> タグの文字色が固定されてしまう問題対応 */
 .prose strong {
   color: var(--my-custom-color) !important;
