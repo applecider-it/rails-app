@@ -77,18 +77,14 @@ class DevelopmentController < ApplicationController
 
   # エディター動作確認
   def editor_test
-    @content = '<h1>見出し</h1>
+    initail_content = '<h1>見出し</h1>
 <p>こんにちは！<strong>リッチテキストエディタ</strong>へようあこそ。</p>
 <ol>
   <li><p>箇条書き１</p></li>
   <li><p>箇条書き２</p></li>
 </ol>
 <p></p>'
-  end
-
-  # エディター動作確認 送信結果
-  def editor_test_result
-    @content = params[:content]
+    @content = params.fetch(:content, initail_content)
   end
 
   # 地図動作確認

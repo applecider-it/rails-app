@@ -20,11 +20,14 @@
   <div class="my-5">結果：</div>
   <div id="trace" class="mt-4 p-5 border-4 prose prose-slate max-w-none h-100 overflow-y-auto"><%= output_richtext @content %></div>
   
-  <%= form_with url: development_editor_test_result_path, method: :post do |f| %>
+  <%= form_with url: development_editor_test_path, method: :post do |f| %>
     <div>
       <%= text_area_tag :content, @content, class: "w-full h-100" %>
     </div>
     
     <%= submit_tag "送信", class: "app-btn-primary" %>
   <% end %>
+
+  <div class="my-5">初期状態：</div>
+  <div class="mt-4 p-5 border-4 prose prose-slate max-w-none h-100 overflow-y-auto"><%= output_richtext @content %></div>
 </div>
