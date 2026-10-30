@@ -1,5 +1,5 @@
 <div class="app-container-normal">
-  <div data-val="<%= @val %>" id="editor">
+  <div data-val="<%= @content %>" id="editor">
     <%= render 'shared/message/loading' %>
   </div>
 
@@ -12,12 +12,19 @@
       (val) => {
         console.log('結果', val);
         document.getElementById('trace').innerHTML = val;
-        document.getElementById('output').value = val;
+        document.getElementById('content').value = val;
       }
     )
   </script>
 
   <div class="my-5">結果：</div>
-  <div id="trace" class="mt-4 p-5 border-4 prose prose-slate max-w-none h-100 overflow-y-auto"><%= raw @val %></div>
-  <textarea id="output" class="w-full h-100"><%= @val %></textarea>
+  <div id="trace" class="mt-4 p-5 border-4 prose prose-slate max-w-none h-100 overflow-y-auto"><%= output_richtext @content %></div>
+  
+  <%= form_with url: development_editor_test_result_path, method: :post do |f| %>
+    <div>
+      <%= text_area_tag :content, @content, class: "w-full h-100" %>
+    </div>
+    
+    <%= submit_tag "送信", class: "app-btn-primary" %>
+  <% end %>
 </div>
