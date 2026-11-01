@@ -1,4 +1,4 @@
-<%= form_with(model: @address_form, url: development_view_test_path) do |form| %>
+<%= form_with do |form| %>
   <div class="space-y-3">
     <div>
       <%= form.label :postal_code, class: "block" %>
@@ -9,10 +9,10 @@
 
         <div>
           <button data-app-element-postal-code="<%= {
-            postal_code: "address_form_postal_code",
-            prefecture: "address_form_prefecture",
-            city: "address_form_city",
-            address_line1: "address_form_address_line1",
+            postal_code: "postal_code",
+            prefecture: "prefecture",
+            city: "city",
+            address_line1: "address_line1",
           }.to_json %>" type="button" class="app-btn-secondary">郵便番号検索</button>
         </div>
       </div>
@@ -31,11 +31,6 @@
     <div>
       <%= form.label :address_line1, class: "block" %>
       <%= form.text_field :address_line1, class: "app-form-input" %>
-    </div>
-
-    <div>
-      <%= form.label :address_line2, class: "block" %>
-      <%= form.text_field :address_line2, class: "app-form-input" %>
     </div>
   </div>
 <% end %>

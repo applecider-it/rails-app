@@ -54,7 +54,6 @@ class DevelopmentController < ApplicationController
     @form = ret[:form]
     @list_vals = ret[:list_vals]
     @radio_vals = ret[:radio_vals]
-    @address_form = AddressForm.new
   end
 
   # Javascript動作確認
