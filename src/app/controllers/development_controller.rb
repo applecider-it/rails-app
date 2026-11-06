@@ -86,6 +86,10 @@ class DevelopmentController < ApplicationController
     @content = params.fetch(:content, initail_content)
   end
 
+  # スライドエディター動作確認
+  def slide_editor_test
+  end
+
   # 地図動作確認
   def map_test
   end
