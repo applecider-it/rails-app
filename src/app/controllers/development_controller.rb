@@ -88,6 +88,7 @@ class DevelopmentController < ApplicationController
 
   # スライドエディター動作確認
   def slide_editor_test
+    render layout: 'blank'
   end
 
   # 地図動作確認
