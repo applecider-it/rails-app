@@ -237,9 +237,9 @@ const stopInteraction = () => {
 
     <div class="flex flex-1 overflow-hidden">
       <!-- 編集キャンバスエリア -->
-      <main class="flex-1 p-6 overflow-auto flex items-center justify-center bg-slate-200">
+      <main class="flex-1 p-6 overflow-auto flex bg-slate-200">
         <div
-          class="relative w-[800px] h-[450px] bg-white shadow-xl rounded-sm overflow-hidden"
+          class="relative w-[800px] h-[450px] bg-white shadow-xl rounded-sm overflow-hidden m-auto shrink-0"
           @pointerdown="deselect"
         >
           <!-- スライド要素リスト（配列の後の要素ほど手前に表示されます） -->
