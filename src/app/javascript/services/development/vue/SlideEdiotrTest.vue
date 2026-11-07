@@ -205,10 +205,8 @@ const handleKeyDown = (e: KeyboardEvent) => {
 watch(
   elements,
   (newVal) => {
-    console.log(
-      '【State Updated (Elements)】',
-      JSON.parse(JSON.stringify(newVal)),
-    );
+    const json = JSON.parse(JSON.stringify(newVal));
+    console.log('【State Updated (Elements)】', json);
   },
   { deep: true },
 );
@@ -226,6 +224,18 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeyDown);
 });
+
+// 表示用定数
+
+/** ツールバーのボタンのCSSクラス */
+const classToolbarBtn =
+  'px-3 py-1.5 text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md border border-slate-300 transition-colors flex items-center gap-1';
+/** プロパティパネルのボタンのCSSクラス */
+const classPropartyBtn =
+  'py-1.5 px-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-300 transition-colors';
+/** プロパティパネルの入力ボックスのCSSクラス */
+const classPropartyInput =
+  'px-2.5 py-1.5 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-normal text-slate-800';
 </script>
 
 <template>
@@ -236,16 +246,10 @@ onUnmounted(() => {
     <header
       class="h-14 bg-white border-b border-slate-200 px-4 flex items-center gap-3 shadow-sm z-10"
     >
-      <button
-        @click="addElement('text')"
-        class="px-3 py-1.5 text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md border border-slate-300 transition-colors flex items-center gap-1"
-      >
+      <button @click="addElement('text')" :class="classToolbarBtn">
         <span>＋</span> テキスト追加
       </button>
-      <button
-        @click="addElement('shape')"
-        class="px-3 py-1.5 text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md border border-slate-300 transition-colors flex items-center gap-1"
-      >
+      <button @click="addElement('shape')" :class="classToolbarBtn">
         <span>＋</span> 図形追加
       </button>
     </header>
@@ -316,7 +320,7 @@ onUnmounted(() => {
             <input
               v-model="selectedElement.content"
               type="text"
-              class="px-2.5 py-1.5 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-normal text-slate-800"
+              :class="classPropartyInput"
             />
           </label>
 
@@ -330,7 +334,7 @@ onUnmounted(() => {
                 type="number"
                 min="8"
                 max="120"
-                class="w-full px-2.5 py-1.5 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-normal text-slate-800"
+                :class="`w-full ${classPropartyInput}`"
               />
               <span class="text-xs text-slate-500">px</span>
             </div>
@@ -357,16 +361,10 @@ onUnmounted(() => {
               >レイヤー順序</span
             >
             <div class="grid grid-cols-2 gap-2">
-              <button
-                @click="moveElement('front')"
-                class="py-1.5 px-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-300 transition-colors"
-              >
+              <button @click="moveElement('front')" :class="classPropartyBtn">
                 最前面へ
               </button>
-              <button
-                @click="moveElement('back')"
-                class="py-1.5 px-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-300 transition-colors"
-              >
+              <button @click="moveElement('back')" :class="classPropartyBtn">
                 最背面へ
               </button>
             </div>
@@ -388,31 +386,18 @@ onUnmounted(() => {
             <div
               class="grid grid-cols-2 gap-2 text-xs font-mono bg-slate-50 p-2.5 rounded-md border border-slate-200 text-slate-600"
             >
-              <div>
-                X:
+              <div
+                v-for="item in [
+                  { label: 'X', value: selectedElement.x },
+                  { label: 'Y', value: selectedElement.y },
+                  { label: 'W', value: selectedElement.width },
+                  { label: 'H', value: selectedElement.height },
+                ]"
+                :key="item.label"
+              >
+                {{ item.label }}:
                 <span class="font-bold text-slate-800">{{
-                  Math.round(selectedElement.x)
-                }}</span
-                >px
-              </div>
-              <div>
-                Y:
-                <span class="font-bold text-slate-800">{{
-                  Math.round(selectedElement.y)
-                }}</span
-                >px
-              </div>
-              <div>
-                W:
-                <span class="font-bold text-slate-800">{{
-                  Math.round(selectedElement.width)
-                }}</span
-                >px
-              </div>
-              <div>
-                H:
-                <span class="font-bold text-slate-800">{{
-                  Math.round(selectedElement.height)
+                  Math.round(item.value)
                 }}</span
                 >px
               </div>
