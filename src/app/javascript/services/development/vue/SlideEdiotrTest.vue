@@ -55,26 +55,6 @@ const elements = ref<SlideElement[]>([
 /** 現在選択されている要素のID（未選択の場合は null） */
 const selectedId = ref<string | null>(null)
 
-/** 現在選択されている要素のオブジェクトを返す算出プロパティ */
-const selectedElement = computed(() => {
-  if (!selectedId.value) return null
-  return elements.value.find((el) => el.id === selectedId.value) || null
-})
-
-// 要素全体の変更を監視し、デバッグ用ログを出力するウォッチャー
-watch(
-  elements,
-  (newVal) => {
-    console.log('【State Updated (Elements)】', JSON.parse(JSON.stringify(newVal)))
-  },
-  { deep: true }
-)
-
-// 選択IDの変更を監視し、デバッグ用ログを出力するウォッチャー
-watch(selectedId, (newId) => {
-  console.log('【Selection Changed】 選択ID:', newId)
-})
-
 /** ドラッグおよびリサイズのインタラクション状態を管理するオブジェクト */
 const interactionState = reactive({
   isDragging: false,
@@ -87,6 +67,8 @@ const interactionState = reactive({
   initialHeight: 0,
 })
 
+// selectedId管理
+
 /** 指定したIDの要素を選択状態にする */
 const selectElement = (id: string) => {
   selectedId.value = id
@@ -96,6 +78,8 @@ const selectElement = (id: string) => {
 const deselect = () => {
   selectedId.value = null
 }
+
+// 要素管理
 
 /** 新しい要素（テキストまたは図形）をスライドに追加する */
 const addElement = (type: ElementType) => {
@@ -114,6 +98,12 @@ const addElement = (type: ElementType) => {
   selectedId.value = newEl.id
 }
 
+/** 現在選択されている要素のオブジェクトを返す算出プロパティ */
+const selectedElement = computed(() => {
+  if (!selectedId.value) return null
+  return elements.value.find((el) => el.id === selectedId.value) || null
+})
+
 /** 現在選択されている要素を削除する */
 const deleteSelectedElement = () => {
   if (!selectedId.value) return
@@ -122,46 +112,20 @@ const deleteSelectedElement = () => {
   selectedId.value = null
 }
 
-/** キーボードイベントを処理し、Deleteキー押下時に要素を削除する */
-const handleKeyDown = (e: KeyboardEvent) => {
-  if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
-    return
-  }
-
-  if (e.key === 'Delete' && selectedId.value) {
-    deleteSelectedElement()
-  }
-}
-
-// コンポーネントマウント時にキーボードイベントリスナーを登録
-onMounted(() => {
-  window.addEventListener('keydown', handleKeyDown)
-})
-
-// コンポーネントアンマウント時にキーボードイベントリスナーを解除
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeyDown)
-})
-
-/** 選択中の要素を配列の末尾（最前面）に移動する */
-const bringToFront = () => {
+/** 選択中の要素を指定した方向へ移動する */
+const moveElement = (position: 'front' | 'back') => {
   if (!selectedId.value) return
   const index = elements.value.findIndex((el) => el.id === selectedId.value)
-  if (index === -1 || index === elements.value.length - 1) return
+  
+  if (index === -1) return
+  if (position === 'front' && index === elements.value.length - 1) return
+  if (position === 'back' && index === 0) return
 
   const [removed] = elements.value.splice(index, 1)
-  elements.value.push(removed)
+  position === 'front' ? elements.value.push(removed) : elements.value.unshift(removed)
 }
 
-/** 選択中の要素を配列の先頭（最背面）に移動する */
-const sendToBack = () => {
-  if (!selectedId.value) return
-  const index = elements.value.findIndex((el) => el.id === selectedId.value)
-  if (index <= 0) return
-
-  const [removed] = elements.value.splice(index, 1)
-  elements.value.unshift(removed)
-}
+// ドラッグ、リサイズ管理
 
 /** 要素のドラッグ移動を開始する */
 const startDrag = (e: PointerEvent, el: SlideElement) => {
@@ -215,6 +179,42 @@ const stopInteraction = () => {
   window.removeEventListener('pointermove', onPointerMove)
   window.removeEventListener('pointerup', stopInteraction)
 }
+
+// イベント管理
+
+/** キーボードイベントを処理し、Deleteキー押下時に要素を削除する */
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
+    return
+  }
+
+  if (e.key === 'Delete' && selectedId.value) {
+    deleteSelectedElement()
+  }
+}
+
+// 要素全体の変更を監視し、デバッグ用ログを出力するウォッチャー
+watch(
+  elements,
+  (newVal) => {
+    console.log('【State Updated (Elements)】', JSON.parse(JSON.stringify(newVal)))
+  },
+  { deep: true }
+)
+
+// 選択IDの変更を監視し、デバッグ用ログを出力するウォッチャー
+watch(selectedId, (newId) => {
+  console.log('【Selection Changed】 選択ID:', newId)
+})
+
+// コンストラクタ、デストラクタ
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown)
+})
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown)
+})
 </script>
 
 <template>
@@ -324,13 +324,13 @@ const stopInteraction = () => {
             <span class="text-xs font-semibold text-slate-600 block">レイヤー順序</span>
             <div class="grid grid-cols-2 gap-2">
               <button
-                @click="bringToFront"
+                @click="moveElement('front')"
                 class="py-1.5 px-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-300 transition-colors"
               >
                 最前面へ
               </button>
               <button
-                @click="sendToBack"
+                @click="moveElement('back')"
                 class="py-1.5 px-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-300 transition-colors"
               >
                 最背面へ
