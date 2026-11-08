@@ -279,3 +279,7 @@ npm install htmx.org
 
 
 npm uninstall htmx.org
+
+-----------------------------------
+
+bundle update rails
