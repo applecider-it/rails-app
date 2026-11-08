@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, onUnmounted, watch } from 'vue';
 
+// 型定義
+
 /** スライド上の要素の種類 */
 type ElementType = 'text' | 'shape';
 
@@ -25,6 +27,11 @@ interface SlideElement {
   /** フォントサイズ (px) */
   fontSize: number;
 }
+
+/** インタラクションの種類 */
+type InteractionType = 'drag' | 'resize';
+
+// 変数定義
 
 /** スライド上の全要素を管理するリアクティブな配列（後ろにあるほど手前に描画されます） */
 const elements = ref<SlideElement[]>([
@@ -94,6 +101,7 @@ const addElement = (type: ElementType) => {
     color: type === 'text' ? '#000000' : '#10b981',
     fontSize: 18,
   };
+
   elements.value.push(newEl);
   selectedId.value = newEl.id;
 };
@@ -101,6 +109,7 @@ const addElement = (type: ElementType) => {
 /** 現在選択されている要素のオブジェクトを返す算出プロパティ */
 const selectedElement = computed(() => {
   if (!selectedId.value) return null;
+
   return elements.value.find((el) => el.id === selectedId.value) || null;
 });
 
@@ -108,20 +117,29 @@ const selectedElement = computed(() => {
 const deleteSelectedElement = () => {
   if (!selectedId.value) return;
 
+  if (!confirm('選択中の要素を削除しますか？')) return;
+
   elements.value = elements.value.filter((el) => el.id !== selectedId.value);
+
   selectedId.value = null;
 };
 
 /** 選択中の要素を指定した方向へ移動する */
 const moveElement = (position: 'front' | 'back') => {
   if (!selectedId.value) return;
+
+  // 対象のインデックス取得
   const index = elements.value.findIndex((el) => el.id === selectedId.value);
 
+  // 移動が可能な状態か確認
   if (index === -1) return;
   if (position === 'front' && index === elements.value.length - 1) return;
   if (position === 'back' && index === 0) return;
 
+  // 対象を切り出す
   const [removed] = elements.value.splice(index, 1);
+
+  // 切り出した要素を前後に追加
   position === 'front'
     ? elements.value.push(removed)
     : elements.value.unshift(removed);
@@ -129,30 +147,32 @@ const moveElement = (position: 'front' | 'back') => {
 
 // ドラッグ、リサイズ管理
 
-/** 要素のドラッグ移動を開始する */
-const startDrag = (e: PointerEvent, el: SlideElement) => {
-  e.stopPropagation();
-  selectElement(el.id);
-
-  interactionState.isDragging = true;
-  interactionState.startX = e.clientX;
-  interactionState.startY = e.clientY;
-  interactionState.initialElemX = el.x;
-  interactionState.initialElemY = el.y;
-
-  window.addEventListener('pointermove', onPointerMove);
-  window.addEventListener('pointerup', stopInteraction);
-};
-
-/** 要素のリサイズを開始する */
-const startResize = (e: PointerEvent, el: SlideElement) => {
+/** インタラクションを開始する */
+const startInteraction = (
+  e: PointerEvent,
+  type: InteractionType,
+  el: SlideElement,
+) => {
   e.stopPropagation();
 
-  interactionState.isResizing = true;
   interactionState.startX = e.clientX;
   interactionState.startY = e.clientY;
-  interactionState.initialWidth = el.width;
-  interactionState.initialHeight = el.height;
+
+  if (type === 'drag') {
+    // ドラッグの時
+
+    selectElement(el.id);
+
+    interactionState.isDragging = true;
+    interactionState.initialElemX = el.x;
+    interactionState.initialElemY = el.y;
+  } else {
+    // リサイズの時
+
+    interactionState.isResizing = true;
+    interactionState.initialWidth = el.width;
+    interactionState.initialHeight = el.height;
+  }
 
   window.addEventListener('pointermove', onPointerMove);
   window.addEventListener('pointerup', stopInteraction);
@@ -166,9 +186,13 @@ const onPointerMove = (e: PointerEvent) => {
   const deltaY = e.clientY - interactionState.startY;
 
   if (interactionState.isDragging) {
+    // ドラッグの時
+
     selectedElement.value.x = interactionState.initialElemX + deltaX;
     selectedElement.value.y = interactionState.initialElemY + deltaY;
   } else if (interactionState.isResizing) {
+    // リサイズの時
+
     selectedElement.value.width = Math.max(
       40,
       interactionState.initialWidth + deltaX,
@@ -184,6 +208,7 @@ const onPointerMove = (e: PointerEvent) => {
 const stopInteraction = () => {
   interactionState.isDragging = false;
   interactionState.isResizing = false;
+
   window.removeEventListener('pointermove', onPointerMove);
   window.removeEventListener('pointerup', stopInteraction);
 };
@@ -280,7 +305,7 @@ const cssClass = {
               backgroundColor: el.type === 'shape' ? el.color : 'transparent',
               color: el.type === 'text' ? el.color : '#ffffff',
             }"
-            @pointerdown="startDrag($event, el)"
+            @pointerdown="startInteraction($event, 'drag', el)"
           >
             <!-- テキスト・図形コンテンツ -->
             <div
@@ -294,7 +319,7 @@ const cssClass = {
             <div
               v-if="el.id === selectedId"
               class="absolute -right-1.5 -bottom-1.5 w-3.5 h-3.5 bg-blue-600 border-2 border-white rounded-full cursor-se-resize shadow-sm"
-              @pointerdown="startResize($event, el)"
+              @pointerdown="startInteraction($event, 'resize', el)"
             ></div>
           </div>
         </div>
