@@ -74,6 +74,9 @@ const interactionState = reactive({
   initialHeight: 0,
 });
 
+/** 変更監視用タイマー */
+let watchTimer = null;
+
 // selectedId管理
 
 /** 指定したIDの要素を選択状態にする */
@@ -230,8 +233,13 @@ const handleKeyDown = (e: KeyboardEvent) => {
 watch(
   elements,
   (newVal) => {
-    const json = JSON.parse(JSON.stringify(newVal));
-    console.log('【State Updated (Elements)】', json);
+    // 変更が入るたびにタイマーをリセットする
+    if (watchTimer) clearTimeout(watchTimer);
+
+    watchTimer = setTimeout(() => {
+      const json = JSON.parse(JSON.stringify(newVal));
+      console.log('【State Updated (Elements)】', json);
+    }, 1000);
   },
   { deep: true },
 );
