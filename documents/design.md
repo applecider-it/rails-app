@@ -6,6 +6,10 @@ Railsをモノリスにする。
 
 websocketはgoのマイクロサービス。
 
+ヘッドレスCMSはwordpressのマイクロサービス。
+
+アプリ化対応はPWA。
+
 ```
 go/ <- goマイクロサービス
   documents/ <- goマイクロサービス固有のドキュメント
