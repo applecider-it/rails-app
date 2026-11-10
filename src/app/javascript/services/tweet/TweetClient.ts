@@ -12,8 +12,8 @@ export default class TweetClient {
   /** 一覧を最新の状態にする */
   public refreshList: Function;
 
-  constructor(token: string, wsHost: string, user: User) {
-    this.webSocketCtrl = new WebSocketCtrl(token, wsHost, user, this);
-    this.tweetCtrl = new TweetCtrl(user);
+  constructor(token: string, wsHost: string) {
+    this.webSocketCtrl = new WebSocketCtrl(token, wsHost, this);
+    this.tweetCtrl = new TweetCtrl();
   }
 }

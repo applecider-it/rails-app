@@ -6,11 +6,7 @@ import { jsonRequestHeaders } from '@/services/api/http';
  * Tweet管理
  */
 export default class TweetCtrl {
-  user;
-
-  constructor(user) {
-    this.user = user;
-  }
+  constructor() {}
 
   /**
    * 新しいツイート送信

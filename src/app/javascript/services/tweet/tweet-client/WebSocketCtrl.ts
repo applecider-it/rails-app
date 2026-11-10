@@ -3,6 +3,8 @@ import { showToast } from '@/services/ui/message';
 import { User } from '../types';
 import type TweetClient from '../TweetClient';
 
+import { getCurrentUser } from '@/services/application/application';
+
 /**
  * WebSocket管理
  *
@@ -15,10 +17,10 @@ export default class WebSocketCtrl {
   ws: WebSocket;
   main: TweetClient;
 
-  constructor(token: string, wsHost: string, user: User, main: TweetClient) {
+  constructor(token: string, wsHost: string, main: TweetClient) {
     this.token = token;
     this.wsHost = wsHost;
-    this.user = user;
+    this.user = getCurrentUser();
     this.main = main;
 
     this.ws = null;
