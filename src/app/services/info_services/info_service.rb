@@ -27,7 +27,7 @@ class InfoServices::InfoService
 
   # YAMLファイルを読み込み、ハッシュの配列で返す
   private def load_infos
-    path = Rails.root.join("app", "services", "data", "infos.yml")
+    path = Rails.root.join("app", "services", "data", "info", "infos.yml")
 
     # タグ（!ruby/object:クラス名）を無効化した安全な読み込み
     YAML.safe_load_file(
