@@ -8,10 +8,6 @@ module ApplicationHelper
 
   # リッチテキスト表示
   def app_output_richtext(val)
-    sanitize(
-      val,
-      tags: DataServices::RichtextService::allowed_tags,
-      attributes: DataServices::RichtextService::allowed_attributes
-    )
+    DataServices::RichtextService.sanitize_richtext(val)
   end
 end

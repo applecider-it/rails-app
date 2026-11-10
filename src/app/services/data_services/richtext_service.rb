@@ -1,18 +1,21 @@
 # リッチテキスト管理
 class DataServices::RichtextService
-  # HTML上に表示するのを許可しているタグ
-  def self.allowed_tags
-    (
+  # 表示用にサニタイズしたHTMLを返す
+  def self.sanitize_richtext(val)
+    allowed_tags = (
       ActionView::Base.sanitized_allowed_tags.to_a +
       %w[figure figcaption iframe]
     )
-  end
 
-  # HTML上に表示するのを許可しているアトリビュート
-  def self.allowed_attributes
-    (
+    allowed_attributes = (
       ActionView::Base.sanitized_allowed_attributes.to_a +
       %w[style srcset sizes loading decoding width height]
+    )
+
+    ActionController::Base.helpers.sanitize(
+      val,
+      tags: allowed_tags,
+      attributes: allowed_attributes
     )
   end
 end
