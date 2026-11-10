@@ -11,7 +11,7 @@
     </div>
 
     <div class="prose prose-slate max-w-none px-6 py-6 prose-a:text-indigo-600 prose-img:rounded-xl">
-      <%= app_output_richtext(@post["content"]["rendered"]) %>
+      <%= app_sanitize_richtext(@post["content"]["rendered"]) %>
     </div>
   </article>
 </div>

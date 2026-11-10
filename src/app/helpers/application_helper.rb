@@ -6,8 +6,8 @@ module ApplicationHelper
     content_tag(:div, form.object.errors[field].first, class: "text-red-600")
   end
 
-  # リッチテキスト表示
-  def app_output_richtext(val)
+  # 表示用にサニタイズしたHTMLを返す
+  def app_sanitize_richtext(val)
     DataServices::RichtextService.sanitize_richtext(val)
   end
 end
