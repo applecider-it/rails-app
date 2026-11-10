@@ -7,7 +7,7 @@
     paginator:     the paginator that renders the pagination tags inside
 -%>
 <%= paginator.render do -%>
-  <nav class="pagination" role="navigation" aria-label="pager">
+  <nav class="my-10 space-x-2 hidden md:flex" role="navigation" aria-label="pager">
     <%= first_page_tag unless current_page.first? %>
     <%= prev_page_tag unless current_page.first? %>
     <% each_page do |page| -%>
@@ -20,6 +20,15 @@
     <% unless current_page.out_of_range? %>
       <%= next_page_tag unless current_page.last? %>
       <%= last_page_tag unless current_page.last? %>
+    <% end %>
+  </nav>
+  <nav class="my-10 justify-between md:hidden flex" role="navigation" aria-label="pager">
+    <%= prev_page_tag %>
+    <span class="py-2">
+      <%= current_page %> / <%= total_pages %>
+    </span>
+    <% unless current_page.out_of_range? %>
+      <%= next_page_tag %>
     <% end %>
   </nav>
 <% end -%>
