@@ -84,6 +84,9 @@ bin/rails db:seed
 
 Rails
 
+
+cd ~/workspace/github/rails-app/src
+
 bundle install
 
 npm ci
@@ -102,6 +105,9 @@ bin/rails db:seed
 
 Go
 
+
+cd ~/workspace/github/rails-app/go
+
 go mod tidy
 
 cp .env.example .env
@@ -112,11 +118,11 @@ cp .env.example .env
 selenium
 
 
+cd ~/workspace/github/rails-app/selenium
+
 python3 -m venv venv
 
 source venv/bin/activate
-
-cp .env.example .env
 
 pip install --upgrade pip
 
