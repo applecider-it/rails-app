@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   before_discard :discard_all_relations
 
+  validates :name, presence: true
+
   # キーワード検索用スコープ
   scope :search_by_keyword, ->(keyword) {
     return all if keyword.blank?

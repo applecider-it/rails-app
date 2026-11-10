@@ -283,3 +283,9 @@ npm uninstall htmx.org
 -----------------------------------
 
 bundle update rails
+
+-----------------------------------
+
+rails g migration AddNameToUsers name:string
+rails db:migrate
+

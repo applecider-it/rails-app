@@ -51,6 +51,7 @@ export default class ChatClient {
       message: data.message,
       userId: data.user_id,
       email: data.email,
+      name: data.name,
     } as ChatMessage);
   }
 
@@ -61,6 +62,7 @@ export default class ChatClient {
       message: data.message,
       userId: data.user_id,
       email: data.email,
+      name: data.name,
     } as ChatMessage);
   }
 
@@ -71,6 +73,7 @@ export default class ChatClient {
       message: data.message,
       userId: data.user_id,
       email: data.email,
+      name: data.name,
     } as ChatMessage);
   }
 

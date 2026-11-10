@@ -13,6 +13,7 @@ class ChatServices::PusherService
         message: "#{message} (P)",
         user_id: user.id,
         email: user.email,
+        name: user.name,
       }
     )
   end

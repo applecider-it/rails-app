@@ -44,7 +44,7 @@ onMounted(() => {
           </p>
 
           <p class="text-gray-500 text-sm">
-            by {{ tweetContainer.tweet.user.email }} -
+            by {{ tweetContainer.tweet.user.name }} -
             {{ new Date(tweetContainer.tweet.created_at).toLocaleString() }}
           </p>
         </div>

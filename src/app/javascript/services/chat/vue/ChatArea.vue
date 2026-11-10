@@ -65,7 +65,7 @@ onMounted(() => {
         @click="sendMessage('websocket')"
         class="app-btn-primary w-auto ml-2 mt-2"
       >
-        Send(動かない)
+        Send(動かないのが正常)
       </button>
 
       <button
@@ -88,7 +88,7 @@ onMounted(() => {
         <li v-for="(msg, index) in reversedMessages" :key="index" class="p-1">
           {{ msg.message }}
           <span class="ml-3 text-sm text-gray-500">
-            by {{ msg.email }} ({{ msg.userId }})
+            by {{ msg.name }} ({{ msg.userId }})
           </span>
         </li>
       </ul>
