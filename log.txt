@@ -289,3 +289,6 @@ bundle update rails
 rails g migration AddNameToUsers name:string
 rails db:migrate
 
+-----------------------------------
+
+rails g kaminari:config
