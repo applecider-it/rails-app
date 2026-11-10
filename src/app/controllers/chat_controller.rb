@@ -18,14 +18,6 @@ class ChatController < ApplicationController
   # ActionCableによる送信
   def store_ac
     actioncable_service = ChatServices::ActioncableService.new
-
-    actioncable_service.broadcast(params[:room], params[:message], current_user)
-
-    render json: { status: 'OK' }
-  end
-
-  # Pusherによる送信
-  def store_p
     form = ChatForm.new
 
     form.assign_attributes({
@@ -33,8 +25,24 @@ class ChatController < ApplicationController
     })
 
     if form.valid?
-      pusher_service = ChatServices::PusherService.new
+      actioncable_service.broadcast(params[:room], form.message, current_user)
 
+      render json: { status: 'OK' }
+    else
+      render json: {errors: form.errors}, status: :unprocessable_entity
+    end
+  end
+
+  # Pusherによる送信
+  def store_p
+    pusher_service = ChatServices::PusherService.new
+    form = ChatForm.new
+
+    form.assign_attributes({
+      message: params[:message],
+    })
+
+    if form.valid?
       pusher_service.broadcast(params[:room], form.message, current_user)
 
       render json: { status: 'OK' }
@@ -46,12 +54,18 @@ class ChatController < ApplicationController
   # Redisによる送信
   def store_redis
     redis_service = ChatServices::RedisService.new
+    form = ChatForm.new
 
-    room = params[:room]
-    message = params[:message]
+    form.assign_attributes({
+      message: params[:message],
+    })
 
-    redis_service.broadcast(room, message, current_user)
+    if form.valid?
+      redis_service.broadcast(params[:room], form.message, current_user)
 
-    render json: { status: 'OK' }
+      render json: { status: 'OK' }
+    else
+      render json: {errors: form.errors}, status: :unprocessable_entity
+    end
   end
 end

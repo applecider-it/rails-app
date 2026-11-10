@@ -77,7 +77,6 @@ export default class ChatClient {
   /** メッセージ送信 */
   async sendMessage(message: string, type: SendType) {
     console.log('sendMessage', message, type);
-    if (!message && type !== 'pusher') return;
 
     if (type === 'websocket') {
       this.send(message);
