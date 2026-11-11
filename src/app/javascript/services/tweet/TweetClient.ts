@@ -1,6 +1,5 @@
 import WebSocketCtrl from './tweet-client/WebSocketCtrl';
 import TweetCtrl from './tweet-client/TweetCtrl';
-import { User } from './types';
 
 /**
  * ツイートクライアント

@@ -1,22 +1,16 @@
 <script setup lang="ts">
 /** respond_to動作確認 */
 
-import axios from 'axios';
-
-import { jsonRequestHeaders } from '@/services/api/http';
+import { sendApi } from '@/services/api/http';
 
 const csrfToken = document
   .querySelector('meta[name="csrf-token"]')
   ?.getAttribute('content');
 
 const jsonTest = async () => {
-  const headers = jsonRequestHeaders();
-
   const data: any = {};
 
-  const response = await axios.post('/development/respond_to_test', data, {
-    headers: headers,
-  });
+  const response = await sendApi('POST','/development/respond_to_test', data);
   console.log('response.data', response.data);
 };
 </script>

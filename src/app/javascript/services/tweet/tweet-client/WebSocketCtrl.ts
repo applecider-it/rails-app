@@ -1,6 +1,6 @@
 import { showToast } from '@/services/ui/message';
 
-import { User } from '../types';
+import { User } from '@/services/application/types';
 import type TweetClient from '../TweetClient';
 
 import { getCurrentUser } from '@/services/application/application';

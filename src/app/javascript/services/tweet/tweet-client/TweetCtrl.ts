@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import { jsonRequestHeaders } from '@/services/api/http';
+import { sendApi } from '@/services/api/http';
 
 /**
  * Tweet管理
@@ -12,24 +10,16 @@ export default class TweetCtrl {
    * 新しいツイート送信
    */
   async sendTweet(content) {
-    const headers = jsonRequestHeaders();
-
     const data: any = { content };
 
-    const response = await axios.post('/tweets_js', data, {
-      headers: headers,
-    });
+    const response = await sendApi('POST', '/tweets_js', data);
     console.log('response.data', response.data);
     return response.data;
   }
 
   /** 一覧取得 */
   async getList() {
-    const headers = jsonRequestHeaders();
-
-    const response = await axios.get('/tweets_js/list', {
-      headers: headers,
-    });
+    const response = await sendApi('GET', '/tweets_js/list');
 
     return response.data;
   }

@@ -1,8 +1,4 @@
-export type User = {
-  id: number;
-  email: string;
-  name: string;
-};
+import { User } from '@/services/application/types';
 
 type Tweet = {
   id: number;

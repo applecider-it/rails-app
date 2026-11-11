@@ -5,7 +5,7 @@ import axios from 'axios';
  */
 
 /** JSON通信用のヘッダー */
-export function jsonRequestHeaders() {
+function jsonRequestHeaders() {
   const token = document
     .querySelector('meta[name="csrf-token"]')
     ?.getAttribute('content');
@@ -20,7 +20,7 @@ export function jsonRequestHeaders() {
 }
 
 /** API送信 */
-export async function sendApi(method: string, url: string, data: any) {
+export async function sendApi(method: string, url: string, data: any = {}) {
   const headers = jsonRequestHeaders();
 
   if (method.toUpperCase() === 'POST') {

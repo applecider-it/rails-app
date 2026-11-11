@@ -3,8 +3,6 @@ import { ChatMessage, SendType } from './types';
 import consumer from '@/channels/consumer';
 import { pusher } from '@/services/application/pusher';
 
-import axios from 'axios';
-
 import { sendApi } from '@/services/api/http';
 
 /** WebSocketサーバーから送信されるメッセージJSONの型 */
