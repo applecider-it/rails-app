@@ -42,6 +42,18 @@ go build -o ./bin/websocket-server ./cmd/websocket-server
 
 -------
 
+Echo、Pusher
+
+soketi起動
+
+cd ~/workspace/github/laravel-app/soketi
+
+nvm use 18
+
+./start.sh
+
+-------
+
 ヘッドレスCMS用wordpress
 
 

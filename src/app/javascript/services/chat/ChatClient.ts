@@ -5,14 +5,22 @@ import { pusher } from '@/services/application/pusher';
 
 import axios from 'axios';
 
-import { jsonRequestHeaders } from '@/services/api/http';
+import { sendApi } from '@/services/api/http';
+
+/** WebSocketサーバーから送信されるメッセージJSONの型 */
+type JsonMessage = {
+  message: string;
+  user_id: string;
+  email: string;
+  name: string;
+};
 
 /**
  * チャットクライアント
  */
 export default class ChatClient {
-  private ws;
-  private room;
+  private ws: WebSocket;
+  private room: string;
 
   addMessage: Function;
 
@@ -29,52 +37,46 @@ export default class ChatClient {
     consumer.subscriptions.create(
       { channel: 'ChatChannel', room: this.room },
       {
-        received: (data) => this.onMessageAC(data),
+        received: (data: JsonMessage) => this.onMessageAC(data),
       },
     );
 
     // pusher 接続
     const channel = pusher.subscribe(`rails-chat-channel-${this.room}`);
 
-    channel.bind('new-message', (data) => this.onMessageP(data));
+    channel.bind('new-message', (data: JsonMessage) => this.onMessageP(data));
   }
 
   /** WebSocketメッセージ受信 */
-  private onMessage(event) {
-    // result = { data: { json }, sender: { user_id, email } }
+  private onMessage(event: MessageEvent<any>) {
     const result = JSON.parse(event.data);
     console.log('onmessage', result);
 
     const data = JSON.parse(result.data.json);
 
-    this.addMessage({
-      message: data.message,
-      userId: data.user_id,
-      email: data.email,
-      name: data.name,
-    } as ChatMessage);
+    this.addMessage(this.convert(data));
   }
 
   /** ActionCableメッセージ受信 */
-  private onMessageAC(data) {
+  private onMessageAC(data: JsonMessage) {
     console.log('受信:', data);
-    this.addMessage({
-      message: data.message,
-      userId: data.user_id,
-      email: data.email,
-      name: data.name,
-    } as ChatMessage);
+    this.addMessage(this.convert(data));
   }
 
   /** Pusherメッセージ受信 */
-  private onMessageP(data) {
+  private onMessageP(data: JsonMessage) {
     console.log('受信:', data);
-    this.addMessage({
+    this.addMessage(this.convert(data));
+  }
+
+  /** メッセージ変換 */
+  private convert(data: JsonMessage): ChatMessage {
+    return {
       message: data.message,
       userId: data.user_id,
       email: data.email,
       name: data.name,
-    } as ChatMessage);
+    };
   }
 
   /** メッセージ送信 */
@@ -96,8 +98,6 @@ export default class ChatClient {
 
   /** APIでメッセージ送信 */
   private async sendApi(message: string, type: SendType) {
-    const headers = jsonRequestHeaders();
-
     const data: any = { message, room: this.room };
     console.log(data);
 
@@ -107,9 +107,8 @@ export default class ChatClient {
       redis: '/chat/store_redis',
     }[type];
 
-    const response = await axios.post(url, data, {
-      headers: headers,
-    });
+    const response = await sendApi('POST', url, data);
+
     console.log('response.data', response.data);
   }
 }

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 /**
  * APIのhttp関連
  */
@@ -15,4 +17,23 @@ export function jsonRequestHeaders() {
   };
 
   return headers;
+}
+
+/** API送信 */
+export async function sendApi(method: string, url: string, data: any) {
+  const headers = jsonRequestHeaders();
+
+  if (method.toUpperCase() === 'POST') {
+    const response = await axios.post(url, data, {
+      headers: headers,
+    });
+    
+    return response;
+  } else {
+    const response = await axios.get(url, {
+      headers: headers,
+    });
+
+    return response;
+  }
 }
