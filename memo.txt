@@ -14,60 +14,12 @@ websocket: 3030
 
 開発サーバーを起動
 
--------
 
 Rails
 
 cd ~/workspace/github/rails-app/src
 
 foreman start -f Procfile.dev
-
--------
-
-go
-
-websocketサーバー起動
-
-cd ~/workspace/github/rails-app/go
-
-go run ./cmd/websocket-server
-
-
-
-本番環境
-
-go build -o ./bin/websocket-server ./cmd/websocket-server
-
-./bin/websocket-server
-
--------
-
-Echo、Pusher
-
-soketi起動
-
-cd ~/workspace/github/laravel-app/soketi
-
-nvm use 18
-
-./start.sh
-
--------
-
-ヘッドレスCMS用wordpress
-
-
-cd ~/workspace/github/rails-app/wordpress
-
-docker compose up
-
-  最初は何度か起動しないといけない場合がある
-
-http://localhost:8080/wp-admin/
-
-admin / admin
-
-パーマリンク設定を「日付と投稿名」にしないとAPIが使えない
 
 -----------------------------------
 
@@ -111,34 +63,6 @@ bin/rails db:create
 bin/rails db:migrate
 
 bin/rails db:seed
-
-
-----
-
-Go
-
-
-cd ~/workspace/github/rails-app/go
-
-go mod tidy
-
-cp .env.example .env
-
-
-----
-
-selenium
-
-
-cd ~/workspace/github/rails-app/selenium
-
-python3 -m venv venv
-
-source venv/bin/activate
-
-pip install --upgrade pip
-
-pip install -r requirements.txt
 
 
 -----------------------------------
@@ -188,25 +112,6 @@ RAILS_ENV=production rails assets:precompile
 
 foreman start -f Procfile.prod
 
------------------------------------
-
-セレニウム
-
-
-cd ~/workspace/github/rails-app/selenium
-
-source venv/bin/activate
-
-python -m app.entrypoints.main sample
-
-python -m app.entrypoints.main sample2
-
-
-ログイン
-
-python -m app.entrypoints.main
-
-通常のログインをすると、状態が維持される
 
 -----------------------------------
 
