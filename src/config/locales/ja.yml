@@ -64,6 +64,12 @@ ja:
         password_confirmation: "パスワードの確認"
       user_tweet:
         content: "投稿内容"
+      admin_user:
+        name: "管理者名"
+        email: "管理者メールアドレス"
+        current_password: "現在のパスワード"
+        password: "管理者パスワード"
+        password_confirmation: "パスワードの確認"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
