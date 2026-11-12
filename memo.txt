@@ -14,6 +14,7 @@ websocket: 3030
 
 開発サーバーを起動
 
+----
 
 Rails
 
@@ -45,6 +46,7 @@ bin/rails db:seed
 
 セットアップ
 
+----
 
 Rails
 
@@ -69,7 +71,7 @@ bin/rails db:seed
 
 ポスグレ接続
 
-win
+windows
 
 sudo -u postgres psql
 

@@ -11,6 +11,7 @@ python -m app.entrypoints.main sample
 
 python -m app.entrypoints.main sample2
 
+----
 
 ログイン
 
@@ -21,6 +22,8 @@ python -m app.entrypoints.main
 -----------------------------------
 
 セットアップ
+
+----
 
 selenium
 

@@ -1,7 +1,8 @@
-
 -----------------------------------
 
 開発サーバーを起動
+
+----
 
 go
 
@@ -11,7 +12,7 @@ cd ~/workspace/github/rails-app/go
 
 go run ./cmd/websocket-server
 
-
+--
 
 本番環境
 
@@ -19,7 +20,7 @@ go build -o ./bin/websocket-server ./cmd/websocket-server
 
 ./bin/websocket-server
 
--------
+----
 
 Echo、Pusher
 
@@ -36,6 +37,7 @@ nvm use 18
 
 セットアップ
 
+----
 
 Go
 
