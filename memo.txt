@@ -64,29 +64,6 @@ bin/rails db:migrate
 
 bin/rails db:seed
 
-
------------------------------------
-
-ポスグレ接続
-
-windows
-
-sudo -u postgres psql
-
-mac
-
-psql postgres
-
-
-DB一覧
-\l
-
-DB切り替え
-\c db_name
-
-テーブル一覧
-dt
-
 -----------------------------------
 
 本番環境
