@@ -9,4 +9,3 @@
 ## リンク
 
 - [Railsモノリスのドキュメント](./src/documents/index.md)
-- [Goマイクロサービスのドキュメント](./go/documents/index.md)
