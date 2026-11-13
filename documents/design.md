@@ -1,21 +1,23 @@
 # 設計
 
-## 構成
+## アプリケーション構成
 
-Railsをモノリスにする。
+- Railsをモノリスにする。
 
-websocketはgoのマイクロサービス。
+- websocketはgo, Pusher, ACのマイクロサービス。
 
-ヘッドレスCMSはwordpressのマイクロサービス。
+  - soketiは、`microservices`のWebサーバーを起動する必要がある。
 
-アプリ化対応はPWA。
+  - Go WebSocketサーバーは、`microservices`のWebサーバーを起動する必要がある。
+
+- ヘッドレスCMSはwordpressのマイクロサービス。
+
+- アプリ化対応はPWA。
+
+## ディレクトリ構成
 
 ```
-go/ <- goマイクロサービス
-  documents/ <- goマイクロサービス固有のドキュメント
 src/ <- Railsモノリス
   documents/ <- Railsモノリス固有のドキュメント
-selenium/ <- セレニウム
-wordpress/ <- ヘッドレスCMS用wordpress
 documents/ <- 全体のドキュメント
 ```

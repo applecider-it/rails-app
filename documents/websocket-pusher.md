@@ -2,8 +2,6 @@
 
 一部は、Pusher(soketi)で実装している。
 
-soketiは、`microservices`のWebサーバーを起動する必要がある。
-
 ## Pusherブロードキャスト時
 
 ### チャット

@@ -2,8 +2,6 @@
 
 websocketはgoで連携する。
 
-Go WebSocketサーバーは、`microservices`のWebサーバーを起動する必要がある。
-
 
 ### チャットの場合のjsonをパースした状態
 
