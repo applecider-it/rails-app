@@ -2,44 +2,8 @@
 
 websocketはgoで連携する。
 
-認証はJWTを使う。
+Go WebSocketサーバーは、`microservices`のWebサーバーを起動する必要がある。
 
-Redis Pub/Sub連携のみで動作する。
-
-## チャンネル名の定義
-
-`channelname:param1,param2...`
-
-## コネクション時のパラメーター
-
-| 項目名 | 内容 | 型 | 詳細 |
-|--------|--------|--------|--------|
-| token | 認証情報を含むJWTトークン | string |  |
-
-## token
-
-| 項目名 | 内容 | 型 | 詳細 |
-|--------|--------|--------|--------|
-| user_id | ユーザーID | integer |  |
-| email | メールアドレス | string |  |
-| channel | 接続するチャンネル | string | つまり、同時に複数のチャンネルには接続できない。 |
-| exp | 有効期限 | integer |  |
-| iat | 現在日時 | integer |  |
-
-## Redis Pub/Sub連携
-
-Pub/Subのチャンネル名: broadcast
-
-```
-{
-  channel: string, <- WebSocketチャンネル名
-  json: string,
-}
-```
-
-| 項目名 | 内容 | 型 | 詳細 |
-|--------|--------|--------|--------|
-| json | Jsonデータ | string | 各チャンネルごとに別々の値が入る |
 
 ### チャットの場合のjsonをパースした状態
 
@@ -59,17 +23,3 @@ Pub/Subのチャンネル名: broadcast
   user_id: integer,
 }
 ```
-
-
-## ブロードキャスト時
-
-```
-{
-  data: {
-    json: string
-  },
-}
-```
-
-
-
