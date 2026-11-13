@@ -2,7 +2,7 @@
 
 一部は、Pusher(soketi)で実装している。
 
-soketiは、`laravel-app`のWebサーバーを起動する必要がある。
+soketiは、`microservices`のWebサーバーを起動する必要がある。
 
 ## Pusherブロードキャスト時
 
