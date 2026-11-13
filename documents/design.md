@@ -6,11 +6,13 @@
 
 - websocketはgo, Pusher, ACのマイクロサービス。
 
-  - soketiは、`microservices`のWebサーバーを起動する必要がある。
+  - soketiは、`microservices`のサーバーを起動する必要がある。
 
-  - Go WebSocketサーバーは、`microservices`のWebサーバーを起動する必要がある。
+  - Go WebSocketサーバーは、`microservices`のサーバーを起動する必要がある。
 
 - ヘッドレスCMSはwordpressのマイクロサービス。
+
+  - wordpressサーバーは、`microservices`のサーバーを起動する必要がある。
 
 - アプリ化対応はPWA。
 
