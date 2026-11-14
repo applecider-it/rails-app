@@ -1,5 +1,23 @@
 # 設計
 
+## アプリケーション構成
+
+- Railsをモノリスにする。
+
+- websocketはgo, Pusher, ACのマイクロサービス。
+
+  - soketiは、`microservices`のサーバーを起動する必要がある。
+
+  - Go WebSocketサーバーは、`microservices`のサーバーを起動する必要がある。
+
+- ヘッドレスCMSはwordpressのマイクロサービス。
+
+  - wordpressサーバーは、`microservices`のサーバーを起動する必要がある。
+
+- アプリ化対応はPWA。
+
+## モノリス概要
+
 Javascript,CSS管理は、Laravelと同じように、vite, tailwind。
 
 MVCSにして、ビジネスロジックは、カテゴリーごとにフォルダを分けたサービスクラスにまとめている。
