@@ -1,12 +1,107 @@
 # 設計
 
-## ディレクトリ構成
+## アプリケーション構成
+
+- Railsをモノリスにする。
+
+- websocketはgo, Pusher, ACのマイクロサービス。
+
+  - soketiは、`microservices`のサーバーを起動する必要がある。
+
+  - Go WebSocketサーバーは、`microservices`のサーバーを起動する必要がある。
+
+- ヘッドレスCMSはwordpressのマイクロサービス。
+
+  - wordpressサーバーは、`microservices`のサーバーを起動する必要がある。
+
+- アプリ化対応はPWA。
+
+## モノリス概要
+
+Javascript,CSS管理は、Laravelと同じように、vite, tailwind。
+
+MVCSにして、ビジネスロジックは、カテゴリーごとにフォルダを分けたサービスクラスにまとめている。
+
+javascriptを使わないでtypescriptだけ利用している。
+
+インタラクティブな部分は、vueをアイランドアーキテクチャで利用している。
+
+## 通常のRails以外の構成
 
 ```
-src/ <- Railsモノリス
-  documents/ <- Railsモノリス固有のドキュメント
-documents/ <- 全体のドキュメント
+app/
+  controllers/
+    admin/ <- 管理画面
+      admin_users/ <- devise関連
+    users/ <- devise関連
+    tweets_controller.rb <- user_tweets_controller.rbにしないで、Tweetというドメインを表すようにしている。
+  javascript/
+    entrypoints/ <- vite_railsのエントリーポイント
+      フォルダを分けて管理ができなさそうなので、「___」を区切りに使っている。
+    services/ <- ビジネスロジックなど
+      (カテゴリーごとにディレクトリを分けて、そのなかにサービスクラスを配置している)
+  services/ <- ビジネスロジックなど
+    (カテゴリーごとにディレクトリを分けて、そのなかにサービスクラスを配置している)
+    sample_services/ <- サービスクラス実装例
+    .
+    .
+    .
+  views/
+    admin_users/ <- devise関連
+    kaminari/ <- paginationファイル
+    users/ <- devise関連
+    .
+    .
+    .
+  config/
+    vite.json <- vite_rails設定ファイル
+    .
+    .
+    .
+  data/ <- 静的データ
+    .
+    .
+    .
 
-log.txt <- 作業ログ
-memo.txt <- 作業用のメモ
+documents/ <- Railsモノリス固有のドキュメント
+
+(foreman用ファイル)
+Procfile.dev
+Procfile.prod
+
+(npm関連の設定ファイル)
+postcss.config.js
+tailwind.config.js
+tsconfig.json
+vite.config.ts
 ```
+
+## Rubyのサービスクラスの命名規則
+
+モジュール名、クラス名の衝突を避けるため、カテゴリーごとのディレクトリには`_services`、サービスクラスには`_service`をポストフィックスにしている。
+
+Railsのオートロードは、危なっかしいので、事故を減らすため、意図的にポストフィックスをつけています。
+
+## Railswayじゃない部分
+
+- モデルはDB構成に連動させるべきですが、コントローラーはドメインの区切りに合わせるべきなので、user_tweets_controller.rbにしないで、tweets_controller.rbにして、UserTweetモデルとの連動を断っています。
+
+- ビジネスロジックは、コントローラーやモデルやconcernに書かないで、サービスクラスにまとめています。
+
+- Viteを使うため、importmapは利用していない。
+
+- turboは副作用があるので利用していない。
+
+- stimulusは潰しがきかないので利用していない。
+
+- credentialsは、暗号化されているとはいえ、環境変数がgitに混ざるのが気持ち悪いので、.envを使っている。
+
+## その他の技術選択の理由
+
+- activeadminは、ブラックボックスのため難しくなってくるので利用していない。
+
+- deviseも、ブラックボックス化しやすいデザインパターンだけど、ある程度は、何とかならなくはない程度で、さらに、デファクトスタンダードになっているため、利用できるエンジニアが多いため採用している。
+
+## その他
+
+- `/config/locales/ja.yml`の、`errors.format`を`"%{message}"`にすることで、エラーメッセージを自由に組み立てられるようにしています。

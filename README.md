@@ -1,7 +1,16 @@
 # Railsモノリスの試験的なアプリケーション
 
-- [設計](./documents/design.md)
+## ディレクトリ構成
+
+```
+src/ <- Railsモノリス
+
+documents/ <- Railsモノリス固有のドキュメント
+
+log.txt <- 作業ログ
+memo.txt <- 作業用のメモ
+```
 
 ## リンク
 
-- [Railsモノリスのドキュメント](./src/documents/index.md)
+- [Railsモノリスのドキュメント](./documents/index.md)
