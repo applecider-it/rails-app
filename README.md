@@ -5,7 +5,7 @@
 ```
 src/ <- Railsモノリス
 
-documents/ <- Railsモノリス固有のドキュメント
+documents/ <- Railsモノリスのドキュメント
 
 log.txt <- 作業ログ
 memo.txt <- 作業用のメモ
