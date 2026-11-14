@@ -11,6 +11,6 @@ log.txt <- 作業ログ
 memo.txt <- 作業用のメモ
 ```
 
-## リンク
+## ドキュメント
 
 - [Railsモノリスのドキュメント](./documents/index.md)
