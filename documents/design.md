@@ -48,6 +48,7 @@ app/
     .
   views/
     admin_users/ <- devise関連
+    custom_generators/ <- カスタムジェネレーター（使い方はmemo.txt参照）
     kaminari/ <- paginationファイル
     users/ <- devise関連
     .
