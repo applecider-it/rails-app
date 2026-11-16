@@ -40,6 +40,12 @@
 - ヘッドレスCMS
 - お知らせ管理
 
+## アプリケーション用のJSオブジェクト
+
+```
+window.App
+```
+
 ## 意味のあるセレクタ
 
 ### [data-app-element-drag-and-drop]
