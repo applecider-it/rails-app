@@ -55,7 +55,11 @@ app/
     .
     .
   config/
+    initializers/
+      pusher.rb <- pusher用
+      kaminari_config.rb <- pagination用
     vite.json <- vite_rails設定ファイル
+    breadcrumbs.rb <- gretel用
     .
     .
     .
