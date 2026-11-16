@@ -12,6 +12,8 @@ window.App.funcs <- Viewから直接利用したい関数を登録する
 
 ## 意味のあるセレクタ
 
+`data-app-element-`がプレフィックス
+
 ### [data-app-element-drag-and-drop]
 
 ドラッグアンドドロップによるファイル指定
