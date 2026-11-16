@@ -1,6 +1,18 @@
-# 意味のあるセレクタ
+# ViewとViteの橋渡し
 
-## [data-app-element-drag-and-drop]
+## アプリケーション用のJSオブジェクト
+
+```
+window.App
+
+window.App.funcs <- Viewから直接利用したい関数を登録する
+```
+
+直接JSで、ViteとViewの橋渡しをする。
+
+## 意味のあるセレクタ
+
+### [data-app-element-drag-and-drop]
 
 ドラッグアンドドロップによるファイル指定
 
@@ -14,21 +26,21 @@
 }
 ```
 
-### target
+#### target
 
 ターゲットのファイルインプットボックスのID
 
-### info
+#### info
 
 ファイル情報を表示するHTMLエレメントのID
 
-### dragover_class
+#### dragover_class
 
 ドラックオーバーしたときに適応されるCSSクラス
 
 Tailwindの利用可
 
-## [data-app-element-postal-code]
+### [data-app-element-postal-code]
 
 郵便番号検索
 
@@ -43,19 +55,19 @@ Tailwindの利用可
 }
 ```
 
-### postal_code
+#### postal_code
 
 郵便番号のインプットボックスのID
 
-### prefecture
+#### prefecture
 
 都道府県のセレクトボックスのID
 
-### city
+#### city
 
 市区町村のインプットボックスのID
 
-### address_line1
+#### address_line1
 
 町域のインプットボックスのID
 
