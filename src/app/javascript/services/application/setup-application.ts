@@ -1,7 +1,5 @@
 import './bootstrap/alpinejs';
 import './bootstrap/container';
-import './bootstrap/postal-code';
-import './bootstrap/drag-and-drop';
 import './bootstrap/window';
 
 // 動作確認

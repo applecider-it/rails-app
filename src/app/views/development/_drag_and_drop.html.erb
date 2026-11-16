@@ -1,9 +1,14 @@
+<script type="module">
+  const dropZone = document.getElementById('drop-zone');
+  const target = document.getElementById('attachment');
+  const fileInfo = document.getElementById('dd-info');
+  const dragoverClass = "bg-gray-300";
+
+  window.App.funcs.fileDragAndDrop(dropZone, target, fileInfo, dragoverClass);
+</script>
+
 <%= form_with url: development_upload_test_path, method: :post, multipart: true do |form| %>
-  <div data-app-element-drag-and-drop="<%= {
-    target: "attachment",
-    info: "dd-info",
-    dragover_class: "bg-gray-300"
-  }.to_json %>">
+  <div id="drop-zone">
     <div class="border-4 p-10">
       ここにファイルをドラッグ＆ドロップしてください
     </div>
