@@ -14,6 +14,20 @@
 }
 ```
 
+### target
+
+ターゲットのファイルインプットボックスのID
+
+### info
+
+ファイル情報を表示するHTMLエレメントのID
+
+### dragover_class
+
+ドラックオーバーしたときに適応されるCSSクラス
+
+Tailwindの利用可
+
 ## [data-app-element-postal-code]
 
 郵便番号検索
@@ -28,4 +42,21 @@
   address_line1: string;
 }
 ```
+
+### postal_code
+
+郵便番号のインプットボックスのID
+
+### prefecture
+
+都道府県のセレクトボックスのID
+
+### city
+
+市区町村のインプットボックスのID
+
+### address_line1
+
+町域のインプットボックスのID
+
 
