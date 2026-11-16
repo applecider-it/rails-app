@@ -1,8 +1,14 @@
 <%= render "shared/message/error_messages", resource: user %>
 
 <div class="my-3">
+  <%= form.label :name, class: "app-form-label" %>
+  <%= form.text_field :name, autofocus: true, autocomplete: "name", class: "app-form-input" %>
+  <%= app_field_error(form, :name) %>
+</div>
+
+<div class="my-3">
   <%= form.label :email, class: "app-form-label" %>
-  <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "app-form-input" %>
+  <%= form.email_field :email, autocomplete: "email", class: "app-form-input" %>
   <%= app_field_error(form, :email) %>
 </div>
 
