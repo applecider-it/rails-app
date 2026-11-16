@@ -42,6 +42,11 @@ export default class ChatClient {
     // pusher 接続
     const channel = pusher.subscribe(`rails-chat-channel-${this.room}`);
 
+    // WebSocketは、ページ遷移しても停止状態で保持されるので、明示的に切断処理をする
+    window.addEventListener('pagehide', () => {
+      pusher.disconnect();
+    });
+
     channel.bind('new-message', (data: JsonMessage) => this.onMessageP(data));
   }
 
