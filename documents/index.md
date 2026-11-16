@@ -6,7 +6,6 @@
   - [Goマイクロサービス](./websocket.md)
   - [ActionCable](./websocket-ac.md)
   - [Pusher](./websocket-pusher.md)
-- [ViewとViteの橋渡し](./view_vite.md)
 
 ## 実装内容
 
