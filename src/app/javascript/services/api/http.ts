@@ -31,6 +31,7 @@ export async function sendApi(method: string, url: string, data: any = {}) {
     return response;
   } else {
     const response = await axios.get(url, {
+      params: data,
       headers: headers,
     });
 
