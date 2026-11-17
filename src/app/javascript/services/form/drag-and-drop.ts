@@ -7,6 +7,29 @@ export const fileDragAndDrop = (
   fileInfo: HTMLElement,
   dragoverClass: string,
 ): void => {
+  /** ファイル情報を出力 */
+  const setInfo = (file: File) => {
+    fileInfo.textContent = `選択されたファイル: ${file.name} (${Math.round(file.size / 1024)} KB)\n`;
+  };
+
+  // dropZone がクリックされたら、target のクリックイベントを起動
+  dropZone.addEventListener('click', () => {
+    console.log('fileDragAndDrop click');
+    target.click();
+  });
+
+  // ファイルが選択されたときの処理など
+  target.addEventListener('change', (e) => {
+    console.log('fileDragAndDrop change');
+    const input = e.target as HTMLInputElement;
+    const files: FileList | null = input.files;
+
+    if (files && files.length > 0) {
+      const file = files[0];
+      setInfo(file);
+    }
+  });
+
   // デフォルトのブラウザ動作（ファイルを開くなど）を無効化
   (['dragenter', 'dragover', 'dragleave', 'drop'] as const).forEach(
     (eventName) => {
@@ -46,6 +69,7 @@ export const fileDragAndDrop = (
   dropZone.addEventListener(
     'drop',
     (e: Event) => {
+      console.log('fileDragAndDrop drop');
       const dragEvent = e as DragEvent;
       const dt = dragEvent.dataTransfer;
       if (!dt) return;
@@ -58,8 +82,7 @@ export const fileDragAndDrop = (
         const file = files[0]; // 1つ目のファイルが対象
         dataTransfer.items.add(file);
         target.files = dataTransfer.files;
-
-        fileInfo.textContent = `選択されたファイル: ${file.name} (${Math.round(file.size / 1024)} KB)\n`;
+        setInfo(file);
       }
     },
     false,

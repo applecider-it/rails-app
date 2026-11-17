@@ -15,7 +15,10 @@
   </div>
   <div id="dd-info"></div>
 
-  <%= form.file_field :attachment %>
+  <div class="mt-5 border">
+    実際に利用するときは、ここは非表示にする。
+    <%= form.file_field :attachment %>
+  </div>
 
   <div class="mt-5">
     <%= form.submit "アップロード", class: "app-btn-primary" %>
