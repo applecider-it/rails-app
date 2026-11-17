@@ -5,20 +5,7 @@
   const cityEl = document.getElementById('city');
   const addressLine1El = document.getElementById('address_line1');
 
-  btnEl.addEventListener('click', async () => {
-    console.log(postalCodeEl.value);
-
-    const result = await window.App.funcs.fetchAddressByPostalCode(postalCodeEl.value);
-    //console.log(result);
-    if (result.success) {
-      console.log(result.data);
-      prefectureEl.value = result.data.prefcode;
-      cityEl.value = result.data.address2;
-      addressLine1El.value = result.data.address3;
-    } else {
-      window.App.funcs.showToast(result.message, 'alert');
-    }
-  });
+  window.App.funcs.setupPostalCodeSearch(btnEl, postalCodeEl, prefectureEl, cityEl, addressLine1El);
 </script>
 
 <%= form_with do |form| %>

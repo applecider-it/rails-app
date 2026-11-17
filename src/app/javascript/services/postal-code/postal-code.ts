@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { showToast } from '@/services/ui/message';
+
 /** Zipcloud API のレスポンス型定義 */
 interface ZipcloudResult {
   /** 都道府県 */
@@ -30,8 +32,32 @@ type ZipSearchResult = {
   message: string;
 };
 
+/** 郵便番号検索のセットアップ */
+export const setupPostalCodeSearch = async (
+  btnEl: HTMLButtonElement,
+  postalCodeEl: HTMLInputElement,
+  prefectureEl: HTMLInputElement,
+  cityEl: HTMLInputElement,
+  addressLine1El: HTMLInputElement,
+) => {
+  btnEl.addEventListener('click', async () => {
+    console.log(postalCodeEl.value);
+
+    const result = await fetchAddressByPostalCode(postalCodeEl.value);
+    //console.log(result);
+    if (result.success) {
+      console.log(result.data);
+      prefectureEl.value = result.data.prefcode;
+      cityEl.value = result.data.address2;
+      addressLine1El.value = result.data.address3;
+    } else {
+      showToast(result.message, 'alert');
+    }
+  });
+};
+
 /** 郵便番号から住所情報を取得する */
-export const fetchAddressByPostalCode = async (
+const fetchAddressByPostalCode = async (
   postalCode: string,
 ): Promise<ZipSearchResult> => {
   const result: ZipSearchResult = {

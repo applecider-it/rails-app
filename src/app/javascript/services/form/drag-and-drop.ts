@@ -1,7 +1,7 @@
 /**
- * ファイルをドラッグアンドドロップ
+ * ファイルをドラッグアンドドロップのセットアップ
  */
-export const fileDragAndDrop = (
+export const setupFileDragAndDrop = (
   dropZone: HTMLElement,
   target: HTMLInputElement | null,
   fileInfo: HTMLElement,
@@ -14,13 +14,13 @@ export const fileDragAndDrop = (
 
   // dropZone がクリックされたら、target のクリックイベントを起動
   dropZone.addEventListener('click', () => {
-    console.log('fileDragAndDrop click');
+    console.log('setupFileDragAndDrop click');
     target.click();
   });
 
   // ファイルが選択されたときの処理など
   target.addEventListener('change', (e) => {
-    console.log('fileDragAndDrop change');
+    console.log('setupFileDragAndDrop change');
     const input = e.target as HTMLInputElement;
     const files: FileList | null = input.files;
 
@@ -69,7 +69,7 @@ export const fileDragAndDrop = (
   dropZone.addEventListener(
     'drop',
     (e: Event) => {
-      console.log('fileDragAndDrop drop');
+      console.log('setupFileDragAndDrop drop');
       const dragEvent = e as DragEvent;
       const dt = dragEvent.dataTransfer;
       if (!dt) return;
