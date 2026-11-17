@@ -18,4 +18,13 @@
   <h3 class="app-h3 mt-10">ドラッグアンドドロップ</h3>
 
   <%= render "drag_and_drop" %>
+
+  <script type="module">
+    console.log('モジュールスコープ動作確認')
+    const val1 = 123;
+    console.log(typeof val1);
+  </script>
+  <script type="module">
+    console.log(typeof val1);
+  </script>
 </div>
