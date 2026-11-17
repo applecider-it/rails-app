@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import TipTap from './vue/TipTap.vue';
 
-/** エディターのセットアップ */
-export const setupEditor = (
+/** リッチテキストエディターのセットアップ */
+export const setupRichtextEditor = (
   el: HTMLElement,
   val: string,
   callback: (val: string) => void,
