@@ -74,8 +74,8 @@ class DevelopmentController < ApplicationController
   def media_test
   end
 
-  # エディター動作確認
-  def editor_test
+  # リッチテキストエディター動作確認
+  def richtext_editor_test
     initail_content = '<h1>見出し</h1>
 <p>こんにちは！<strong>リッチテキストエディタ</strong>へようあこそ。</p>
 <ol>

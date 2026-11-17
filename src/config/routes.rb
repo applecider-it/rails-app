@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   get "development/javascript_test"
   post "development/respond_to_test"
   get "development/media_test"
-  match "development/editor_test", via: [:get, :post]
+  match "development/richtext_editor_test", via: [:get, :post]
   get "development/slide_editor_test"
   get "development/map_test"
   post "development/upload_test"
