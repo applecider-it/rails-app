@@ -36,8 +36,7 @@ export async function sendApi(
   const headers = jsonRequestHeaders();
 
   // マルチパート指定の時はContent-Typeを変更
-  if ("multipart" in options && options.multipart)
-    headers["Content-Type"] = "multipart/form-data";
+  if (options?.multipart) headers['Content-Type'] = 'multipart/form-data';
 
   const upperMethod = method.toUpperCase();
 
@@ -45,10 +44,10 @@ export async function sendApi(
     method: upperMethod,
     url,
     headers,
-    ...(upperMethod === "GET" ? { params: data } : { data }),
+    ...(upperMethod === 'GET' ? { params: data } : { data }),
   };
 
-  console.log("sendApi", { config });
+  console.log('sendApi', { config });
 
   const response = await axios.request(config);
 
