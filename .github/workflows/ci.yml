@@ -49,6 +49,4 @@ jobs:
           DATABASE_URL: postgres://postgres:password@localhost:5432/rails_test_test # ★ DB名を rails_test_test に統一
           PUSHER_URL: https://dummy_key:dummy_secret@api.pusherapp.com/apps/12345
         working-directory: src
-        run: |
-          bin/rails db:test:prepare
-          bin/rails test test:system
+        run: bin/rails db:test:prepare test test:system
