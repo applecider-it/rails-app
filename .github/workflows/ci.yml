@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-24.04
 
-    # PostgreSQLのサービスコンテナを追加
+    # PostgreSQLのサービスコンテナ
     services:
       postgres:
         image: postgres:15
@@ -18,7 +18,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: rails_test_test # ★ database.yml の test用DB名に合わせる
+          POSTGRES_DB: rails_test_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -32,6 +32,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Nodeセットアップ（Viteのビルドに必要）
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '26'
+          cache: 'npm'
+          cache-dependency-path: src/package-lock.json
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -39,14 +47,20 @@ jobs:
           bundler-cache: true
           working-directory: src
 
+      # Node.jsのパッケージをインストール
+      - name: Install JS dependencies
+        working-directory: src
+        run: npm ci
+
       - name: Run tests
-        # database.yml が参照する環境変数と、テスト環境用の変数を指定
         env:
           RAILS_ENV: test
           DATABASE_USERNAME: postgres
           DATABASE_PASSWORD: password
           DATABASE_HOST: localhost
-          DATABASE_URL: postgres://postgres:password@localhost:5432/rails_test_test # ★ DB名を rails_test_test に統一
+          DATABASE_URL: postgres://postgres:password@localhost:5432/rails_test_test
           PUSHER_URL: https://dummy_key:dummy_secret@api.pusherapp.com/apps/12345
         working-directory: src
-        run: bin/rails db:test:prepare test test:system
+        run: |
+          bin/vite build --mode=tests
+          bin/rails db:test:prepare test test:system
