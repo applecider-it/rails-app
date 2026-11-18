@@ -2,6 +2,9 @@
 class WebsocketServices::SystemService
   # Redis Pub/Subに送信
   def send_to_redis(channel, data)
+    # テスト環境ならRedisに接続せずここで処理を抜ける
+    return if Rails.env.test?
+
     redis = DataServices::RedisService.get_redis
 
     data = {
