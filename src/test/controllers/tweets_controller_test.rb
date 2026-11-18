@@ -1,10 +1,13 @@
 require "test_helper"
 
 class TweetsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @user = users(:one) # fixturesなどで用意されているユーザー
+  include Devise::Test::IntegrationHelpers
 
+  setup do
+    @user = users(:one)
     sign_in @user
+
+    mock_redis_service
   end
 
   test "should get index" do
@@ -18,7 +21,7 @@ class TweetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create tweet" do
-    assert_difference("UserTweet.count") do
+    assert_difference("UserTweet.count", 1) do
       post tweets_url, params: { tweet: { content: 'テストツイート' }, commit: "on" }
     end
 
