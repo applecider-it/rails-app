@@ -114,5 +114,7 @@ rails generate scaffold Memo title:string body:text --force
 
 ユニットテスト
 
+railsは起動しないでも動く
+
 bin/rails db:test:prepare test test:system
 
