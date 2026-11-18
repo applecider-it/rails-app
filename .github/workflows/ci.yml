@@ -61,5 +61,6 @@ jobs:
           DATABASE_HOST: localhost
           DATABASE_URL: postgres://postgres:password@localhost:5432/rails_test_test
           PUSHER_URL: https://dummy_key:dummy_secret@api.pusherapp.com/apps/12345
+          APP_JWT_SECRET: dummy_secret
         working-directory: src
         run: bin/rails db:test:prepare test test:system
