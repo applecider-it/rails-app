@@ -4,7 +4,7 @@
 
 - Railsをモノリスにする。
 
-- websocketはGo, Pusher(soketi), ActionCableのマイクロサービス。
+- websocketはGo, Pusher(soketi)のマイクロサービスとActionCable。
 
   - soketiは、`microservices`のサーバーを起動する必要がある。
 
