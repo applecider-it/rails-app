@@ -61,6 +61,4 @@ jobs:
           DATABASE_URL: postgres://postgres:password@localhost:5432/rails_test_test
           PUSHER_URL: https://dummy_key:dummy_secret@api.pusherapp.com/apps/12345
         working-directory: src
-        run: |
-          bin/vite build --mode=tests
-          bin/rails db:test:prepare test test:system
+        run: bin/rails db:test:prepare test test:system
