@@ -112,3 +112,7 @@ rails generate scaffold Memo title:string body:text --force
 
 -----------------------------------
 
+ユニットテスト
+
+bin/rails db:test:prepare test test:system
+

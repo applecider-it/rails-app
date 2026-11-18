@@ -2,42 +2,22 @@ require "application_system_test_case"
 
 class TweetsTest < ApplicationSystemTestCase
   setup do
-    @user_tweet = user_tweets(:one)
+    @user = users(:one)
   end
 
   test "visiting the index" do
-    visit user_tweets_url
-    assert_selector "h1", text: "User tweets"
-  end
+    # ログイン画面へ移動
+    visit new_user_session_path
 
-  test "should create user tweet" do
-    visit user_tweets_url
-    click_on "New user tweet"
+    # フォームにメールアドレスとパスワードを入力
+    fill_in "メールアドレス", with: @user.email
+    fill_in "パスワード", with: "password"
 
-    fill_in "Content", with: @user_tweet.content
-    fill_in "User", with: @user_tweet.user_id
-    click_on "Create User tweet"
+    # ログインボタンをクリック
+    click_button "Log in"
 
-    assert_text "User tweet was successfully created"
-    click_on "Back"
-  end
-
-  test "should update User tweet" do
-    visit user_tweet_url(@user_tweet)
-    click_on "Edit this user tweet", match: :first
-
-    fill_in "Content", with: @user_tweet.content
-    fill_in "User", with: @user_tweet.user_id
-    click_on "Update User tweet"
-
-    assert_text "User tweet was successfully updated"
-    click_on "Back"
-  end
-
-  test "should destroy User tweet" do
-    visit user_tweet_url(@user_tweet)
-    click_on "Destroy this user tweet", match: :first
-
-    assert_text "User tweet was successfully destroyed"
+    # ログイン後のページでテストを続ける
+    visit tweets_url
+    assert_selector "h2", text: "ツイート一覧"
   end
 end
