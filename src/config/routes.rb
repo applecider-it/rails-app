@@ -57,7 +57,6 @@ Rails.application.routes.draw do
   scope "/admin_secret" do
     devise_for :admin_users, controllers: {
       sessions: 'admin/admin_users/sessions',
-      passwords: 'admin/admin_users/passwords',
     }
 
     scope as: "admin", module: "admin" do
