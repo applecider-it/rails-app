@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # サンプルサービスのサブクラス
 class SampleServices::SampleService::SubService
   # サンプルメソッド

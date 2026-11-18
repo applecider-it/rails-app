@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # リッチテキスト管理
 class DataServices::RichtextService
   # 表示用にサニタイズしたHTMLを返す

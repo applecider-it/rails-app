@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   # 項目エラー表示
   def app_field_error(form, field)

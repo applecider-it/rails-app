@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ツイートのWebSocket関連管理
 class TweetServices::WebsocketService
   # ブロードキャスト

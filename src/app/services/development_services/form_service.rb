@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 開発者向けページのFormテスト管理
 class DevelopmentServices::FormService
   # テスト用フォームデータ

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Websocketのシステム関連の管理クラス
 class WebsocketServices::SystemService
   # Redis Pub/Subに送信

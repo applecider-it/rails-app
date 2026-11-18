@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ツイートの一覧関連管理
 class TweetServices::ListService
   # 一覧用のオブジェクト

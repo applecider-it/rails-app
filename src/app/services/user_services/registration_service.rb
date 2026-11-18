@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ユーザー登録関連管理クラス
 class UserServices::RegistrationService
   # 更新処理を上書き

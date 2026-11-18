@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # チャットのRedis管理
 class ChatServices::RedisService
   # ブロードキャスト

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 管理画面　ユーザー一覧関連管理
 class AdminServices::UserServices::ListService
   # 一覧取得

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # チャットのRoom管理
 class ChatServices::RoomService
   # Room情報取得

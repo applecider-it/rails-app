@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # サンプルサービスのサブクラス
 # 問題が発生しやすい実装例
 class SampleServices::SampleService::User

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 管理画面　ユーザー登録関連管理クラス
 class AdminServices::UserServices::EditService
   # 更新処理を上書き

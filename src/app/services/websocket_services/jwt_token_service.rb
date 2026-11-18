@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WebsocketのJWTトークン管理クラス
 class WebsocketServices::JwtTokenService
   # userのjwtトークン

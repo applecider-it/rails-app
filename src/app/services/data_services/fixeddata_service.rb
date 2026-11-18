@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 固定データ管理
 class DataServices::FixeddataService
   # 都道府県のハッシュ

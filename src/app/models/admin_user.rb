@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 管理者モデル
 # 
 # ドキュメント

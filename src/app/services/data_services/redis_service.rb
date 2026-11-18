@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'redis'
 
 # Redis管理

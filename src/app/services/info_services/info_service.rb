@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # お知らせ管理
 class InfoServices::InfoService
   def initialize
