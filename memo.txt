@@ -126,3 +126,11 @@ bin/rails db:test:prepare test test:system
 
 bin/jobsはDBキューを動かすものなので、開発環境ではエラーになる
 
+-----------------------------------
+
+メールプレビュー
+
+http://localhost:3000/rails/mailers/sample_mailer
+
+対応ファイル
+/test/mailers/previews/sample_mailer_preview.rb
