@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [ main ]
+  # ActionsにRunボタン追加
   workflow_dispatch:
 
 jobs:
@@ -35,7 +36,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      # Nodeセットアップ（Viteのビルドに必要）
+      # Nodeセットアップ
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
