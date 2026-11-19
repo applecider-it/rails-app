@@ -9,6 +9,8 @@ require 'jwt'
 class User < ApplicationRecord
   include Discard::Model
 
+  PUBLIC_JSON_ATTRIBUTES = %i[id name email].freeze
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -58,10 +60,5 @@ class User < ApplicationRecord
   def jwt_token(channel)
     jwt_token_service = WebsocketServices::JwtTokenService.new
     jwt_token_service.create_user_jwt_token(self, channel)
-  end
-
-  # シリアライズ対象から除外
-  def self.hidden_attributes
-    [:created_at, :updated_at, :discarded_at]
   end
 end

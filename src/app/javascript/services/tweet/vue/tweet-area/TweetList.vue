@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 
 import LoadingInline from '@/services/ui/vue/message/LoadingInline.vue';
-import { TweetContainer } from '../../types';
+import { TweetContainer, Tweet } from '../../types';
 import type TweetClient from '../../TweetClient';
 
 const props = defineProps<{
@@ -13,9 +13,11 @@ const tweetContainers = ref<TweetContainer[] | null>(null);
 
 /** 一覧を最新にする */
 const refreshList = async (): Promise<void> => {
-  const initialTweets = await props.tweetClient.tweetCtrl.getList();
+  const tweets: Tweet[] = await props.tweetClient.tweetCtrl.getList();
 
-  const list: TweetContainer[] = initialTweets.map((tweet) => ({
+  console.log({ tweets });
+
+  const list: TweetContainer[] = tweets.map((tweet) => ({
     tweet,
   }));
 

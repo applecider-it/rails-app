@@ -5,6 +5,8 @@
 # ドキュメント
 # /documents/models/admin_user.md
 class AdminUser < ApplicationRecord
+  PUBLIC_JSON_ATTRIBUTES = %i[id email].freeze
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, 

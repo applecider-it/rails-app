@@ -16,7 +16,12 @@ class TweetsJsController < ApplicationController
     list_service = TweetServices::ListService.new
     @tweets = list_service.get_list 1, ""
 
-    render json: @tweets.as_json(include: :user)
+    render json: @tweets.as_json(
+      only: UserTweet::PUBLIC_JSON_ATTRIBUTES,
+      include: {
+        user: { only: User::PUBLIC_JSON_ATTRIBUTES }
+      }
+    )
   end
 
   # 新規作成処理

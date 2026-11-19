@@ -1,6 +1,6 @@
 import { User } from '@/services/application/types';
 
-type Tweet = {
+export type Tweet = {
   id: number;
   content: string;
   created_at: string;
