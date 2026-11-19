@@ -111,7 +111,7 @@ class DevelopmentController < ApplicationController
 
   # メールテスト
   def mail_test
-    SampleMailer.sample_mail(current_user).deliver_now
+    SampleMailer.sample_mail(current_user).deliver_later
     render :complate
   end
 

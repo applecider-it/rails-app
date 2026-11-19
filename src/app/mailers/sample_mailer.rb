@@ -8,6 +8,6 @@ class SampleMailer < ApplicationMailer
     @greeting = "Hi"
     @user = user
 
-    mail to: @user.email
+    mail to: @user.email, subject: "サンプルメール"
   end
 end
