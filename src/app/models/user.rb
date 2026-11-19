@@ -9,8 +9,6 @@ require 'jwt'
 class User < ApplicationRecord
   include Discard::Model
 
-  PUBLIC_JSON_ATTRIBUTES = %i[id name email].freeze
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -27,6 +25,11 @@ class User < ApplicationRecord
     return all if keyword.blank?
     where("email LIKE ?", "%#{sanitize_sql_like(keyword)}%")
   }
+
+  # JSONで出力可能な項目
+  def self.public_json_attributes
+    %i[id name email]
+  end
 
   # ログイン可能かチェック
   # 

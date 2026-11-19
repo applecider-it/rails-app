@@ -7,8 +7,6 @@
 class UserTweet < ApplicationRecord
   include Discard::Model
 
-  PUBLIC_JSON_ATTRIBUTES = %i[id content created_at].freeze
-
   belongs_to :user
 
   validates :content, presence: true
@@ -18,4 +16,9 @@ class UserTweet < ApplicationRecord
     return all if keyword.blank?
     where("content LIKE ?", "%#{sanitize_sql_like(keyword)}%")
   }
+
+  # JSONで出力可能な項目
+  def self.public_json_attributes
+    %i[id content created_at]
+  end
 end

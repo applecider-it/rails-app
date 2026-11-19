@@ -36,5 +36,5 @@
 -->
 
 <% if user_signed_in? %>
-  <meta name="user" data-json="<%= current_user.to_json(only: User::PUBLIC_JSON_ATTRIBUTES) %>">
+  <meta name="user" data-json="<%= current_user.to_json(only: User.public_json_attributes) %>">
 <% end %>

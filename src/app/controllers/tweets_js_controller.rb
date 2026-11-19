@@ -17,9 +17,9 @@ class TweetsJsController < ApplicationController
     @tweets = list_service.get_list 1, ""
 
     render json: @tweets.as_json(
-      only: UserTweet::PUBLIC_JSON_ATTRIBUTES,
+      only: UserTweet.public_json_attributes,
       include: {
-        user: { only: User::PUBLIC_JSON_ATTRIBUTES }
+        user: { only: User.public_json_attributes }
       }
     )
   end
