@@ -292,3 +292,8 @@ rails db:migrate
 -----------------------------------
 
 rails g kaminari:config
+
+-----------------------------------
+
+bin/rails generate mailer SampleMailer sample_mail
+
