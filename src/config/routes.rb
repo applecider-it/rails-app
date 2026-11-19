@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get "development/slide_editor_test"
   get "development/map_test"
   post "development/upload_test"
+  get "development/mail_test"
 
   # 管理画面
   scope "/admin_secret" do

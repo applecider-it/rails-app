@@ -1,6 +1,6 @@
 # 開発者向けページ
 class DevelopmentController < ApplicationController
-  before_action :authenticate_user!, only: [:ruby_test]
+  before_action :authenticate_user!, only: [:ruby_test, :mail_test]
 
   def index
   end
@@ -107,6 +107,12 @@ class DevelopmentController < ApplicationController
     end
 
     redirect_to development_view_test_path, notice: "アップロードが完了しました！"
+  end
+
+  # メールテスト
+  def mail_test
+    SampleMailer.sample_mail(current_user).deliver_now
+    render :complate
   end
 
   private def view_test_params

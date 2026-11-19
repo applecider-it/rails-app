@@ -4,9 +4,10 @@ class SampleMailer < ApplicationMailer
   #
   #   en.sample_mailer.sample_mail.subject
   #
-  def sample_mail
+  def sample_mail(user)
     @greeting = "Hi"
+    @user = user
 
-    mail to: "to@example.org"
+    mail to: @user.email
   end
 end
