@@ -100,27 +100,7 @@
   @apply px-6 py-4 whitespace-nowrap;
 }
 
-/* ページネーター */
-
-/* ページネーターの有効リンク */
-.app-paginator-link > a {
-  @apply px-2 py-1 border rounded bg-blue-200;
-}
-
-/* ページネーターの無効リンク */
-.app-paginator-link > span {
-  @apply px-2 py-1 border rounded text-gray-400;
-}
-
-/* ページネーター（レスポンシブ）の有効リンク */
-.app-paginator-responsive-link > a {
-  @apply px-3 py-2 border rounded bg-blue-200;
-}
-
-/* ページネーター（レスポンシブ）の無効リンク */
-.app-paginator-responsive-link > span {
-  @apply px-3 py-2 border rounded text-gray-400;
-}
+/* CSSの指定 */
 
 /* .prose（Tailwind CSSのTypographyプラグイン）のスタイルが優先されてしまい、<strong> タグの文字色が固定されてしまう問題対応 */
 .prose strong {

@@ -7,8 +7,3 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<% if page.current? %>
-  <span><%= page %></span>
-<% else %>
-  <%= link_to page, url, {remote: remote, rel: page.rel}  %>
-<% end %>
