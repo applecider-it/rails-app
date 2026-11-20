@@ -7,35 +7,37 @@
     paginator:     the paginator that renders the pagination tags inside
 -%>
 <%= paginator.render do -%>
-  <nav class="my-10 space-x-2 hidden md:flex justify-between" role="navigation" aria-label="pager">
-    <span>
-      <span class="app-paginator-link"><%= first_page_tag %></span>
-      <span class="app-paginator-link"><%= prev_page_tag %></span>
-    </span>
-    <span>
-      <% each_page do |page| -%>
-        <% if page.display_tag? -%>
-          <span class="app-paginator-link"><%= page_tag page %></span>
-        <% elsif !page.was_truncated? -%>
-          <%= gap_tag %>
+  <% unless current_page.out_of_range? %>
+    <nav class="my-10 space-x-2 hidden md:flex justify-between" role="navigation" aria-label="pager">
+      <span>
+        <span class="app-paginator-link"><%= first_page_tag %></span>
+        <span class="app-paginator-link"><%= prev_page_tag %></span>
+      </span>
+      <span>
+        <% each_page do |page| -%>
+          <% if page.display_tag? -%>
+            <span class="app-paginator-link"><%= page_tag page %></span>
+          <% elsif !page.was_truncated? -%>
+            <%= gap_tag %>
+          <% end -%>
         <% end -%>
-      <% end -%>
-    </span>
-    <span>
-      <span class="app-paginator-link"><%= next_page_tag %></span>
-      <span class="app-paginator-link"><%= last_page_tag %></span>
-    </span>
-  </nav>
+      </span>
+      <span>
+        <span class="app-paginator-link"><%= next_page_tag %></span>
+        <span class="app-paginator-link"><%= last_page_tag %></span>
+      </span>
+    </nav>
 
-  <nav class="my-10 justify-between md:hidden flex" role="navigation" aria-label="pager">
-    <span>
-      <span class="app-paginator-responsive-link"><%= prev_page_tag %></span>
-    </span>
-    <span>
-      <%= current_page %> / <%= total_pages %>
-    </span>
-    <span>
-      <span class="app-paginator-responsive-link"><%= next_page_tag %></span>
-    </span>
-  </nav>
+    <nav class="my-10 justify-between md:hidden flex" role="navigation" aria-label="pager">
+      <span>
+        <span class="app-paginator-responsive-link"><%= prev_page_tag %></span>
+      </span>
+      <span>
+        <%= current_page %> / <%= total_pages %>
+      </span>
+      <span>
+        <span class="app-paginator-responsive-link"><%= next_page_tag %></span>
+      </span>
+    </nav>
+  <% end -%>
 <% end -%>
