@@ -68,6 +68,8 @@
   @apply max-w-5xl mx-auto px-6 py-10;
 }
 
+/* テーブル */
+
 /* テーブルをレスポンシブ対応させるためのコンテナ */
 @utility app-table-container {
   @apply overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg;
@@ -98,12 +100,26 @@
   @apply px-6 py-4 whitespace-nowrap;
 }
 
-/* ページネーターのリンク */
+/* ページネーター */
+
+/* ページネーターの有効リンク */
 .app-paginator-link > a {
-  @apply px-3 py-2 border rounded bg-blue-100;
+  @apply px-2 py-1 border rounded bg-blue-200;
 }
+
+/* ページネーターの無効リンク */
 .app-paginator-link > span {
-  @apply px-3 py-2 border rounded;
+  @apply px-2 py-1 border rounded text-gray-400;
+}
+
+/* ページネーター（レスポンシブ）の有効リンク */
+.app-paginator-responsive-link > a {
+  @apply px-3 py-2 border rounded bg-blue-200;
+}
+
+/* ページネーター（レスポンシブ）の無効リンク */
+.app-paginator-responsive-link > span {
+  @apply px-3 py-2 border rounded text-gray-400;
 }
 
 /* .prose（Tailwind CSSのTypographyプラグイン）のスタイルが優先されてしまい、<strong> タグの文字色が固定されてしまう問題対応 */
