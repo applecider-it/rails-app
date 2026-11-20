@@ -13,13 +13,13 @@
   css_classes = {
     primary: {
       link: {
-        a: "px-2 py-1 border rounded bg-blue-200",
+        a: "px-2 py-1 border rounded bg-blue-200 border-blue-400 text-gray-600",
         span: "px-2 py-1 border rounded text-gray-400",
       }
     },
     responsive: {
       link: {
-        a: "px-3 py-2 border rounded bg-blue-200",
+        a: "px-3 py-2 border rounded bg-blue-200 border-blue-400 text-gray-600",
         span: "px-3 py-2 border rounded text-gray-400",
       }
     },
@@ -61,7 +61,7 @@
             </span>
           <% elsif !page.was_truncated? -%>
             <%= gap_tag %>
-            <span><%= t('views.pagination.truncate').html_safe %></span>
+            <span class="px-2"><%= t('views.pagination.truncate').html_safe %></span>
           <% end -%>
         <% end -%>
       </span>
@@ -92,9 +92,9 @@
         <span>
           <%= prev_page_tag %>
           <% if current_page.first? %>
-            <span class="<%= css_classes[:primary][:link][:span] %>"><%= t('views.pagination.previous').html_safe %></span>
+            <span class="<%= css_classes[:responsive][:link][:span] %>"><%= t('views.pagination.previous').html_safe %></span>
           <% else %>
-            <%= link_to t('views.pagination.previous').html_safe, page_url_for(current_page - 1), rel: 'prev', remote: remote, class: css_classes[:primary][:link][:a]  %>
+            <%= link_to t('views.pagination.previous').html_safe, page_url_for(current_page - 1), rel: 'prev', remote: remote, class: css_classes[:responsive][:link][:a]  %>
           <% end %>
         </span>
       </span>
