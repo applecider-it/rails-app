@@ -98,6 +98,14 @@
   @apply px-6 py-4 whitespace-nowrap;
 }
 
+/* ページネーターのリンク */
+.app-paginator-link > a {
+  @apply px-3 py-2 border rounded bg-blue-100;
+}
+.app-paginator-link > span {
+  @apply px-3 py-2 border rounded;
+}
+
 /* .prose（Tailwind CSSのTypographyプラグイン）のスタイルが優先されてしまい、<strong> タグの文字色が固定されてしまう問題対応 */
 .prose strong {
   color: var(--my-custom-color) !important;
