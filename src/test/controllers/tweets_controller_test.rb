@@ -17,10 +17,8 @@ class TweetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create tweet" do
-    with_mock_redis_service do
-      assert_difference("UserTweet.count", 1) do
-        post tweets_url, params: { tweet: { content: 'テストツイート' }, commit: "on" }
-      end
+    assert_difference("UserTweet.count", 1) do
+      post tweets_url, params: { tweet: { content: 'テストツイート' }, commit: "on" }
     end
 
     assert_redirected_to tweets_url

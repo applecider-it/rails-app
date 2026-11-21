@@ -18,7 +18,7 @@ class TweetsTest < ApplicationSystemTestCase
     fill_in "投稿内容", with: "ツイートテスト"
     click_on "確認"
 
-    with_mock_redis_service do
+    assert_difference -> { UserTweet.count }, 1 do
       click_on "登録する"
 
       assert_text "作成しました。"

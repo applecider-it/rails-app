@@ -10,29 +10,23 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
+    # すべてのテストの前に実行する
+    setup :setup_mock_redis_service
+
     # Add more helper methods to be used by all tests here...
 
-    # Redisを一時的に無効化する
-    def with_mock_redis_service
+    # Redisを無効化する
+    def setup_mock_redis_service
       # ダミー用のRedisオブジェクト
       dummy_redis = Object.new
       dummy_redis.define_singleton_method(:publish) do |*args|
         Rails.logger.info("publish dummy: " + args.to_json)
       end
 
-      # オリジナルのメソッドの中身を保存
-      original_method = DataServices::RedisService.method(:get_redis)
-
       # クラス関数( DataServices::RedisService.get_redis() )入れ替え
       DataServices::RedisService.define_singleton_method(:get_redis) do
         dummy_redis
       end
-
-      # ブロック実行
-      yield
-    ensure
-      # オリジナルのメソッドを戻す
-      DataServices::RedisService.define_singleton_method(:get_redis, original_method) if original_method
     end
   end
 end
