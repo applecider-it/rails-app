@@ -7,10 +7,16 @@
     paginator:     the paginator that renders the pagination tags inside
 
   デザインをあてやすくするため、１ファイルにまとめています。
-  ライブラリーは、内部的に*_tagの読み込んだ種類を保存し、それに合わせた処理があるため、空でも*_tagの実行が必要なので注意。
 -%>
 <%
-  css_classes = {
+  work_data = {
+    # ページリンク用データ
+    pages: [],
+    # 共通で使うCSSをまとめる
+    css: nil,
+  }
+
+  work_data[:css] = {
     primary: {
       link: {
         a: "px-2 py-1 border rounded bg-blue-200 border-blue-400 text-gray-600",
@@ -24,43 +30,66 @@
       }
     },
   }
+
 %>
 <%= paginator.render do -%>
+  <%
+    # ページリンクの処理がカオスなため、あらかじめデータを生成する。
+    # 具体的には、描画部分でデータ生成のようなことをしている。
+    # ライブラリーは、内部的に*_tagの読み込んだ種類を保存し、was_truncated?で、それに合わせた処理があるため、
+    # 空でも*_tagの実行が必要なので注意。
+    #
+    # 参考
+    # gems/kaminari-core-*/lib/kaminari/helpers/paginator.rb
+    each_page do |page|
+      if page.display_tag?
+        page_tag page
+        work_data[:pages] << {
+          type: :page,
+          page: page.to_i,
+          current: page.current?,
+          rel: page.rel,
+        }
+      elsif !page.was_truncated?
+        gap_tag
+        work_data[:pages] << {
+          type: :gap,
+        }
+      end
+    end
+  %>
+
   <% unless current_page.out_of_range? %>
     <%# プライマリーページネーション %>
     <nav class="my-10 space-x-2 hidden md:flex justify-between" role="navigation" aria-label="pager">
       <span>
         <span>
-          <%= first_page_tag %>
           <% if current_page.first? %>
-            <span class="<%= css_classes[:primary][:link][:span] %>"><%= t('views.pagination.first').html_safe %></span>
+            <span class="<%= work_data[:css][:primary][:link][:span] %>"><%= t('views.pagination.first').html_safe %></span>
           <% else %>
-            <%= link_to t('views.pagination.first').html_safe, page_url_for(1), remote: remote, class: css_classes[:primary][:link][:a]  %>
+            <%= link_to t('views.pagination.first').html_safe, page_url_for(1), remote: remote, class: work_data[:css][:primary][:link][:a]  %>
           <% end %>
         </span>
         <span>
-          <%= prev_page_tag %>
           <% if current_page.first? %>
-            <span class="<%= css_classes[:primary][:link][:span] %>"><%= t('views.pagination.previous').html_safe %></span>
+            <span class="<%= work_data[:css][:primary][:link][:span] %>"><%= t('views.pagination.previous').html_safe %></span>
           <% else %>
-            <%= link_to t('views.pagination.previous').html_safe, page_url_for(current_page - 1), rel: 'prev', remote: remote, class: css_classes[:primary][:link][:a]  %>
+            <%= link_to t('views.pagination.previous').html_safe, page_url_for(current_page - 1), rel: 'prev', remote: remote, class: work_data[:css][:primary][:link][:a]  %>
           <% end %>
         </span>
       </span>
 
       <span>
-        <% each_page do |page| -%>
-          <% if page.display_tag? -%>
+        <% work_data[:pages].each do |page| -%>
+          <% if page[:type] == :page -%>
             <span>
-              <%= page_tag page %>
-              <% if page.current? %>
-                <span class="<%= css_classes[:primary][:link][:span] %>"><%= page %></span>
+              <% if page[:current] %>
+                <span class="<%= work_data[:css][:primary][:link][:span] %>"><%= page[:page] %></span>
               <% else %>
-                <%= link_to page, page_url_for(page), remote: remote, rel: page.rel, class: css_classes[:primary][:link][:a]  %>
+                <%= link_to page[:page], page_url_for(page[:page]), remote: remote, rel: page[:rel], class: work_data[:css][:primary][:link][:a]  %>
               <% end %>
             </span>
-          <% elsif !page.was_truncated? -%>
-            <%= gap_tag %>
+          <% else -%>
             <span class="px-2"><%= t('views.pagination.truncate').html_safe %></span>
           <% end -%>
         <% end -%>
@@ -68,19 +97,17 @@
 
       <span>
         <span>
-          <%= next_page_tag %>
           <% if current_page.last? %>
-            <span class="<%= css_classes[:primary][:link][:span] %>"><%= t('views.pagination.next').html_safe %></span>
+            <span class="<%= work_data[:css][:primary][:link][:span] %>"><%= t('views.pagination.next').html_safe %></span>
           <% else %>
-            <%= link_to t('views.pagination.next').html_safe, page_url_for(current_page + 1), rel: 'next', remote: remote, class: css_classes[:primary][:link][:a]  %>
+            <%= link_to t('views.pagination.next').html_safe, page_url_for(current_page + 1), rel: 'next', remote: remote, class: work_data[:css][:primary][:link][:a]  %>
           <% end %>
         </span>
         <span>
-          <%= last_page_tag %>
           <% if current_page.last? %>
-            <span class="<%= css_classes[:primary][:link][:span] %>"><%= t('views.pagination.last').html_safe %></span>
+            <span class="<%= work_data[:css][:primary][:link][:span] %>"><%= t('views.pagination.last').html_safe %></span>
           <% else %>
-            <%= link_to t('views.pagination.last').html_safe, page_url_for(total_pages), remote: remote, class: css_classes[:primary][:link][:a]  %>
+            <%= link_to t('views.pagination.last').html_safe, page_url_for(total_pages), remote: remote, class: work_data[:css][:primary][:link][:a]  %>
           <% end %>
         </span>
       </span>
@@ -90,11 +117,10 @@
     <nav class="my-10 justify-between md:hidden flex" role="navigation" aria-label="pager">
       <span>
         <span>
-          <%= prev_page_tag %>
           <% if current_page.first? %>
-            <span class="<%= css_classes[:responsive][:link][:span] %>"><%= t('views.pagination.previous').html_safe %></span>
+            <span class="<%= work_data[:css][:responsive][:link][:span] %>"><%= t('views.pagination.previous').html_safe %></span>
           <% else %>
-            <%= link_to t('views.pagination.previous').html_safe, page_url_for(current_page - 1), rel: 'prev', remote: remote, class: css_classes[:responsive][:link][:a]  %>
+            <%= link_to t('views.pagination.previous').html_safe, page_url_for(current_page - 1), rel: 'prev', remote: remote, class: work_data[:css][:responsive][:link][:a]  %>
           <% end %>
         </span>
       </span>
@@ -105,11 +131,10 @@
 
       <span>
         <span>
-          <%= next_page_tag %>
           <% if current_page.last? %>
-            <span class="<%= css_classes[:responsive][:link][:span] %>"><%= t('views.pagination.next').html_safe %></span>
+            <span class="<%= work_data[:css][:responsive][:link][:span] %>"><%= t('views.pagination.next').html_safe %></span>
           <% else %>
-            <%= link_to t('views.pagination.next').html_safe, page_url_for(current_page + 1), rel: 'next', remote: remote, class: css_classes[:responsive][:link][:a]  %>
+            <%= link_to t('views.pagination.next').html_safe, page_url_for(current_page + 1), rel: 'next', remote: remote, class: work_data[:css][:responsive][:link][:a]  %>
           <% end %>
         </span>
       </span>
