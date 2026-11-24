@@ -1,7 +1,7 @@
 import type { Members, PresenceChannel } from 'pusher-js';
 
 import { showToast } from "@/services/ui/message";
-import { pusher } from '@/services/application/pusher';
+import { pusher, delimiterString } from '@/services/application/pusher';
 import { sendApi } from '@/services/api/http';
 
 import { ChatMessage, PusherUserInfo, PusherUser } from './types';
@@ -34,9 +34,11 @@ export default class ChatClient {
 
     console.log('this.room', this.room);
 
+    const channelBaseId = 'presence-rails-chat-channel';
+
     // pusher 接続
     const channel = pusher.subscribe(
-      `presence-rails-chat-channel-${this.room}`,
+      `${channelBaseId}${delimiterString}${this.room}`,
     ) as PresenceChannel;
 
     // WebSocketは、ページ遷移しても停止状態で保持されるので、明示的に切断処理をする

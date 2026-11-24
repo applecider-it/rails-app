@@ -17,3 +17,6 @@ export const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
     },
   },
 });
+
+/** チャンネルIDと詳細の区切り文字 */
+export const delimiterString = '---';
