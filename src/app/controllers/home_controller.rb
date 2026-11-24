@@ -24,4 +24,9 @@ class HomeController < ApplicationController
       head :forbidden
     end
   end
+
+  # アプリの開始画面
+  def appli_start
+    render layout: 'blank'
+  end
 end

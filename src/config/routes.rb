@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   # Pusher認証
   post "pusher/auth", to: "home#pusher_auth"
 
+  # アプリの開始画面
+  get "appli_start", to: "home#appli_start", as: :appli_start
+
   # ブログ
   resources :posts, path: 'blog', only: [:index, :show]
 

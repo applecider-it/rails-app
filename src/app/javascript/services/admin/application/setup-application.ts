@@ -1,4 +1,5 @@
 import '@/services/application/bootstrap/container';
+import '@/services/application/bootstrap/window';
 
 console.log('admin/application init');
 

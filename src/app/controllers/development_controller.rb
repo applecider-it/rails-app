@@ -106,7 +106,10 @@ class DevelopmentController < ApplicationController
       file.write(file_content)
     end
 
-    redirect_to development_view_test_path, notice: "アップロードが完了しました！"
+    respond_to do |format|
+      format.html { redirect_to development_view_test_path, notice: "アップロードが完了しました！" }
+      format.json { render json: {status: true} }
+    end
   end
 
   # メールテスト
