@@ -118,6 +118,11 @@ railsは起動しないでも動く
 
 bin/rails db:test:prepare test test:system
 
+
+JS
+
+npx vitest run app/javascript/tests/
+
 -----------------------------------
 
 ジョブ

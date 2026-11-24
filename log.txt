@@ -297,3 +297,8 @@ rails g kaminari:config
 
 bin/rails generate mailer SampleMailer sample_mail
 
+-----------------------------------
+
+
+npm install -D vitest
+

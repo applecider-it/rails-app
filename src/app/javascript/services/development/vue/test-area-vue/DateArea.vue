@@ -4,7 +4,7 @@
 import { dateFormat } from '@/services/data/date';
 
 const display = (obj: Date) => {
-  return dateFormat(obj, 'ymdwhis');
+  return dateFormat(obj, 'all');
 };
 
 //「そのまま表示される」の部分が、そのまま表示される理由は、

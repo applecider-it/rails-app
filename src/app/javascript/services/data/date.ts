@@ -3,7 +3,9 @@
  *
  * ```
  * type:
- * ymdwhis: YYYY/MM/DD (W) HH:MM:SS
+ * all: YYYY/MM/DD (W) HH:MM:SS
+ * full: YYYY/MM/DD HH:MM:SS
+ * date: YYYY/MM/DD
  * ```
  */
 export function dateFormat(obj: Date, type: string) {
@@ -11,18 +13,29 @@ export function dateFormat(obj: Date, type: string) {
 
   const pad = (num: number) => String(num).padStart(2, '0');
 
-  const y = obj.getFullYear();
-  const m = pad(obj.getMonth() + 1);
-  const d = pad(obj.getDate());
+  const yyyy = obj.getFullYear();
+  const mm = obj.getMonth() + 1;
+  const dd = obj.getDate();
 
-  const h = pad(obj.getHours());
-  const i = pad(obj.getMinutes());
-  const s = pad(obj.getSeconds());
+  const hh = obj.getHours();
+  const mi = obj.getMinutes();
+  const ss = obj.getSeconds();
+
+  const mmPad = pad(mm);
+  const ddPad = pad(dd);
+
+  const hhPad = pad(hh);
+  const miPad = pad(mi);
+  const ssPad = pad(ss);
 
   const w = days[obj.getDay()];
 
-  if (type === 'ymdwhis') {
-    return `${y}/${m}/${d} (${w}) ${h}:${i}:${s}`;
+  if (type === 'all') {
+    return `${yyyy}/${mmPad}/${ddPad} (${w}) ${hhPad}:${miPad}:${ssPad}`;
+  } else if (type === 'full') {
+    return `${yyyy}/${mmPad}/${ddPad} ${hhPad}:${miPad}:${ssPad}`;
+  } else if (type === 'date') {
+    return `${yyyy}/${mmPad}/${ddPad}`;
   }
 
   throw Error(`dateFormat() error. Invalid Type: ${type}`);
