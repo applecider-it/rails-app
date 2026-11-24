@@ -1,17 +1,10 @@
 <script setup lang="ts">
 /** Date動作確認 */
 
-const display = (obj: Date) => {
-  const days = ['日', '月', '火', '水', '木', '金', '土'];
-  const y = obj.getFullYear();
-  const m = obj.getMonth() + 1;
-  const d = obj.getDate();
-  const w = days[obj.getDay()];
-  const h = obj.getHours();
-  const mi = obj.getMinutes();
-  const s = obj.getSeconds();
+import { dateFormat } from '@/services/data/date';
 
-  return `${y}/${m}/${d} (${w}) ${h}:${mi}:${s}`;
+const display = (obj: Date) => {
+  return dateFormat(obj, 'ymdwhis');
 };
 
 //「そのまま表示される」理由は、new Date()でタイムゾーン付きのオブジェクトに変換されて
@@ -25,6 +18,8 @@ const list = [
   '2026-11-24 00:00:00',  // そのまま表示される
   '2026-11-24 10:00:00',  // そのまま表示される
   '2026-11-24 10:00:00+09:00',  // タイムゾーンが違うとそれに合わせた値になる
+
+  '2026-1-2 3:4:5',
 ];
 </script>
 
