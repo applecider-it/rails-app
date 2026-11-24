@@ -1,7 +1,6 @@
 import { ChatMessage, SendType } from './types';
 
 import consumer from '@/channels/consumer';
-import { pusher } from '@/services/application/pusher';
 
 import { sendApi } from '@/services/api/http';
 
@@ -38,16 +37,6 @@ export default class ChatClient {
         received: (data: JsonMessage) => this.onMessageAC(data),
       },
     );
-
-    // pusher 接続
-    const channel = pusher.subscribe(`rails-chat-channel-${this.room}`);
-
-    // WebSocketは、ページ遷移しても停止状態で保持されるので、明示的に切断処理をする
-    window.addEventListener('pagehide', () => {
-      pusher.disconnect();
-    });
-
-    channel.bind('new-message', (data: JsonMessage) => this.onMessageP(data));
   }
 
   /** WebSocketメッセージ受信 */
@@ -62,12 +51,6 @@ export default class ChatClient {
 
   /** ActionCableメッセージ受信 */
   private onMessageAC(data: JsonMessage) {
-    console.log('受信:', data);
-    this.addMessage(this.convert(data));
-  }
-
-  /** Pusherメッセージ受信 */
-  private onMessageP(data: JsonMessage) {
     console.log('受信:', data);
     this.addMessage(this.convert(data));
   }
@@ -106,7 +89,6 @@ export default class ChatClient {
 
     const url = {
       actioncable: '/chat/store_ac',
-      pusher: '/chat/store_p',
       redis: '/chat/store_redis',
     }[type];
 

@@ -7,4 +7,4 @@ export type ChatMessage = {
 };
 
 /** 送信タイプ */
-export type SendType = 'websocket' | 'redis' | 'actioncable' | 'pusher';
+export type SendType = 'websocket' | 'redis' | 'actioncable';

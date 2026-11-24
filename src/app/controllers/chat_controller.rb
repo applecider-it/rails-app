@@ -33,24 +33,6 @@ class ChatController < ApplicationController
     end
   end
 
-  # Pusherによる送信
-  def store_p
-    pusher_service = ChatServices::PusherService.new
-    form = ChatForm.new
-
-    form.assign_attributes({
-      message: params[:message],
-    })
-
-    if form.valid?
-      pusher_service.broadcast(params[:room], form.message, current_user)
-
-      render json: { status: 'OK' }
-    else
-      render json: {errors: form.errors}, status: :unprocessable_entity
-    end
-  end
-
   # Redisによる送信
   def store_redis
     redis_service = ChatServices::RedisService.new
