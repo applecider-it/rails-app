@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get "chat/index"
   post "chat/store_ac"
   post "chat/store_redis"
-  post "chat/store_p"
+  
+  # チャット (Pusher)
+  get "chat_pusher/index"
+  post "chat_pusher/store_p"
 
   # ツイート
   resources :tweets, only: [:index, :new, :create]
@@ -36,6 +39,9 @@ Rails.application.routes.draw do
 
   # お知らせページ
   get "info", to: "home#info"
+
+  # Pusher認証
+  post "pusher/auth", to: "home#pusher_auth"
 
   # ブログ
   resources :posts, path: 'blog', only: [:index, :show]

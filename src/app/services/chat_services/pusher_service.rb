@@ -6,7 +6,7 @@ require 'redis'
 class ChatServices::PusherService
   # ブロードキャスト
   def broadcast(room, message, user)
-    channel_id = "rails-chat-channel-#{room}"
+    channel_id = "presence-rails-chat-channel-#{room}"
     p("store_p channel_id", channel_id)
     
     Pusher.trigger(
