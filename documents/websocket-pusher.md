@@ -14,7 +14,7 @@
 
 ### チャット
 
-チャンネル名: `presence-rails-chat-channel`
+チャンネルベースID: `presence-rails-chat-channel`
 
 メッセージ名: `new-message`
 

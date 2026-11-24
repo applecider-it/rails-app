@@ -5,6 +5,8 @@ websocketはgoで連携する。
 
 ### チャットの場合のjsonをパースした状態
 
+チャンネル名: `chat`
+
 ```
 {
   message: string,
@@ -14,6 +16,8 @@ websocketはgoで連携する。
 ```
 
 ### Tweetの場合のjsonをパースした状態
+
+チャンネル名: `tweet`
 
 ```
 {

@@ -6,6 +6,8 @@
 
 ### チャット
 
+チャンネルベースID: `chat_channel`
+
 ```
 {
   message: string,
