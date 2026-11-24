@@ -11,8 +11,6 @@ class ChatPusherController < ApplicationController
     
     @rooms = ret[:rooms]
     @room = ret[:room]
-
-    @token = current_user.jwt_token(ChannelServices::ChatChannelService.get_channel(@room))
   end
 
   # Pusherによる送信
