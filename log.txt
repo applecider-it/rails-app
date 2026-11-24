@@ -302,3 +302,7 @@ bin/rails generate mailer SampleMailer sample_mail
 
 npm install -D vitest
 
+-----------------------------------
+
+npm i -D @types/rails__actioncable
+

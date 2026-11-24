@@ -1,6 +1,6 @@
 import type { Members, PresenceChannel } from 'pusher-js';
 
-import { showToast } from "@/services/ui/message";
+import { showToast } from '@/services/ui/message';
 import { pusher, delimiterString } from '@/services/application/pusher';
 import { sendApi } from '@/services/api/http';
 
@@ -35,11 +35,10 @@ export default class ChatClient {
     console.log('this.room', this.room);
 
     const channelBaseId = 'presence-rails-chat-channel';
+    const channelId = `${channelBaseId}${delimiterString}${this.room}`;
 
     // pusher 接続
-    const channel = pusher.subscribe(
-      `${channelBaseId}${delimiterString}${this.room}`,
-    ) as PresenceChannel;
+    const channel = pusher.subscribe(channelId) as PresenceChannel;
 
     // WebSocketは、ページ遷移しても停止状態で保持されるので、明示的に切断処理をする
     window.addEventListener('pagehide', () => {
@@ -88,7 +87,7 @@ export default class ChatClient {
     const exists = this.users.some((u) => u.id === user.id);
 
     if (!exists) {
-      console.log("push user", user);
+      console.log('push user', user);
       this.users.push(user);
 
       showToast(`${user.info.name}さんが、入室しました。`);
