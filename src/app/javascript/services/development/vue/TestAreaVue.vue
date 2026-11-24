@@ -5,6 +5,7 @@ import ModalArea from './test-area-vue/ModalArea.vue';
 import UIArea from './test-area-vue/UIArea.vue';
 import FormArea from './test-area-vue/FormArea.vue';
 import RespondToArea from './test-area-vue/RespondToArea.vue';
+import DateArea from './test-area-vue/DateArea.vue';
 
 interface Props {
   formData: any;
@@ -40,6 +41,10 @@ const blockStyle = 'border-gray-400 border-2 p-3';
 
       <div :class="blockStyle">
         <RespondToArea />
+      </div>
+
+      <div :class="blockStyle">
+        <DateArea />
       </div>
     </div>
   </div>
