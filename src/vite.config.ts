@@ -4,6 +4,7 @@ import path from 'path';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+  cacheDir: path.resolve(import.meta.dirname, 'tmp/vite-cache'),
   plugins: [RubyPlugin(), vue()],
   resolve: {
     alias: {
