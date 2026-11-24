@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMedia } from '../javascript-test/useMedia';
+import { useMedia } from '../vue-hook/useMedia';
 
 const {
   startCamera,

@@ -25,6 +25,9 @@ class DevelopmentController < ApplicationController
       p('tweet.as_json(include: :user)', tweet.as_json(include: :user))
     end
 
+    redis = DataServices::RedisService.get_redis
+    redis.set("redis_test", "token_value", ex: 3600)
+
     memory_mb = `ps -o rss= -p #{Process.pid}`.to_i / 1024.0
     Rails.logger.info "使用メモリ: #{memory_mb.round(2)} MB"
 

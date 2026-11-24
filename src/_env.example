@@ -1,6 +1,3 @@
-# 共通のJWTシークレット
-APP_JWT_SECRET=ThisIsASecretKey1234567890
-
 # Pusher関連
 PUSHER_URL="http://app-key:app-secret@localhost:6001/apps/app-id"
 

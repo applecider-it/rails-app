@@ -19,7 +19,7 @@ if (el) {
 
   console.log(all);
 
-  const tweetClient = new TweetClient(all.token, all.wsHost);
+  const tweetClient = new TweetClient();
 
   createApp(TweetArea, {
     tweetClient: tweetClient,
