@@ -32,10 +32,10 @@ class WebsocketServices::PusherService
     p("PusherService::check_authenticate channel", channel)
     p("PusherService::check_authenticate channel_detail", channel_detail)
 
-    if ChatServices::PusherService.base_channel_id == channel
+    if PusherChannelServices::ChatChannelService.base_channel_id == channel
       # チャットの場合
 
-      pusher_service = ChatServices::PusherService.new
+      pusher_service = PusherChannelServices::ChatChannelService.new
       return pusher_service.check_authenticate(user, channel_detail)
     end
 
