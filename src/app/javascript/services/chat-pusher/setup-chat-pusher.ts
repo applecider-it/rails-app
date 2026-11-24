@@ -8,9 +8,6 @@ import ChatClient from './ChatClient';
 import ChatArea from './vue/ChatArea.vue';
 
 type Props = {
-  host: string;
-  /** JWTトークン */
-  token: string;
   room: string;
 };
 
@@ -21,7 +18,7 @@ if (el) {
 
   console.log(all);
 
-  const chatClient = new ChatClient(all.host, all.token, all.room);
+  const chatClient = new ChatClient(all.room);
 
   createApp(ChatArea, {
     chatClient: chatClient,

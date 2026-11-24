@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   
   # チャット (Pusher)
   get "chat_pusher/index"
-  post "chat_pusher/store_p"
+  post "chat_pusher/store"
 
   # ツイート
   resources :tweets, only: [:index, :new, :create]

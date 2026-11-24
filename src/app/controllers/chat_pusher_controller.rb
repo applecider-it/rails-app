@@ -16,7 +16,7 @@ class ChatPusherController < ApplicationController
   end
 
   # Pusherによる送信
-  def store_p
+  def store
     pusher_service = ChatServices::PusherService.new
     form = ChatForm.new
 

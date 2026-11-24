@@ -12,7 +12,7 @@ class WebsocketServices::PusherService
       channel_name,
       socket_id,
       user_id: user.id.to_s, # 文字列で渡す
-      user_info: { name: user.name, email: user.email, id: user.id }
+      user_info: { name: user.name, email: user.email }
     )
   end
 end

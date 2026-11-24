@@ -5,3 +5,13 @@ export type ChatMessage = {
   name: string;
   userId: number | string;
 };
+
+export type PusherUserInfo = {
+  name: string;
+  email: string;
+};
+
+export type PusherUser = {
+  id: number;
+  info: PusherUserInfo;
+};
