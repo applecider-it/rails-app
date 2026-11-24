@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 
-import { ChatMessage, SendType } from '../types';
+import { ChatMessage } from '../types';
 import type ChatClient from '../ChatClient';
 import { showToast } from '@/services/ui/message';
 
@@ -19,13 +19,13 @@ const reversedMessages = computed<ChatMessage[]>(() => {
 
 /** Enterキー */
 const onKeydown = (e: KeyboardEvent): void => {
-  if (e.key === 'Enter') sendMessage('websocket');
+  if (e.key === 'Enter') sendMessage();
 };
 
 /** メッセージ送信 */
-const sendMessage = async (type: SendType) => {
+const sendMessage = async () => {
   try {
-    await props.chatClient.sendMessage(message.value.trim(), type);
+    await props.chatClient.sendMessage(message.value.trim());
     message.value = '';
   } catch (error: any) {
     if (error.response?.status === 422) {
@@ -55,24 +55,10 @@ onMounted(() => {
       />
 
       <button
-        @click="sendMessage('redis')"
+        @click="sendMessage()"
         class="app-btn-primary w-auto ml-2 mt-2"
       >
         Send
-      </button>
-
-      <button
-        @click="sendMessage('websocket')"
-        class="app-btn-primary w-auto ml-2 mt-2"
-      >
-        Send(動かないのが正常)
-      </button>
-
-      <button
-        @click="sendMessage('actioncable')"
-        class="app-btn-primary w-auto ml-2 mt-2"
-      >
-        Send(AC)
       </button>
     </div>
 

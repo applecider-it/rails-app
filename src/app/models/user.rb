@@ -58,10 +58,4 @@ class User < ApplicationRecord
   private def discard_all_relations
     user_tweets.kept.update_all(discarded_at: Time.current)
   end
-
-  # WebSocket用のjwtトークン
-  def jwt_token(channel)
-    jwt_token_service = WebsocketServices::JwtTokenService.new
-    jwt_token_service.create_user_jwt_token(self, channel)
-  end
 end

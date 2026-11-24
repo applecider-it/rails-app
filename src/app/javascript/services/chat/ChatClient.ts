@@ -1,4 +1,4 @@
-import { ChatMessage, SendType } from './types';
+import { ChatMessage } from './types';
 
 import consumer from '@/channels/consumer';
 
@@ -16,41 +16,26 @@ type JsonMessage = {
  * チャットクライアント
  */
 export default class ChatClient {
-  private ws: WebSocket;
   private room: string;
 
   addMessage: Function;
 
-  constructor(host: string, token: string, room: string) {
+  constructor(room: string) {
     this.room = room;
 
     console.log('this.room', this.room);
-
-    // WebSocket 接続
-    this.ws = new WebSocket(`ws://${host}/ws?token=${token}`);
-    this.ws.onmessage = (event) => this.onMessage(event);
 
     // ActionCable 接続
     consumer.subscriptions.create(
       { channel: 'ChatChannel', room: this.room },
       {
-        received: (data: JsonMessage) => this.onMessageAC(data),
+        received: (data: JsonMessage) => this.onMessage(data),
       },
     );
   }
 
-  /** WebSocketメッセージ受信 */
-  private onMessage(event: MessageEvent<any>) {
-    const result = JSON.parse(event.data);
-    console.log('onmessage', result);
-
-    const data = JSON.parse(result.data.json);
-
-    this.addMessage(this.convert(data));
-  }
-
   /** ActionCableメッセージ受信 */
-  private onMessageAC(data: JsonMessage) {
+  private onMessage(data: JsonMessage) {
     console.log('受信:', data);
     this.addMessage(this.convert(data));
   }
@@ -66,31 +51,18 @@ export default class ChatClient {
   }
 
   /** メッセージ送信 */
-  async sendMessage(message: string, type: SendType) {
-    console.log('sendMessage', message, type);
+  async sendMessage(message: string) {
+    console.log('sendMessage', message);
 
-    if (type === 'websocket') {
-      this.send(message);
-    } else {
-      await this.sendApi(message, type);
-    }
-  }
-
-  /** WebSocketメッセージ送信 */
-  private async send(message: string) {
-    const json = JSON.stringify({ message });
-    this.ws.send(JSON.stringify({ json }));
+    await this.sendApi(message);
   }
 
   /** APIでメッセージ送信 */
-  private async sendApi(message: string, type: SendType) {
+  private async sendApi(message: string) {
     const data: any = { message, room: this.room };
     console.log(data);
 
-    const url = {
-      actioncable: '/chat/store_ac',
-      redis: '/chat/store_redis',
-    }[type];
+    const url = '/chat/store';
 
     const response = await sendApi('POST', url, data);
 

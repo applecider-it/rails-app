@@ -23,13 +23,15 @@ const onSubmit = async () => {
   setIsLoading(true);
 
   try {
-    await props.tweetClient.tweetCtrl.sendTweet(content.value);
+    await props.tweetClient.sendTweet(content.value);
 
     errors.value = {};
 
     showToast('ツイートしました。');
 
     content.value = '';
+
+    props.tweetClient.refreshList();
   } catch (error: any) {
     if (error.response?.status === 422) {
       errors.value = error.response.data.errors;

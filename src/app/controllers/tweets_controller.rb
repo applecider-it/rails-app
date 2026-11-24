@@ -20,8 +20,6 @@ class TweetsController < ApplicationController
 
   # 新規作成処理
   def create
-    websocket_service = TweetServices::WebsocketService.new
-
     commit = params[:commit]
     confirm = params[:confirm]
 
@@ -35,8 +33,6 @@ class TweetsController < ApplicationController
         # 確定ボタンの時
         
         @tweet.save
-
-        websocket_service.broadcast(@tweet)
 
         redirect_to tweets_path, notice: "作成しました。"
       else

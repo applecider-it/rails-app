@@ -13,7 +13,7 @@ const tweetContainers = ref<TweetContainer[] | null>(null);
 
 /** 一覧を最新にする */
 const refreshList = async (): Promise<void> => {
-  const tweets: Tweet[] = await props.tweetClient.tweetCtrl.getList();
+  const tweets: Tweet[] = await props.tweetClient.getList();
 
   console.log({ tweets });
 

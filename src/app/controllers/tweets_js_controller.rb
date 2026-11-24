@@ -8,7 +8,6 @@ class TweetsJsController < ApplicationController
 
   def index
     @user = current_user
-    @token = current_user.jwt_token(ChannelServices::TweetChannelService.get_channel)
   end
 
   # 一覧取得
@@ -26,8 +25,6 @@ class TweetsJsController < ApplicationController
 
   # 新規作成処理
   def create
-    websocket_service = TweetServices::WebsocketService.new
-
     @tweet = UserTweet.new(tweet_params)
     @tweet.user = current_user
 
@@ -35,8 +32,6 @@ class TweetsJsController < ApplicationController
       # エラーがないとき
 
       @tweet.save
-
-      websocket_service.broadcast(@tweet)
 
       render json: {status: true}
     else

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   # チャット
   get "chat/index"
-  post "chat/store_ac"
-  post "chat/store_redis"
+  post "chat/store"
   
   # チャット (Pusher)
   get "chat_pusher/index"
