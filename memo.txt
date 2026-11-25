@@ -152,8 +152,13 @@ http://localhost:3000/rails/mailers/sample_mailer
 
 -----------------------------------
 
+独自コマンド
+
+
 ActionCableチャットのユーザー情報削除
 
-redis-cli --scan --pattern 'presence:chat_channel.*' | xargs -r redis-cli DEL
+cd ~/workspace/github/rails-app/src
+
+bundle exec rails mytask:websocket:clear_chat_channel_redis
 
 ActionCableチャット接続中にサーバーを再起動すると、データ不整合になるので、これが必要
