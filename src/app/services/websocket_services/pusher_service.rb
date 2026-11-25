@@ -3,9 +3,7 @@
 # Pusher管理
 class WebsocketServices::PusherService
   # 区切り文字列
-  def self.delimiter_string
-    "---"
-  end
+  def self.delimiter_string = "---"
 
   # チャンネル購読の認証
   # 許可しない場合は nil を返す
