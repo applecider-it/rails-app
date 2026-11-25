@@ -14,7 +14,7 @@
 
 - アプリ化対応はPWA。
 
-## Rails概要
+## Rails設計概要
 
 Javascript,CSS管理は、vite, tailwind。
 

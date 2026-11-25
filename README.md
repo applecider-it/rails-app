@@ -1,11 +1,11 @@
-# Railsモノリスの試験的なアプリケーション
+# Railsアプリケーション
 
 ## ディレクトリ構成
 
 ```
-src/ <- Railsモノリス
+src/ <- Railsアプリケーション
 
-documents/ <- Railsモノリスのドキュメント
+documents/ <- Railsアプリケーションのドキュメント
 
 log.txt <- 作業ログ
 memo.txt <- 作業用のメモ
@@ -13,4 +13,4 @@ memo.txt <- 作業用のメモ
 
 ## ドキュメント
 
-- [Railsモノリスのドキュメント](./documents/index.md)
+- [Railsアプリケーションのドキュメント](./documents/index.md)

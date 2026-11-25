@@ -1,5 +1,5 @@
 
-# RailsのハイブリッドMPA
+# Railsアプリケーション
 
 - [設計](./design.md)
 - websocket
