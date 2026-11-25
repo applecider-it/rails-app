@@ -313,3 +313,10 @@ http://localhost:3000/development/javascript_test
 
 
 npm uninstall @tailwindcss/forms
+
+-----------------------------------
+
+redis-cli keys '*'
+
+redis-cli HGETALL presence:chat_channel.default
+
