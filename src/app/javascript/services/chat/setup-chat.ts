@@ -8,9 +8,6 @@ import ChatClient from './ChatClient';
 import ChatArea from './vue/ChatArea.vue';
 
 type Props = {
-  host: string;
-  /** JWTトークン */
-  token: string;
   room: string;
 };
 

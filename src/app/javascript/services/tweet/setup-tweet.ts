@@ -7,10 +7,7 @@ import TweetArea from './vue/TweetArea.vue';
 
 import TweetClient from './TweetClient';
 
-type Props = {
-  wsHost: string;
-  token: string;
-};
+type Props = {};
 
 const el = document.getElementById('tweet-root');
 
