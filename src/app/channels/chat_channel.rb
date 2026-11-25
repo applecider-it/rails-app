@@ -12,11 +12,36 @@ class ChatChannel < ApplicationCable::Channel
     p('subscribed @meta', @meta)
 
     stream_from channel_id
+
+    ActionCable.server.broadcast(
+      channel_id,
+      {
+        type: "subscribed",
+        data: {
+          id: current_user.id,
+          email: current_user.email,
+          name: current_user.name,
+        }
+      }
+    )
   end
 
   def unsubscribed
     p('unsubscribed current_user', current_user)
     p('unsubscribed @meta', @meta)
+    p('unsubscribed @meta[:channel_id]', @meta[:channel_id])
     # Any cleanup needed when channel is unsubscribed
+
+    ActionCable.server.broadcast(
+      @meta[:channel_id],
+      {
+        type: "unsubscribed",
+        data: {
+          id: current_user.id,
+          email: current_user.email,
+          name: current_user.name,
+        }
+      }
+    )
   end
 end

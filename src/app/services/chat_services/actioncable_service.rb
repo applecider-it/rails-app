@@ -11,10 +11,13 @@ class ChatServices::ActioncableService
     ActionCable.server.broadcast(
       channel_id,
       {
-        message: message,
-        user_id: user.id,
-        email: user.email,
-        name: user.name,
+        type: "message",
+        data: {
+          message: message,
+          user_id: user.id,
+          email: user.email,
+          name: user.name,
+        }
       }
     )
   end
