@@ -147,3 +147,13 @@ http://localhost:3000/rails/mailers/sample_mailer
 
 対応ファイル
 /test/mailers/previews/sample_mailer_preview.rb
+
+
+
+-----------------------------------
+
+ActionCableチャットのユーザー情報削除
+
+redis-cli --scan --pattern 'presence:chat_channel.*' | xargs -r redis-cli DEL
+
+ActionCableチャット接続中にサーバーを再起動すると、データ不整合になるので、これが必要
