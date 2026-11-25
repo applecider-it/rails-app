@@ -19,6 +19,21 @@
 }
 ```
 
+#### ユーザー一覧
+
+```
+{
+  type: 'users',
+  [
+    {
+      id: integer,
+      email: string,
+      name: string,
+    }
+  ]
+}
+```
+
 #### メッセージ送信
 
 ```
