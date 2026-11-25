@@ -1,5 +1,3 @@
-import { ChatMessage } from './types';
-
 import consumer from '@/channels/consumer';
 import { showToast } from '@/services/ui/message';
 
@@ -7,14 +5,18 @@ import { sendApi } from '@/services/api/http';
 import { getCurrentUser } from '@/services/application/application';
 import { User } from '@/services/application/types';
 
+import { ChatMessage, ChatUser } from './types';
+
 /**
  * チャットクライアント
  */
 export default class ChatClient {
   private room: string;
   private user: User;
+  private users: ChatUser[] = [];
 
   addMessage: (data: ChatMessage) => void;
+  setUsers: (users: ChatUser[]) => void;
 
   constructor(room: string) {
     this.room = room;
@@ -43,13 +45,49 @@ export default class ChatClient {
       this.addMessage(data.data as ChatMessage);
     } else if (data.type === 'subscribed') {
       if (data.data.id !== this.user.id) {
-        showToast(`${data.data.name}さんが、入室しました。`);
+        this.addUser(data.data);
       }
     } else if (data.type === 'unsubscribed') {
       if (data.data.id !== this.user.id) {
-        showToast(`${data.data.name}さんが、退室しました。`);
+        this.removeUser(data.data);
       }
+    } else if (data.type === 'users') {
+      this.setupUsers(data.data);
     }
+  }
+
+  /** ユーザー一覧セットアップ */
+  private setupUsers(users: ChatUser[]) {
+    this.users = users;
+    this.refreshUsers();
+  }
+
+  /** ユーザー追加（重複防止付き） */
+  private addUser(user: ChatUser) {
+    const exists = this.users.some((u) => u.id === user.id);
+
+    if (!exists) {
+      console.log('push user', user);
+      this.users.push(user);
+
+      showToast(`${user.name}さんが、入室しました。`);
+
+      this.refreshUsers();
+    }
+  }
+
+  /** ユーザー削除 */
+  private removeUser(user: ChatUser) {
+    this.users = this.users.filter((u) => u.id !== user.id);
+
+    showToast(`${user.name}さんが、退室しました。`);
+
+    this.refreshUsers();
+  }
+
+  /** ユーザー一覧を反映 */
+  private refreshUsers() {
+    this.setUsers(this.users);
   }
 
   /** メッセージ送信 */

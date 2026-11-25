@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 
-import { ChatMessage } from '../types';
+import { ChatMessage, ChatUser } from '../types';
 import type ChatClient from '../ChatClient';
 import { showToast } from '@/services/ui/message';
 
@@ -11,6 +11,7 @@ const props = defineProps<{
 
 const message = ref<string>('');
 const messages = ref<ChatMessage[]>([]);
+const userList = ref<ChatUser[]>([]);
 
 /** 逆順メッセージ */
 const reversedMessages = computed<ChatMessage[]>(() => {
@@ -38,6 +39,11 @@ const sendMessage = async () => {
 onMounted(() => {
   props.chatClient.addMessage = (val: ChatMessage) => {
     messages.value.push(val);
+  };
+
+  props.chatClient.setUsers = (users: ChatUser[]) => {
+    console.log("users", users);
+    userList.value = [...users];
   };
 });
 </script>
@@ -71,6 +77,15 @@ onMounted(() => {
           </span>
         </li>
       </ul>
+    </div>
+
+    <div class="mt-5">
+      接続ユーザー一覧
+      <div class="border-2 border-gray-300 p-2 mb-2 h-40 mt-2 overflow-y-auto">
+        <p v-for="(user, index) in userList" :key="index">
+          {{ user.id }} {{ user.name }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
