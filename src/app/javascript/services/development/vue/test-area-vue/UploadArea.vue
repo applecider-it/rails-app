@@ -43,8 +43,8 @@ const upload = async () => {
     アップロード動作確認
 
     <div class="mt-5">
-      <input type="file" ref="fileInput" @change="handleFileChange" />
-      <button class="app-btn-secondary mr-2" @click="upload">
+      <input type="file" ref="fileInput" @change="handleFileChange" class="app-form-input w-auto" />
+      <button class="app-btn-secondary ml-2" @click="upload">
         アップロード
       </button>
     </div>
