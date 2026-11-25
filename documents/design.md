@@ -144,3 +144,5 @@ window.App.funcs <- Viewから直接利用したい関数を登録する
 ## その他
 
 - `/config/locales/ja.yml`の、`errors.format`を`"%{message}"`にすることで、エラーメッセージを自由に組み立てられるようにしています。
+
+- ページネーションは、デザインをあてやすくするため、１ファイルにまとめています。対象ファイル：`/app/views/kaminari/_paginator.html.erb`
