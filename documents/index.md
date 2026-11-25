@@ -1,9 +1,8 @@
 
-# Railsモノリスのテスト用アプリケーション
+# RailsのハイブリッドMPA
 
 - [設計](./design.md)
 - websocket
-  - [Goマイクロサービス](./websocket.md)
   - [ActionCable](./websocket-ac.md)
   - [Pusher](./websocket-pusher.md)
 

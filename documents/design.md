@@ -2,23 +2,21 @@
 
 ## アプリケーション構成
 
-- Railsをモノリスにする。
+- Railsでアプリケーションを管理。
 
-- websocketはGo, Pusher(soketi)のマイクロサービスとActionCable。
+- websocketはPusher(soketi)とActionCable。
 
-  - soketiは、`microservices`のサーバーを起動する必要がある。
+  - soketiは、`tools`のサーバーを起動する必要がある。
 
-  - Go WebSocketサーバーは、`microservices`のサーバーを起動する必要がある。
+- ヘッドレスCMSはwordpress API。
 
-- ヘッドレスCMSはwordpressのマイクロサービス。
-
-  - wordpressサーバーは、`microservices`のサーバーを起動する必要がある。
+  - wordpressサーバーは、`tools`のサーバーを起動する必要がある。
 
 - アプリ化対応はPWA。
 
-## モノリス概要
+## Rails概要
 
-Javascript,CSS管理は、Laravelと同じように、vite, tailwind。
+Javascript,CSS管理は、vite, tailwind。
 
 MVCSにして、ビジネスロジックは、カテゴリーごとにフォルダを分けたサービスクラスにまとめている。
 
