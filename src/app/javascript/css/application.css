@@ -2,11 +2,10 @@
 
 @theme {
   --font-sans:
-    'Figtree', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'EmojiSymbols';
 }
 
-@plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 
 @source inline("bg-{red,blue}-200");

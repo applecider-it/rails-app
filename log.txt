@@ -311,3 +311,5 @@ npm i -D @types/rails__actioncable
 
 http://localhost:3000/development/javascript_test
 
+
+npm uninstall @tailwindcss/forms
