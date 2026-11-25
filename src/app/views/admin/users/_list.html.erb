@@ -1,23 +1,23 @@
 <div class="app-table-container">
-  <table class="app-table">
-    <thead class="app-table-thead">
+  <table class="app-table-normal">
+    <thead>
       <tr>
-        <th class="app-table-th">ID</th>
-        <th class="app-table-th">名前</th>
-        <th class="app-table-th">作成日時</th>
-        <th class="app-table-th">削除日時</th>
-        <th class="app-table-th text-right">操作</th>
+        <th>ID</th>
+        <th>名前</th>
+        <th>作成日時</th>
+        <th>削除日時</th>
+        <th class="text-right">操作</th>
       </tr>
     </thead>
-    <tbody class="app-table-tbody">
+    <tbody>
       <% @users.each do |user| %>
         <tr class="transition
          <% if user.discarded? %>bg-gray-300 hover:bg-gray-200<% else %>hover:bg-gray-50<% end %>">
-          <td class="app-table-td text-gray-700"><%= user.id %></td>
-          <td class="app-table-td font-medium text-gray-900"><%= user.name %></td>
-          <td class="app-table-td"><%= user.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td class="app-table-td"><%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : '' %></td>
-          <td class="app-table-td text-right">
+          <td class="text-gray-700"><%= user.id %></td>
+          <td class="font-medium text-gray-900"><%= user.name %></td>
+          <td><%= user.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= user.discarded_at ? user.discarded_at.strftime("%Y-%m-%d %H:%M") : '' %></td>
+          <td class="text-right">
             <%= link_to "編集", edit_admin_user_path(user), class: "app-link-normal" %>
           </td>
         </tr>

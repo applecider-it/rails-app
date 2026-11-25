@@ -17,7 +17,7 @@
 /* ボタン */
 
 @utility app-btn {
-  @apply font-semibold px-4 py-2 rounded-sm transition;
+  @apply font-semibold px-4 py-2 rounded-sm transition cursor-pointer;
 }
 
 @utility app-btn-primary {
@@ -75,32 +75,28 @@
 
 /* テーブルをレスポンシブ対応させるためのコンテナ */
 @utility app-table-container {
-  @apply overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg;
+  @apply overflow-x-auto bg-white shadow-md rounded-lg;
 }
 
-/* tableタグ用 */
-@utility app-table {
-  @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
-}
+/* 通常のテーブル */
+@utility app-table-normal {
+  @apply min-w-full divide-y divide-gray-200;
 
-/* テーブルのtheadタグ用 */
-@utility app-table-thead {
-  @apply bg-gray-50 dark:bg-gray-700;
-}
+  & thead {
+    @apply bg-gray-50;
+  }
 
-/* テーブルのtbodyタグ用 */
-@utility app-table-tbody {
-  @apply bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700;
-}
+  & tbody {
+    @apply bg-white divide-y divide-gray-200;
+  }
 
-/* テーブルのthタグ用 */
-@utility app-table-th {
-  @apply px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 tracking-wider;
-}
+  & th {
+    @apply px-6 py-3 text-xs font-medium text-gray-500 tracking-wider;
+  }
 
-/* テーブルのtdタグ用 */
-@utility app-table-td {
-  @apply px-6 py-4 whitespace-nowrap;
+  & td {
+    @apply px-6 py-4 whitespace-nowrap;
+  }
 }
 
 /* CSSの指定 */
