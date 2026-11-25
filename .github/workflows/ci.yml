@@ -66,3 +66,7 @@ jobs:
           PUSHER_URL: https://dummy_key:dummy_secret@api.pusherapp.com/apps/12345
         working-directory: src
         run: bin/rails db:test:prepare test test:system
+
+      - name: Run tests JS
+        working-directory: src
+        run: npx vitest run app/javascript/tests/
