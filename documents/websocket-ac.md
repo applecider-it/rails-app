@@ -1,17 +1,36 @@
 # ActionCable
 
-一部は、ActionCableで実装している。
-
 ## ActionCableブロードキャスト時
 
 ### チャット
 
 チャンネルベースID: `chat_channel`
 
+#### 入室退室
+
 ```
 {
-  message: string,
-  user_id: integer,
-  email: string,
+  type: 'subscribed' | 'unsubscribed',
+  {
+    id: integer,
+    email: string,
+    name: string,
+  }
+}
+```
+
+#### メッセージ送信
+
+```
+{
+  type: 'message',
+  {
+    message: string,
+    user: {
+      id: integer,
+      email: string,
+      name: string,
+    }
+  }
 }
 ```

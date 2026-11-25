@@ -7,14 +7,6 @@ import { sendApi } from '@/services/api/http';
 import { getCurrentUser } from '@/services/application/application';
 import { User } from '@/services/application/types';
 
-/** WebSocketサーバーから送信されるメッセージJSONの型 */
-type JsonMessage = {
-  message: string;
-  user_id: string;
-  email: string;
-  name: string;
-};
-
 /**
  * チャットクライアント
  */
@@ -22,7 +14,7 @@ export default class ChatClient {
   private room: string;
   private user: User;
 
-  addMessage: Function;
+  addMessage: (data: ChatMessage) => void;
 
   constructor(room: string) {
     this.room = room;
@@ -48,7 +40,7 @@ export default class ChatClient {
   private onMessage(data: any) {
     console.log('受信:', data);
     if (data.type === 'message') {
-      this.addMessage(this.convert(data.data as JsonMessage));
+      this.addMessage(data.data as ChatMessage);
     } else if (data.type === 'subscribed') {
       if (data.data.id !== this.user.id) {
         showToast(`${data.data.name}さんが、入室しました。`);
@@ -58,16 +50,6 @@ export default class ChatClient {
         showToast(`${data.data.name}さんが、退室しました。`);
       }
     }
-  }
-
-  /** メッセージ変換 */
-  private convert(data: JsonMessage): ChatMessage {
-    return {
-      message: data.message,
-      userId: data.user_id,
-      email: data.email,
-      name: data.name,
-    };
   }
 
   /** メッセージ送信 */

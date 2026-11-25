@@ -12,9 +12,11 @@ class ChatServices::PusherService
       'new-message',
       {
         message: message,
-        user_id: user.id,
-        email: user.email,
-        name: user.name,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+        }
       }
     )
   end

@@ -1,7 +1,9 @@
-/** 表示上のチャットメッセージ */
+/** チャットメッセージ */
 export type ChatMessage = {
   message: string;
-  email: string;
-  name: string;
-  userId: number | string;
+  user: {
+    id: number;
+    email: string;
+    name: string;
+  };
 };

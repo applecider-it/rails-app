@@ -1,7 +1,5 @@
 # Pusher(soketi)
 
-一部は、Pusher(soketi)で実装している。
-
 ## Pusherのライブラリーの説明
 
 チャンネル名に`presence-`があると、Pusherのライブラリー上ではprivate接続になる。
@@ -16,12 +14,29 @@
 
 チャンネルベースID: `presence-rails-chat-channel`
 
+#### 入室退室ユーザー一覧取得時のユーザー情報
+
+```
+{
+  id: string, <- Pusherの内部的な理由で文字列になっている
+  {
+    name: string,
+    email: string,
+  }
+}
+```
+
+#### メッセージ送信
+
 メッセージ名: `new-message`
 
 ```
 {
   message: string,
-  user_id: integer,
-  email: string,
+  user: {
+    id: integer,
+    email: string,
+    name: string,
+  }
 }
 ```

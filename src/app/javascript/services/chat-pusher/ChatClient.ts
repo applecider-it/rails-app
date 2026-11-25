@@ -6,14 +6,6 @@ import { sendApi } from '@/services/api/http';
 
 import { ChatMessage, PusherUserInfo, PusherUser } from './types';
 
-/** WebSocketサーバーから送信されるメッセージJSONの型 */
-type JsonMessage = {
-  message: string;
-  user_id: string;
-  email: string;
-  name: string;
-};
-
 type PusherUserSending = {
   id: string;
   info: PusherUserInfo;
@@ -26,8 +18,8 @@ export default class ChatClient {
   private room: string;
   private users: PusherUser[] = [];
 
-  addMessage: Function;
-  setUsers: Function;
+  addMessage: (data: ChatMessage) => void;
+  setUsers: (users: PusherUser[]) => void;
 
   constructor(room: string) {
     this.room = room;
@@ -45,7 +37,7 @@ export default class ChatClient {
       pusher.disconnect();
     });
 
-    channel.bind('new-message', (data: JsonMessage) => this.onMessage(data));
+    channel.bind('new-message', (data: ChatMessage) => this.onMessage(data));
 
     // 接続時にユーザー一覧取得
     channel.bind('pusher:subscription_succeeded', (members: Members) => {
@@ -111,19 +103,9 @@ export default class ChatClient {
   }
 
   /** Pusherメッセージ受信 */
-  private onMessage(data: JsonMessage) {
+  private onMessage(data: ChatMessage) {
     console.log('受信:', data);
-    this.addMessage(this.convert(data));
-  }
-
-  /** メッセージ変換 */
-  private convert(data: JsonMessage): ChatMessage {
-    return {
-      message: data.message,
-      userId: data.user_id,
-      email: data.email,
-      name: data.name,
-    };
+    this.addMessage(data);
   }
 
   /** メッセージ送信 */

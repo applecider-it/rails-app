@@ -73,7 +73,7 @@ onMounted(() => {
         <li v-for="(msg, index) in reversedMessages" :key="index" class="p-1">
           {{ msg.message }}
           <span class="ml-3 text-sm text-gray-500">
-            by {{ msg.name }} ({{ msg.userId }})
+            by {{ msg.user.name }} ({{ msg.user.id }})
           </span>
         </li>
       </ul>
