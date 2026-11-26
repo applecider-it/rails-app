@@ -16,7 +16,7 @@ import { useModal } from '@/services/ui/vue-hook/useModal';
  * @param initialValue エディタの初期HTML
  * @param onChange     HTMLが変更されるたびに呼ばれるコールバック
  */
-export function useHtmlEditor(
+export function useRichtextEditor(
   initialValue: string,
   onChange: (val: string) => void,
 ) {

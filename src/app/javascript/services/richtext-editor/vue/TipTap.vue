@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { EditorContent } from '@tiptap/vue-3';
-import { useHtmlEditor } from '../vue-hook/useHtmlEditor';
+import { useRichtextEditor } from '../vue-hook/useRichtextEditor';
 import Toolbar from './tiptap/Toolbar.vue';
 import ImageModal from './tiptap/ImageModal.vue';
 
@@ -21,7 +21,7 @@ const {
   currentBlock,
   changeBlock,
   imageModal,
-} = useHtmlEditor(props.initialValue, props.callback);
+} = useRichtextEditor(props.initialValue, props.callback);
 
 onMounted(() => {
   //addImage(); // 画像処理実装時に有効化すると便利
