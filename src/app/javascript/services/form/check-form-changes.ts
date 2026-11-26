@@ -28,7 +28,6 @@ function init() {
  * ```
  */
 export function checkFormChanges(form: HTMLFormElement, options: any = {}) {
-  // マルチパート指定の時はContent-Typeを変更
   const clearOnly = !!options?.clearOnly;
 
   console.log("checkFormChanges setup", { options, clearOnly });

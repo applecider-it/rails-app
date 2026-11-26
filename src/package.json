@@ -4,6 +4,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
+    "@types/alpinejs": "^3.17.0",
     "@types/leaflet": "^1.9.22",
     "@types/node": "^24.10.1",
     "@types/rails__actioncable": "^8.0.3",
