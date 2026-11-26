@@ -4,15 +4,16 @@
     <%= render 'layouts/shared/head' %>
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col">
     <%= render 'shared/application/container' %>
     <%= render 'layouts/shared/navbar' %>
 
-    <main>
+    <main class="flex-1">
       <%= render 'shared/message/message' %>
 
       <%= yield %>
     </main>
 
+    <%= render 'layouts/shared/footer' %>
   </body>
 </html>
