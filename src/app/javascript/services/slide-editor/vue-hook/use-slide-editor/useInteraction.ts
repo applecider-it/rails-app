@@ -2,6 +2,9 @@ import { reactive, Ref, ComputedRef } from 'vue';
 
 import { SlideElement, InteractionType } from '../../types';
 
+/**
+ * インタラクション管理用Hook
+ */
 export function useInteraction(
   selectedId: Ref<string, string>,
   selectedElement: ComputedRef<SlideElement>,

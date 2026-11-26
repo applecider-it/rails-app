@@ -14,6 +14,8 @@ const {
   selectedElement,
   moveElement,
   deleteSelectedElement,
+  save,
+  load,
 } = useSlideEditor();
 </script>
 
@@ -22,7 +24,7 @@ const {
     class="flex flex-col h-screen select-none font-sans bg-slate-100 text-slate-800"
   >
     <!-- ツールバー -->
-    <Toolbar :addElement="addElement" v-model:elements="elements" />
+    <Toolbar :addElement="addElement" :save="save" :load="load" />
 
     <div class="flex flex-1 overflow-hidden">
       <!-- 編集キャンバスエリア -->

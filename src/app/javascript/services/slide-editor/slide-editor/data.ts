@@ -1,5 +1,6 @@
 import { SlideElement } from './types';
 
+/** ダミーデータ */
 export const initailData: SlideElement[] = [
   {
     id: 'el-1',

@@ -1,38 +1,14 @@
 <script setup lang="ts">
-import { cloneJson } from '@/services/data/json';
-
-import { cssClass } from '../../main';
-import { ElementType, SlideElement } from '../../types';
+import { cssClass } from '../../slide-editor/main';
+import { ElementType } from '../../types';
 
 interface Props {
   addElement: (type: ElementType) => void;
+  save: () => void;
+  load: (needConfirm?: boolean) => void;
 }
 
 const props = defineProps<Props>();
-
-const elements = defineModel<SlideElement[]>('elements');
-
-let saveData = null;
-
-const save = () => {
-  // JSONに変換
-  const json = cloneJson(elements.value);
-  console.log(json);
-
-  saveData = json;
-};
-
-const load = () => {
-  if (!saveData) {
-    console.log('セーブデータなし');
-    return;
-  }
-
-  console.log(saveData);
-
-  // 再生成しないと、変更が認識されない
-  elements.value = cloneJson(saveData);
-};
 </script>
 
 <template>
@@ -46,6 +22,6 @@ const load = () => {
       <span>＋</span> 図形追加
     </button>
     <button @click="save" :class="cssClass.toolbarBtn">保存</button>
-    <button @click="load" :class="cssClass.toolbarBtn">読み込み</button>
+    <button @click="load()" :class="cssClass.toolbarBtn">読み込み</button>
   </header>
 </template>

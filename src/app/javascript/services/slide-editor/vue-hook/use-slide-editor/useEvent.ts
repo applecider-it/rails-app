@@ -1,5 +1,8 @@
 import { onMounted, onUnmounted, Ref } from 'vue';
 
+/**
+ * イベント管理用Hook
+ */
 export function useEvent(
   selectedId: Ref<string, string>,
   deleteSelectedElement: () => void,

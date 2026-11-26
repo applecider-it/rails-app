@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cssClass } from '../../main';
+import { cssClass } from '../../slide-editor/main';
 import { SlideElement } from '../../types';
 
 interface Props {

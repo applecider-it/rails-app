@@ -4,14 +4,15 @@ import { cloneJson } from '@/services/data/json';
 
 import { ElementType, SlideElement } from '../../types';
 
-import { initailData } from '../../data';
-
+/**
+ * エレメント管理用Hook
+ */
 export function useElements() {
   /** 変更監視用タイマー */
   let watchTimer = null;
 
   /** スライド上の全要素を管理するリアクティブな配列（後ろにあるほど手前に描画されます） */
-  const elements = ref<SlideElement[]>(initailData);
+  const elements = ref<SlideElement[]>([]);
 
   /** 現在選択されている要素のID（未選択の場合は null） */
   const selectedId = ref<string | null>(null);
