@@ -16,11 +16,11 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const blockStyle = 'border-gray-400 border-2 p-3';
+const blockStyle = 'border-gray-400 border-2 p-4 rounded-lg';
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="space-y-7">
     <div :class="blockStyle">
       <UIArea />
     </div>
