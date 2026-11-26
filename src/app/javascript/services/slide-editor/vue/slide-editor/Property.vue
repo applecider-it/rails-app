@@ -2,14 +2,12 @@
 import { cssClass } from '../../slide-editor/main';
 import { SlideElement } from '../../types';
 
-interface Props {
-  moveElement: (position: "front" | "back") => void;
-  deleteSelectedElement: () => void;
-}
-
 const selectedElement = defineModel<SlideElement | null>('selectedElement');
 
-const props = defineProps<Props>();
+const emit = defineEmits<{
+  moveElement: [position: 'front' | 'back'];
+  deleteSelectedElement: [];
+}>();
 </script>
 
 <template>
@@ -70,10 +68,16 @@ const props = defineProps<Props>();
           >レイヤー順序</span
         >
         <div class="grid grid-cols-2 gap-2">
-          <button @click="moveElement('front')" :class="cssClass.propertyBtn">
+          <button
+            @click="emit('moveElement', 'front')"
+            :class="cssClass.propertyBtn"
+          >
             最前面へ
           </button>
-          <button @click="moveElement('back')" :class="cssClass.propertyBtn">
+          <button
+            @click="emit('moveElement', 'back')"
+            :class="cssClass.propertyBtn"
+          >
             最背面へ
           </button>
         </div>
@@ -81,7 +85,7 @@ const props = defineProps<Props>();
 
       <div class="border-t border-slate-100 pt-3">
         <button
-          @click="deleteSelectedElement"
+          @click="emit('deleteSelectedElement')"
           class="w-full py-2 px-3 text-xs font-medium bg-red-50 hover:bg-red-100 text-red-600 rounded border border-red-200 transition-colors flex items-center justify-center gap-1"
         >
           🗑️ この要素を削除

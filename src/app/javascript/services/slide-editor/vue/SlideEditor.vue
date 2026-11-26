@@ -24,21 +24,21 @@ const {
     class="flex flex-col h-screen select-none font-sans bg-slate-100 text-slate-800"
   >
     <!-- ツールバー -->
-    <Toolbar :addElement="addElement" :save="save" :load="load" />
+    <Toolbar @addElement="addElement" @save="save" @load="load" />
 
     <div class="flex flex-1 overflow-hidden">
       <!-- 編集キャンバスエリア -->
       <Canvas
-        :deselect="deselect"
         :elements="elements"
         :selectedId="selectedId"
-        :startInteraction="startInteraction"
+        @deselect="deselect"
+        @startInteraction="startInteraction"
       />
 
       <!-- プロパティパネル（右サイドバー） -->
       <Property
-        :moveElement="moveElement"
-        :deleteSelectedElement="deleteSelectedElement"
+        @moveElement="moveElement"
+        @deleteSelectedElement="deleteSelectedElement"
         v-model:selectedElement="selectedElement"
       />
     </div>

@@ -2,24 +2,23 @@
 import { SlideElement, InteractionType } from '../../types';
 
 interface Props {
-  deselect: () => void;
   elements: SlideElement[];
   selectedId: string | null;
-  startInteraction: (
-    e: PointerEvent,
-    type: InteractionType,
-    el: SlideElement,
-  ) => void;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
+
+const emit = defineEmits<{
+  deselect: [];
+  startInteraction: [e: PointerEvent, type: InteractionType, el: SlideElement];
+}>();
 </script>
 
 <template>
   <main class="flex-1 p-6 overflow-auto flex bg-slate-200">
     <div
       class="relative w-200 h-112.5 bg-white shadow-xl rounded-sm overflow-hidden m-auto shrink-0"
-      @pointerdown="deselect"
+      @pointerdown="emit('deselect')"
     >
       <!-- スライド要素リスト（配列の後の要素ほど手前に表示されます） -->
       <div
@@ -37,7 +36,7 @@ const props = defineProps<Props>();
           backgroundColor: el.type === 'shape' ? el.color : 'transparent',
           color: el.type === 'text' ? el.color : '#ffffff',
         }"
-        @pointerdown="startInteraction($event, 'drag', el)"
+        @pointerdown="emit('startInteraction', $event, 'drag', el)"
       >
         <!-- テキスト・図形コンテンツ -->
         <div
@@ -51,7 +50,7 @@ const props = defineProps<Props>();
         <div
           v-if="el.id === selectedId"
           class="absolute -right-1.5 -bottom-1.5 w-3.5 h-3.5 bg-blue-600 border-2 border-white rounded-full cursor-se-resize shadow-sm"
-          @pointerdown="startInteraction($event, 'resize', el)"
+          @pointerdown="emit('startInteraction', $event, 'resize', el)"
         ></div>
       </div>
     </div>
