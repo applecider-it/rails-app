@@ -1,6 +1,12 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import L from 'leaflet';
 
+import {
+  fixLeafletIconPath,
+  addTileLayer,
+  getCurrentPositionOptions,
+} from '../map/main';
+
 /**
  * マップ動作確認
  */
@@ -17,17 +23,11 @@ export const useMap = () => {
   // 位置情報取得中のローディング状態
   const isLocating = ref(false);
 
-  /** Vite 環境における Leaflet デフォルトアイコンの破綻対策 */
-  const fixLeafletIconPath = () => {
-    delete (L.Icon.Default.prototype as any)._getIconUrl;
-    L.Icon.Default.mergeOptions({
-      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-      iconRetinaUrl:
-        'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-      shadowUrl:
-        'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-    });
-  };
+  // 初期座標（例：東京駅）とズームレベル
+  const initialLocation: L.LatLngTuple = [35.681236, 139.767125];
+  const initialZoomLevel = 15;
+  const markerTextInitialLocation = '<b>東京駅</b>';
+  const markerTextCurrentLocation = '<b>現在地</b>';
 
   /** 初期化 */
   const init = () => {
@@ -35,25 +35,14 @@ export const useMap = () => {
 
     fixLeafletIconPath();
 
-    // 中心座標（例：東京駅）とズームレベル
-    const centerLocation: L.LatLngTuple = [35.681236, 139.767125];
-    const zoomLevel = 15;
-
     // 地図の初期化
-    map = L.map(mapContainer.value).setView(centerLocation, zoomLevel);
+    map = L.map(mapContainer.value).setView(initialLocation, initialZoomLevel);
 
-    // タイルレイヤー（OpenStreetMap）の追加
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    addTileLayer(map);
 
     // 初期マーカーの追加
-    const marker = L.marker(centerLocation).addTo(map);
-    marker
-      .bindPopup('<b>東京駅</b><br>Vue 3 + Tailwind + TypeScript のサンプル')
-      .openPopup();
+    const marker = L.marker(initialLocation).addTo(map);
+    marker.bindPopup(markerTextInitialLocation).openPopup();
   };
 
   /** GPSで現在地を取得して移動する関数 */
@@ -81,11 +70,11 @@ export const useMap = () => {
         // 既に現在地マーカーがある場合は位置を更新、なければ新規作成
         if (currentMarker) {
           currentMarker.setLatLng(latLng);
-          currentMarker.bindPopup('<b>現在地</b>').openPopup();
         } else {
           currentMarker = L.marker(latLng).addTo(map!);
-          currentMarker.bindPopup('<b>現在地</b>').openPopup();
         }
+
+        currentMarker.bindPopup(markerTextCurrentLocation).openPopup();
       },
       (error) => {
         isLocating.value = false;
@@ -94,19 +83,7 @@ export const useMap = () => {
           '現在地の取得に失敗しました。位置情報の権限（パーミッション）を確認してください。',
         );
       },
-      {
-        // 高精度な位置情報（GPSなど）の利用を強いるかどうか
-        // true にすると精度が上がりますが、バッテリー消費が増えたり、取得に時間がかかる場合があります
-        enableHighAccuracy: true,
-
-        // 位置情報の取得を待つ最大時間（ミリ秒単位）
-        // この時間（10000ms = 10秒）以内に位置情報が取得できない場合、エラーとして処理されます
-        timeout: 10000,
-
-        // キャッシュされた（保存されていた）位置情報の有効期限（ミリ秒単位）
-        // 0 に指定するとキャッシュを一切使わず、常に「今現在」の最新の位置情報を取得しに行きます
-        maximumAge: 0,
-      },
+      getCurrentPositionOptions,
     );
   };
 
