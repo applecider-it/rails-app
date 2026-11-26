@@ -35,10 +35,11 @@
     <div class="<%= block_style %>">
       <h3 class="app-h3">コピーの動作確認</h3>
 
-      <div class="mt-5">
+      <div>
         <button type="button" onclick="App.funcs.writeClipboard(this.dataset.val, this)" data-val="<%= copy_value %>" class="app-btn-primary">Copy</button>
 
-        <div>
+        <div class="mt-5">
+          <div>コピー結果確認用</div>
           <textarea class="app-form-input w-full h-20 mt-2"></textarea>
         </div>
       </div>
