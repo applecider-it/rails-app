@@ -67,17 +67,17 @@ gem 'devise'
 
 gem 'vite_rails'
 
-gem "sprockets-rails"
-gem 'sassc'
-gem 'sass-rails'
-gem 'sassc-rails'
+#gem "sprockets-rails"
+#gem 'sassc'
+#gem 'sass-rails'
+#gem 'sassc-rails'
 
 gem 'discard'
 
-gem 'jwt'
+#gem 'jwt'
 gem 'dotenv-rails', groups: [:development, :test]
 
-gem 'websocket-client-simple'
+#gem 'websocket-client-simple'
 
 gem 'redis'
 
