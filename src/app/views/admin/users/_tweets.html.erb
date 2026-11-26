@@ -10,7 +10,8 @@
     </thead>
     <tbody class="divide-y divide-gray-100">
       <% @tweets.each do |tweet| %>
-      <tr class="hover:bg-gray-50 transition">
+      <tr class="transition
+         <% if tweet.discarded? %>bg-gray-300 hover:bg-gray-200<% else %>hover:bg-gray-50<% end %>">
         <td class="px-6 py-4 text-gray-700"><%= tweet.id %></td>
         <td class="px-6 py-4 font-medium text-gray-900"><%= tweet.content %></td>
         <td class="px-6 py-4"><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></td>
