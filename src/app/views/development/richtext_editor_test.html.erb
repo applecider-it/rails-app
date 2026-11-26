@@ -13,6 +13,7 @@
         (val) => {
           console.log('結果', val);
           document.getElementById('trace').innerHTML = val;
+          document.getElementById('content_preview').value = val;
           document.getElementById('content').value = val;
         }
       )
@@ -22,9 +23,11 @@
     <div id="trace" class="mt-4 p-5 border-4 prose prose-slate max-w-none h-100 overflow-y-auto"><%= app_sanitize_richtext @content %></div>
     
     <div>
-      <%= text_area_tag :content, @content, class: "w-full h-100" %>
+      <textarea id="content_preview" class="w-full h-100"><%= @content %></textarea>
     </div>
-    
+
+    <%= hidden_field_tag :content, @content %>
+
     <%= submit_tag "送信", class: "app-btn-primary" %>
   <% end %>
 
