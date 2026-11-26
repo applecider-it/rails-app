@@ -1,6 +1,6 @@
-import { useInteraction } from './useInteraction';
-import { useElements } from './useElements';
-import { useEvent } from './useEvent';
+import { useInteraction } from './use-slide-editor/useInteraction';
+import { useElements } from './use-slide-editor/useElements';
+import { useEvent } from './use-slide-editor/useEvent';
 
 export function useSlideEditor() {
   const {

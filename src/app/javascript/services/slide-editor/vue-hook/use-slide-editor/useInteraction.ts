@@ -1,6 +1,6 @@
 import { reactive, Ref, ComputedRef } from 'vue';
 
-import { SlideElement, InteractionType } from '../types';
+import { SlideElement, InteractionType } from '../../types';
 
 export function useInteraction(
   selectedId: Ref<string, string>,

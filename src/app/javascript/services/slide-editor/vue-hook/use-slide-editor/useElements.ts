@@ -1,8 +1,10 @@
 import { ref, computed, watch } from 'vue';
 
-import { ElementType, SlideElement } from '../types';
+import { cloneJson } from '@/services/data/json';
 
-import { initailData } from '../data';
+import { ElementType, SlideElement } from '../../types';
+
+import { initailData } from '../../data';
 
 export function useElements() {
   /** 変更監視用タイマー */
@@ -87,7 +89,7 @@ export function useElements() {
 
       watchTimer = setTimeout(() => {
         // JSONに変換
-        const json = JSON.parse(JSON.stringify(newVal));
+        const json = cloneJson(newVal);
         console.log('【State Updated (Elements)】', json);
       }, 1000);
     },

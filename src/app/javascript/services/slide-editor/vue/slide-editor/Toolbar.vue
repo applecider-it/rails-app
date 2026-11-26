@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { cloneJson } from '@/services/data/json';
+
 import { cssClass } from '../../main';
 import { ElementType, SlideElement } from '../../types';
 
@@ -14,7 +16,7 @@ let saveData = null;
 
 const save = () => {
   // JSONに変換
-  const json = JSON.parse(JSON.stringify(elements.value));
+  const json = cloneJson(elements.value);
   console.log(json);
 
   saveData = json;
@@ -29,7 +31,7 @@ const load = () => {
   console.log(saveData);
 
   // 再生成しないと、変更が認識されない
-  elements.value = JSON.parse(JSON.stringify(saveData));
+  elements.value = cloneJson(saveData);
 };
 </script>
 
