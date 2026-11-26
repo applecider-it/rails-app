@@ -4,28 +4,27 @@ import { cloneJson } from '@/services/data/json';
 import { showToast } from '@/services/ui/message';
 
 import { SlideElement } from '../../types';
-import { initailData } from '../../slide-editor/data';
+import { saveSlideData, loadSlideData } from '../../slide-editor/save';
 
 /**
  * 保存管理用Hook
  */
 export function useSave(elements: Ref<SlideElement[]>) {
-  /** ダミーの保存用変数 */
-  let saveData = null;
-
   /** 保存する */
-  const save = () => {
+  const save = async () => {
     // JSONに変換
     const json = cloneJson(elements.value);
     console.log(json);
 
-    saveData = json;
+    await saveSlideData(json);
 
     showToast('保存しました。');
   };
 
   /** 読み込みをする */
-  const load = (needConfirm: boolean = true) => {
+  const load = async (needConfirm: boolean = true) => {
+    const saveData = await loadSlideData();
+
     if (!saveData) {
       showToast('セーブデータがありません。', 'alert');
       return;
@@ -47,10 +46,8 @@ export function useSave(elements: Ref<SlideElement[]>) {
     if (needConfirm) showToast('読み込みしました。');
   };
 
-  onMounted(() => {
-    saveData = initailData;
-
-    load(false);
+  onMounted(async () => {
+    await load(false);
   });
 
   return {

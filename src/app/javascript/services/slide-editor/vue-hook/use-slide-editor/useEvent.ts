@@ -7,18 +7,18 @@ export function useEvent(
   selectedId: Ref<string, string>,
   deleteSelectedElement: () => void,
 ) {
-  /** キーボードイベントを処理し、Deleteキー押下時に要素を削除する */
+  /** キーダウンイベント */
   const handleKeyDown = (e: KeyboardEvent) => {
+    // 入力関連の場合は無視
     if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
       return;
     }
 
+    // Deleteキー押下時に要素を削除
     if (e.key === 'Delete' && selectedId.value) {
       deleteSelectedElement();
     }
   };
-
-  // コンストラクタ、デストラクタ
 
   onMounted(() => {
     window.addEventListener('keydown', handleKeyDown);

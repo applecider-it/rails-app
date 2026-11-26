@@ -1,6 +1,3 @@
-
-// 表示用定数
-
 /** CSSクラス用定数 */
 export const cssClass = {
   /** ツールバーのボタンのCSSクラス */

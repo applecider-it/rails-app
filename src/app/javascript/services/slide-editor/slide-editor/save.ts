@@ -1,4 +1,4 @@
-import { SlideElement } from './types';
+import { SlideElement } from '../types';
 
 /** ダミーデータ */
 export const initailData: SlideElement[] = [
@@ -25,3 +25,17 @@ export const initailData: SlideElement[] = [
     fontSize: 16,
   },
 ];
+
+/** ダミーの保存用変数 */
+//let saveData = null;
+let saveData = initailData;
+
+/** スライドデータの保存 */
+export const saveSlideData = async (json: any) => {
+  saveData = json;
+};
+
+/** スライドデータの読み込み */
+export const loadSlideData = async () => {
+  return saveData;
+};

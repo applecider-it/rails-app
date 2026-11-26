@@ -2,6 +2,7 @@ import { ref, computed, watch } from 'vue';
 
 import { cloneJson } from '@/services/data/json';
 
+import { createSlideElement } from '../../slide-editor/elements';
 import { ElementType, SlideElement } from '../../types';
 
 /**
@@ -22,21 +23,9 @@ export function useElements() {
     selectedId.value = null;
   };
 
-  // 要素管理
-
   /** 新しい要素（テキストまたは図形）をスライドに追加する */
   const addElement = (type: ElementType) => {
-    const newEl: SlideElement = {
-      id: `el-${Date.now()}`,
-      type,
-      x: 100,
-      y: 100,
-      width: type === 'text' ? 180 : 120,
-      height: type === 'text' ? 50 : 120,
-      content: type === 'text' ? '新規テキスト' : '四角形',
-      color: type === 'text' ? '#000000' : '#10b981',
-      fontSize: 18,
-    };
+    const newEl: SlideElement = createSlideElement(type);
 
     elements.value.push(newEl);
     selectedId.value = newEl.id;
