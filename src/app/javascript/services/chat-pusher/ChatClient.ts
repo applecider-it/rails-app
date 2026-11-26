@@ -1,7 +1,7 @@
 import type { Members, PresenceChannel } from 'pusher-js';
 
 import { showToast } from '@/services/ui/message';
-import { pusher, delimiterString } from '@/services/application/pusher';
+import { pusher, delimiterString } from '@/services/api/pusher';
 import { sendApi } from '@/services/api/http';
 
 import { ChatMessage, PusherUserInfo, PusherUser } from './types';
