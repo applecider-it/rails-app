@@ -3,15 +3,15 @@
  */
 
 import { createApp } from 'vue';
-import MediaTest from './vue/MediaTest.vue';
+import MediaArea from './vue/MediaArea.vue';
 
-const el = document.getElementById('media-test');
+const el = document.getElementById('media-area');
 
 if (el) {
   const all = JSON.parse(el.dataset.all);
 
   console.log('vue all', all);
 
-  const app = createApp(MediaTest);
+  const app = createApp(MediaArea);
   app.mount(el);
 }
