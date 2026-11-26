@@ -22,7 +22,7 @@ const {
     class="flex flex-col h-screen select-none font-sans bg-slate-100 text-slate-800"
   >
     <!-- ツールバー -->
-    <Toolbar :addElement="addElement" />
+    <Toolbar :addElement="addElement" v-model:elements="elements" />
 
     <div class="flex flex-1 overflow-hidden">
       <!-- 編集キャンバスエリア -->

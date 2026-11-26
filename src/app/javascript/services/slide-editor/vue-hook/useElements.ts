@@ -86,6 +86,7 @@ export function useElements() {
       if (watchTimer) clearTimeout(watchTimer);
 
       watchTimer = setTimeout(() => {
+        // JSONに変換
         const json = JSON.parse(JSON.stringify(newVal));
         console.log('【State Updated (Elements)】', json);
       }, 1000);
