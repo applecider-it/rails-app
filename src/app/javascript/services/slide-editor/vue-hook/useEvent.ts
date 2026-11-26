@@ -1,6 +1,9 @@
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, Ref } from 'vue';
 
-export function useEvent(selectedId, deleteSelectedElement) {
+export function useEvent(
+  selectedId: Ref<string, string>,
+  deleteSelectedElement: () => void,
+) {
   /** キーボードイベントを処理し、Deleteキー押下時に要素を削除する */
   const handleKeyDown = (e: KeyboardEvent) => {
     if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
@@ -21,4 +24,3 @@ export function useEvent(selectedId, deleteSelectedElement) {
     window.removeEventListener('keydown', handleKeyDown);
   });
 }
-

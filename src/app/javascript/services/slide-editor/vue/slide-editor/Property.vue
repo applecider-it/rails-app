@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { cssClass } from '../../main';
+import { SlideElement } from '../../types';
 
 interface Props {
-  selectedElement: any;
-  moveElement: any;
-  deleteSelectedElement: any;
+  selectedElement: SlideElement | null;
+  moveElement: (position: "front" | "back") => void;
+  deleteSelectedElement: () => void;
 }
 
 const props = defineProps<Props>();

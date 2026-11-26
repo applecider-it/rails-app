@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { SlideElement, InteractionType } from '../../types';
+
 interface Props {
-  deselect: any;
-  elements: any;
-  selectedId: any;
-  startInteraction: any;
+  deselect: () => void;
+  elements: SlideElement[];
+  selectedId: string | null;
+  startInteraction: (
+    e: PointerEvent,
+    type: InteractionType,
+    el: SlideElement,
+  ) => void;
 }
 
 const props = defineProps<Props>();

@@ -1,8 +1,11 @@
-import { reactive } from 'vue';
+import { reactive, Ref, ComputedRef } from 'vue';
 
 import { SlideElement, InteractionType } from '../types';
 
-export function useInteraction(selectedId, selectedElement) {
+export function useInteraction(
+  selectedId: Ref<string, string>,
+  selectedElement: ComputedRef<SlideElement>,
+) {
   /** 指定したIDの要素を選択状態にする */
   const selectElement = (id: string) => {
     selectedId.value = id;

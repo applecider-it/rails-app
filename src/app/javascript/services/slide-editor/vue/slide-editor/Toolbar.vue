@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { cssClass } from '../../main';
+import { ElementType } from '../../types';
 
 interface Props {
-  addElement: any;
+  addElement: (type: ElementType) => void;
 }
 
 const props = defineProps<Props>();
