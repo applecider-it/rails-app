@@ -35,9 +35,9 @@ const {
 
       <!-- プロパティパネル（右サイドバー） -->
       <Property
-        :selectedElement="selectedElement"
         :moveElement="moveElement"
         :deleteSelectedElement="deleteSelectedElement"
+        v-model:selectedElement="selectedElement"
       />
     </div>
   </div>

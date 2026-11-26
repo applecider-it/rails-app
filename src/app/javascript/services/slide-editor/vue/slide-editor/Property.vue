@@ -3,10 +3,11 @@ import { cssClass } from '../../main';
 import { SlideElement } from '../../types';
 
 interface Props {
-  selectedElement: SlideElement | null;
   moveElement: (position: "front" | "back") => void;
   deleteSelectedElement: () => void;
 }
+
+const selectedElement = defineModel<SlideElement | null>('selectedElement');
 
 const props = defineProps<Props>();
 </script>
