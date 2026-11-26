@@ -29,7 +29,7 @@ const list = [
 
 <template>
   <div>
-    Date動作確認
+    <h3 class="app-h3">Date動作確認</h3>
 
     <div v-for="(str, index) in list" :key="index" class="border my-2 p-2">
       <table>

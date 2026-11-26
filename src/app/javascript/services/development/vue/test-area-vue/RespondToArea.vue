@@ -10,14 +10,14 @@ const csrfToken = document
 const jsonTest = async () => {
   const data: any = {};
 
-  const response = await sendApi('POST','/development/respond_to_test', data);
+  const response = await sendApi('POST', '/development/respond_to_test', data);
   console.log('response.data', response.data);
 };
 </script>
 
 <template>
   <div class="app-form">
-    respond_to動作確認
+    <h3 class="app-h3">respond_to動作確認</h3>
 
     <div class="mt-5">
       <form method="POST" action="/development/respond_to_test">

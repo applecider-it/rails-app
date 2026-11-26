@@ -8,7 +8,7 @@ const { pwa } = useAppli();
 
 <template>
   <div>
-    アプリ動作確認
+    <h3 class="app-h3">アプリ動作確認</h3>
 
     <div class="my-10 p-10 border-4">
       <div v-if="pwa">アプリで起動</div>

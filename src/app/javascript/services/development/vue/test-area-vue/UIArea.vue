@@ -35,7 +35,7 @@ const toastTest = (type) => {
 
 <template>
   <div>
-    UI動作確認
+    <h3 class="app-h3">UI動作確認</h3>
 
     <div class="mt-5">
       <button class="app-btn-secondary mr-2" @click="loadingTest">

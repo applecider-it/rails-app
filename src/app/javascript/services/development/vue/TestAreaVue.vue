@@ -20,47 +20,43 @@ const blockStyle = 'border-gray-400 border-2 p-3';
 </script>
 
 <template>
-  <div class="py-6 border-gray-500 border-2 p-5">
-    <div class="mb-6 text-lg">vue.js動作確認</div>
+  <div class="space-y-4">
+    <div :class="blockStyle">
+      <UIArea />
+    </div>
 
-    <div class="space-y-4">
-      <div :class="blockStyle">
-        <UIArea />
-      </div>
+    <div :class="blockStyle">
+      <ModalArea />
+    </div>
 
-      <div :class="blockStyle">
-        <ModalArea />
-      </div>
+    <div :class="blockStyle">
+      <FormArea
+        :listVal="formData.list_val"
+        :radioVal="formData.radio_val"
+        :dateTimeVal="formData.datetime_val"
+        :listVals="formData.list_vals"
+        :radioVals="formData.radio_vals"
+      />
+    </div>
 
-      <div :class="blockStyle">
-        <FormArea
-          :listVal="formData.list_val"
-          :radioVal="formData.radio_val"
-          :dateTimeVal="formData.datetime_val"
-          :listVals="formData.list_vals"
-          :radioVals="formData.radio_vals"
-        />
-      </div>
+    <div :class="blockStyle">
+      <RespondToArea />
+    </div>
 
-      <div :class="blockStyle">
-        <RespondToArea />
-      </div>
+    <div :class="blockStyle">
+      <AppliArea />
+    </div>
 
-      <div :class="blockStyle">
-        <AppliArea />
-      </div>
+    <div :class="blockStyle">
+      <UploadArea />
+    </div>
 
-      <div :class="blockStyle">
-        <UploadArea />
-      </div>
+    <div :class="blockStyle">
+      <RouterArea name="test" />
+    </div>
 
-      <div :class="blockStyle">
-        <RouterArea name="test" />
-      </div>
-
-      <div :class="blockStyle">
-        <DateArea />
-      </div>
+    <div :class="blockStyle">
+      <DateArea />
     </div>
   </div>
 </template>

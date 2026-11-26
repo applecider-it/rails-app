@@ -29,17 +29,13 @@ const confirmFormValue = () => {
 
 <template>
   <div class="app-form">
-    Form動作確認
+    <h3 class="app-h3">Form動作確認</h3>
 
     <div class="mt-5">
       <label for="listVal" class="app-form-label">リスト動作確認</label>
       <select v-model="listVal" id="listVal">
         <option :value="null" key="null">選択してください</option>
-        <option
-          v-for="[key, value] in listVals"
-          :key="key"
-          :value="key"
-        >
+        <option v-for="[key, value] in listVals" :key="key" :value="key">
           {{ value }}
         </option>
       </select>

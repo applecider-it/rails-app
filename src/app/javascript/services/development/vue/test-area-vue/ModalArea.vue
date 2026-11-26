@@ -21,7 +21,7 @@ const handleOpenModal = async () => {
 
 <template>
   <div>
-    モーダルウィンドウ動作確認
+    <h3 class="app-h3">モーダルウィンドウ動作確認</h3>
 
     <div class="mt-5 space-y-2">
       <div class="space-x-2">

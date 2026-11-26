@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "@/services/ui/vue-hook/useRouter";
+import { ref, onMounted } from 'vue';
+import { useRouter } from '@/services/ui/vue-hook/useRouter';
 
-import { components, componentInfos } from "../../router-test/routes";
+import { components, componentInfos } from '../../router-test/routes';
 
-console.log("router test code");
+console.log('router test code');
 
 interface Props {
   name: string;
@@ -12,31 +12,33 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const router = useRouter(components, "Parts1");
+const router = useRouter(components, 'Parts1');
 
 const commonCnt = ref<number>(0);
 
-const direction = ref<string>("");
+const direction = ref<string>('');
 
 const navLinkClass = (name: string) => {
-  return [router.isCurrent(name) ? "app-link-active" : "app-link-normal"];
+  return [router.isCurrent(name) ? 'app-link-active' : 'app-link-normal'];
 };
 
 const setCurrent = (name: string) => {
   const before = componentInfos[router.currentName()];
   const after = componentInfos[name];
-  direction.value = before.sort > after.sort ? "left" : "right";
+  direction.value = before.sort > after.sort ? 'left' : 'right';
   router.setCurrent(name);
 };
 
 // 初期化時
 onMounted(() => {
-  console.log("router test mounted");
+  console.log('router test mounted');
 });
 </script>
 
 <template>
   <div>
+    <h3 class="app-h3">独自ルーター動作確認</h3>
+
     <div class="mt-5 space-y-2">
       <div>Propからの値: {{ name }}</div>
       <div>
