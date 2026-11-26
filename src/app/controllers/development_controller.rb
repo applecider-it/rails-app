@@ -77,6 +77,10 @@ class DevelopmentController < ApplicationController
   def media_test
   end
 
+  # ルーターテスト動作確認
+  def router_test
+  end
+
   # リッチテキストエディター動作確認
   def richtext_editor_test
     initail_content = '<h1>見出し</h1>

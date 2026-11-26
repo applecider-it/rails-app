@@ -7,7 +7,6 @@ import FormArea from './test-area-vue/FormArea.vue';
 import RespondToArea from './test-area-vue/RespondToArea.vue';
 import DateArea from './test-area-vue/DateArea.vue';
 import AppliArea from './test-area-vue/AppliArea.vue';
-import RouterArea from './test-area-vue/RouterArea.vue';
 import UploadArea from './test-area-vue/UploadArea.vue';
 
 interface Props {
@@ -49,10 +48,6 @@ const blockStyle = 'border-gray-400 border-2 p-4 rounded-lg';
 
     <div :class="blockStyle">
       <UploadArea />
-    </div>
-
-    <div :class="blockStyle">
-      <RouterArea name="test" />
     </div>
 
     <div :class="blockStyle">

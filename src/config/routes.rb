@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   match "development/richtext_editor_test", via: [:get, :post]
   get "development/slide_editor_test"
   get "development/map_test"
+  get "development/router_test"
   post "development/upload_test"
   get "development/mail_test"
 

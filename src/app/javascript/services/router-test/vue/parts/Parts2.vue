@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onActivated } from "vue";
 import { showToast } from "@/services/ui/message";
-import { RouterPartsProps } from "../../../types";
+import { RouterPartsProps } from "../../types";
 
 const props = defineProps<RouterPartsProps>();
 
