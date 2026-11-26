@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSlideEditor } from '../slide-editor/vue-hook/useSlideEditor';
+import { useSlideEditor } from '../vue-hook/useSlideEditor';
 
 import Toolbar from './slide-editor-test/Toolbar.vue';
 import Canvas from './slide-editor-test/Canvas.vue';

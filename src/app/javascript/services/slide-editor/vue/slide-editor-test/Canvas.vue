@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cssClass } from '../../slide-editor/main';
+import { cssClass } from '../../main';
 
 interface Props {
   deselect: any;
