@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { EditorContent } from '@tiptap/vue-3';
-import { useHtmlEditor } from '../tiptap/main';
+import { useHtmlEditor } from '../vue-hook/useHtmlEditor';
 import Toolbar from './tiptap/Toolbar.vue';
 import ImageModal from './tiptap/ImageModal.vue';
 

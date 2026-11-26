@@ -5,7 +5,7 @@ import { TextStyle, Color } from '@tiptap/extension-text-style';
 
 import { formatHtml } from '@/services/data/html';
 
-import { CustomImage, HEADING_LEVELS } from './parts';
+import { CustomImage, HEADING_LEVELS } from '../tiptap/parts';
 import { useModal } from '@/services/ui/vue-hook/useModal';
 
 /**
