@@ -1,5 +1,5 @@
-import Parts1 from "../vue/router-test-area/Parts1.vue";
-import Parts2 from "../vue/router-test-area/Parts2.vue";
+import Parts1 from "../vue/test-area-vue/router-area/Parts1.vue";
+import Parts2 from "../vue/test-area-vue/router-area/Parts2.vue";
 
 import { RouterComponentInfos } from "../types";
 
