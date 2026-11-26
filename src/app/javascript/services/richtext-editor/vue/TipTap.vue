@@ -3,7 +3,6 @@ import { onMounted } from 'vue';
 import { EditorContent } from '@tiptap/vue-3';
 import { useRichtextEditor } from '../vue-hook/useRichtextEditor';
 import Toolbar from './tiptap/Toolbar.vue';
-import ImageModal from './tiptap/ImageModal.vue';
 
 interface Props {
   initialValue: string;
@@ -20,7 +19,6 @@ const {
   addImage,
   currentBlock,
   changeBlock,
-  imageModal,
 } = useRichtextEditor(props.initialValue, props.callback);
 
 onMounted(() => {
@@ -54,10 +52,6 @@ onMounted(() => {
         placeholder="HTMLを入力..."
       ></textarea>
     </div>
-  </div>
-
-  <div>
-    <ImageModal :modal="imageModal" />
   </div>
 </template>
 
