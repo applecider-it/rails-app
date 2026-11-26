@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useSlideEditor } from '../vue-hook/useSlideEditor';
 
-import Toolbar from './slide-editor-test/Toolbar.vue';
-import Canvas from './slide-editor-test/Canvas.vue';
-import Property from './slide-editor-test/Property.vue';
+import Toolbar from './slide-editor/Toolbar.vue';
+import Canvas from './slide-editor/Canvas.vue';
+import Property from './slide-editor/Property.vue';
 
 const {
   addElement,

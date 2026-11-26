@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { cssClass } from '../../main';
-
 interface Props {
   deselect: any;
   elements: any;
