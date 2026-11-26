@@ -1,12 +1,11 @@
 <script setup lang="ts">
 interface Props {
-  startCamera: any;
-  stopCamera: any;
-  takePhoto: any;
-  isRecording: any;
-  startRecording: any;
-  stopRecording: any;
-  videoRef: any;
+  startCamera: () => Promise<void>;
+  stopCamera: () => void;
+  takePhoto: () => void;
+  isRecording: boolean;
+  startRecording: () => Promise<void>;
+  stopRecording: () => void;
 }
 
 const videoRef = defineModel<HTMLVideoElement | null>('videoRef');
