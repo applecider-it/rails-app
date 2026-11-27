@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { cssClass } from '../../slide-editor/main';
 import { SlideElement } from '../../types';
 
 const selectedElement = defineModel<SlideElement | null>('selectedElement');
@@ -8,6 +7,15 @@ const emit = defineEmits<{
   moveElement: [position: 'front' | 'back'];
   deleteSelectedElement: [];
 }>();
+
+/** CSSクラス用定数 */
+const cssClass = {
+  /** ボタンのCSSクラス */
+  btn: 'py-1.5 px-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-300 transition-colors',
+  /** 入力ボックスのCSSクラス */
+  input:
+    'px-2.5 py-1.5 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-normal text-slate-800',
+};
 </script>
 
 <template>
@@ -31,7 +39,7 @@ const emit = defineEmits<{
         <input
           v-model="selectedElement.content"
           type="text"
-          :class="cssClass.propertyInput"
+          :class="cssClass.input"
         />
       </label>
 
@@ -43,7 +51,7 @@ const emit = defineEmits<{
             type="number"
             min="8"
             max="120"
-            :class="`w-full ${cssClass.propertyInput}`"
+            :class="`w-full ${cssClass.input}`"
           />
           <span class="text-xs text-slate-500">px</span>
         </div>
@@ -68,16 +76,10 @@ const emit = defineEmits<{
           >レイヤー順序</span
         >
         <div class="grid grid-cols-2 gap-2">
-          <button
-            @click="emit('moveElement', 'front')"
-            :class="cssClass.propertyBtn"
-          >
+          <button @click="emit('moveElement', 'front')" :class="cssClass.btn">
             最前面へ
           </button>
-          <button
-            @click="emit('moveElement', 'back')"
-            :class="cssClass.propertyBtn"
-          >
+          <button @click="emit('moveElement', 'back')" :class="cssClass.btn">
             最背面へ
           </button>
         </div>
