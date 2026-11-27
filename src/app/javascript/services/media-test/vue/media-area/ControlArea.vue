@@ -1,31 +1,44 @@
 <script setup lang="ts">
 interface Props {
-  startCamera: () => Promise<void>;
-  stopCamera: () => void;
-  takePhoto: () => void;
   isRecording: boolean;
-  startRecording: () => Promise<void>;
-  stopRecording: () => void;
 }
 
 const videoRef = defineModel<HTMLVideoElement | null>('videoRef');
 
 const props = defineProps<Props>();
+
+const emit = defineEmits<{
+  startCamera: [];
+  stopCamera: [];
+  takePhoto: [];
+  startRecording: [];
+  stopRecording: [];
+}>();
 </script>
 
 <template>
   <div class="space-x-3 mb-5">
-    <button @click="startCamera" class="app-btn-primary">カメラを起動</button>
-    <button @click="stopCamera" class="app-btn-primary">カメラを停止</button>
-    <button @click="takePhoto" class="app-btn-secondary">撮影する</button>
+    <button @click="emit('startCamera')" class="app-btn-primary">
+      カメラを起動
+    </button>
+    <button @click="emit('stopCamera')" class="app-btn-primary">
+      カメラを停止
+    </button>
+    <button @click="emit('takePhoto')" class="app-btn-secondary">
+      撮影する
+    </button>
 
     <!-- 録音操作用ボタン -->
-    <button v-if="!isRecording" @click="startRecording" class="app-btn-primary">
+    <button
+      v-if="!isRecording"
+      @click="emit('startRecording')"
+      class="app-btn-primary"
+    >
       録音開始
     </button>
     <button
       v-else
-      @click="stopRecording"
+      @click="emit('stopRecording')"
       class="app-btn-secondary bg-red-600 text-white"
     >
       録音停止中...

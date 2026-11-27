@@ -21,12 +21,12 @@ const {
   <div class="camera-container">
     <!-- 操作ボタンエリア -->
     <ControlArea
-      :startCamera="startCamera"
-      :stopCamera="stopCamera"
-      :takePhoto="takePhoto"
       :isRecording="isRecording"
-      :startRecording="startRecording"
-      :stopRecording="stopRecording"
+      @startCamera="startCamera"
+      @stopCamera="stopCamera"
+      @takePhoto="takePhoto"
+      @startRecording="startRecording"
+      @stopRecording="stopRecording"
       v-model:videoRef="videoRef"
     />
 
