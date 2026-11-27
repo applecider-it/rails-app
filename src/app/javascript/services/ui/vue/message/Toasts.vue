@@ -15,6 +15,7 @@ function computedClass(toast: Toast) {
   if (toast.type in otherColors) colors = otherColors[toast.type];
 
   return [
+    'relative',
     'text-sm',
     'border-2',
     'text-black',
