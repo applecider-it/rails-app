@@ -2,7 +2,7 @@
 
   <div class="mt-5">
     <%= f.label :list_val, "リスト動作確認", class: "app-form-label" %>
-    <%= f.select :list_val, @list_vals.map { |k, v| [v, k] }, { prompt: "選択してください" } %>
+    <%= f.select :list_val, @list_vals.invert, { prompt: "選択してください" }, { class: "app-form-input w-auto" } %>
   </div>
 
   <div class="mt-5">
