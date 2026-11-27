@@ -3,6 +3,8 @@
 
 import { ref } from 'vue';
 
+import SubFormArea from './form-area/SubFormArea.vue';
+
 interface Props {
   listVal: number;
   radioVal: string;
@@ -33,7 +35,7 @@ const confirmFormValue = () => {
 
     <div class="mt-5">
       <label for="listVal" class="app-form-label">リスト動作確認</label>
-      <select v-model="listVal" id="listVal">
+      <select v-model="listVal" id="listVal" class="app-form-input w-auto">
         <option :value="null" key="null">選択してください</option>
         <option v-for="[key, value] in listVals" :key="key" :value="key">
           {{ value }}
@@ -57,13 +59,28 @@ const confirmFormValue = () => {
 
     <div class="mt-5">
       <label for="dateTimeVal" class="app-form-label">日時動作確認</label>
-      <input type="datetime-local" v-model="dateTimeVal" id="dateTimeVal" />
+      <input
+        type="datetime-local"
+        v-model="dateTimeVal"
+        id="dateTimeVal"
+        class="app-form-input w-auto"
+      />
 
       <p>選択中: {{ dateTimeVal }}</p>
     </div>
 
     <div class="mt-5">
       <button @click="confirmFormValue" class="app-btn-secondary">確認</button>
+    </div>
+
+    <div class="mt-5 border p-2">
+      <SubFormArea
+        :listVals="listVals"
+        :radioVals="radioVals"
+        v-model:listVal="listVal"
+        v-model:radioVal="radioVal"
+        v-model:dateTimeVal="dateTimeVal"
+      />
     </div>
   </div>
 </template>
