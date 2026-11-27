@@ -11,7 +11,7 @@
 <%
   work_data = {
     # ページリンク用データ
-    pages: [],
+    pages: nil,
     # 共通で使うCSSをまとめる
     css: nil,
   }
@@ -41,6 +41,7 @@
     #
     # 参考
     # gems/kaminari-core-*/lib/kaminari/helpers/paginator.rb
+    work_data[:pages] = []
     each_page do |page|
       if page.display_tag?
         page_tag page
