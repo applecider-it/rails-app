@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { useModal } from '@/services/ui/vue-hook/useModal';
-import { getImages } from '../image';
+import { getImages } from '../image/api';
 
 /**
  * 画像用モーダル
