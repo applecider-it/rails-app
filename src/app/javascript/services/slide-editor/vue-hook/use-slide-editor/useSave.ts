@@ -42,8 +42,7 @@ export function useSave(elements: Ref<SlideElement[]>) {
     )
       return;
 
-    // 再生成しないと、変更が認識されない
-    elements.value = cloneJson(saveData);
+    elements.value = saveData;
 
     if (needConfirm) showToast('読み込みしました。');
   };

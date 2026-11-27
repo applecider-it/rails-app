@@ -1,3 +1,5 @@
+import { cloneJson } from '@/services/data/json';
+
 import { SlideElement } from '../types';
 
 /** ダミーデータ */
@@ -37,5 +39,6 @@ export const saveSlideData = async (json: any) => {
 
 /** スライドデータの読み込み */
 export const loadSlideData = async () => {
-  return saveData;
+  // cloneJson()で再生成しないと、Vueが変更を認識しない
+  return cloneJson(saveData);
 };
