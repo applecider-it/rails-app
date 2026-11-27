@@ -18,7 +18,7 @@ const updateByJs = () => {
 
 <template>
   <div class="app-form">
-    <h4 class="app-h4">defineModel操作確認</h4>
+    <h4 class="app-h4">defineModel動作確認</h4>
 
     <div class="mt-5">
       <label for="listVal" class="app-form-label">リスト動作確認</label>
