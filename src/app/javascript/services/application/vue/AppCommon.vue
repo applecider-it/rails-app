@@ -7,28 +7,27 @@ import { useToast } from '@/services/ui/vue-hook/useToast';
 import { setupMessage } from '@/services/ui/message';
 import { setupImage } from '@/services/ui/image';
 import ImageModal from '@/services/ui/vue/popup/ImageModal.vue';
-import { useModal } from '@/services/ui/vue-hook/useModal';
+import { useImageModal } from '@/services/ui/vue-hook/useImageModal';
 
 const { toasts, showToast } = useToast();
 
 const isLoading = ref(false);
 
-/** 画像用モーダル */
-const imageModal = useModal<string>();
+const imageModal = useImageModal();
+
+const setIsLoading = (value: boolean) => {
+  isLoading.value = value;
+};
 
 onMounted(() => {
-  setupMessage(showToast, (value: boolean) => {
-    isLoading.value = value;
-  });
-  setupImage(async (initialValue: string) => {
-    return await imageModal.open(initialValue);
-  });
+  setupMessage(showToast, setIsLoading);
+  setupImage(imageModal);
 });
 </script>
 
 <template>
   <div>
-    <ImageModal :modal="imageModal" />
+    <ImageModal :imageModal="imageModal" />
 
     <Toasts :toasts="toasts" />
     <Loading :isLoading="isLoading" />

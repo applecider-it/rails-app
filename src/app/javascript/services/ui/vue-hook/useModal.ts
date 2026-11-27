@@ -1,9 +1,14 @@
 import { ref } from 'vue';
 
+type Options = {
+  /** モーダルを開いた直後のコールバック */
+  onOpened?: () => void;
+};
+
 /**
- * シンプルなモーダルウィンドウ用フック(composable)
+ * 値を１つ返すだけのモーダルウィンドウ用フック(composable)
  */
-export function useModal<T = string>() {
+export function useModal<T = string>(options: Options = {}) {
   const isOpen = ref<boolean>(false);
   const value = ref<T | null>(null);
 
@@ -19,6 +24,8 @@ export function useModal<T = string>() {
   const open = (initialValue: T | null = null): Promise<T | null> => {
     value.value = initialValue;
     isOpen.value = true;
+
+    if (options.onOpened) options.onOpened();
 
     return new Promise((resolve) => {
       resolvePromise = resolve;

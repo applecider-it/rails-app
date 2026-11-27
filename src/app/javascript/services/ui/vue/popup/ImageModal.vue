@@ -1,44 +1,31 @@
 <script setup lang="ts">
-import { ref, onMounted, type Ref } from 'vue';
 import Modal from './Modal.vue';
-import { useModal } from '../../vue-hook/useModal';
-
-import { getImages } from '../../image';
+import type { useImageModal } from '../../vue-hook/useImageModal';
 
 interface Props {
-  modal: ReturnType<typeof useModal<string>>;
+  imageModal: ReturnType<typeof useImageModal>;
 }
 
 const props = defineProps<Props>();
-
-const images: Ref<string[], string[]> = ref([]);
-
-/** 画像選択時 */
-const onSelectImage = (src: string) => {
-  props.modal.value.value = src;
-  props.modal.onCommit();
-};
-
-onMounted(async () => {
-  const list = await getImages();
-
-  images.value = list;
-});
 </script>
 
 <template>
-  <Modal :isOpen="modal.isOpen.value" :onClose="modal.onCancel">
+  <Modal
+    :isOpen="imageModal.modal.isOpen.value"
+    :onClose="imageModal.modal.onCancel"
+  >
     <h2 class="text-xl font-bold mb-2">画像</h2>
 
     <h3 class="font-bold my-2">一覧から選択</h3>
 
-    <div class="flex flex-wrap gap-1 items-center">
+    <div v-if="imageModal.loading.value">Loading...</div>
+    <div v-else class="flex flex-wrap gap-1 items-center">
       <img
-        v-for="(src, index) in images"
+        v-for="(src, index) in imageModal.images.value"
         :key="index"
         :src="src"
         class="w-10 object-cover"
-        @click="onSelectImage(src)"
+        @click="imageModal.onSelectImage(src)"
       />
     </div>
 
@@ -49,11 +36,11 @@ onMounted(async () => {
       <input
         type="text"
         class="app-form-input w-auto"
-        v-model="modal.value.value"
+        v-model="imageModal.modal.value.value"
       />
 
       <button
-        @click="modal.onCommit"
+        @click="imageModal.modal.onCommit"
         class="app-btn-primary mr-2"
         type="button"
       >
@@ -61,7 +48,11 @@ onMounted(async () => {
       </button>
     </div>
 
-    <button @click="modal.onCancel" class="app-btn-secondary" type="button">
+    <button
+      @click="imageModal.modal.onCancel"
+      class="app-btn-secondary"
+      type="button"
+    >
       キャンセル
     </button>
   </Modal>
