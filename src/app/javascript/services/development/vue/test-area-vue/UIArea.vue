@@ -56,6 +56,9 @@ const toastTest = (type) => {
       <button class="app-btn-primary" @click="() => toastTest('alert')">
         Toast alert
       </button>
+      <button class="app-btn-primary" @click="() => toastTest('invalidtype')">
+        Toast invalidtype
+      </button>
       <button
         class="app-btn-primary"
         @click="

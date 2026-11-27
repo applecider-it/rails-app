@@ -6,46 +6,63 @@ defineProps<{
 }>();
 
 function computedClass(toast: Toast) {
-  const color = toast.type === 'alert' ? 'red-200' : 'blue-200';
+  let colors = ['bg-blue-200', 'border-cyan-900'];
 
-  const bgClass = `bg-${color}`;
+  const otherColors = {
+    alert: ['bg-red-200', 'border-amber-800'],
+  };
+
+  if (toast.type in otherColors) colors = otherColors[toast.type];
 
   return [
     'text-sm',
-    bgClass,
     'border-2',
-    'border-gray-400',
     'text-black',
     'px-3',
     'py-1',
     'rounded-lg',
     'shadow-lg',
-    'toast-slide-in',
+    ...colors,
   ];
 }
 </script>
 
 <template>
-  <div class="fixed top-4 right-4 space-y-2 z-50">
+  <TransitionGroup
+    name="toast"
+    tag="div"
+    class="fixed top-4 right-4 z-50 flex flex-col items-end gap-3"
+  >
     <div v-for="toast in toasts" :key="toast.id" :class="computedClass(toast)">
       {{ toast.message }}
     </div>
-  </div>
+  </TransitionGroup>
 </template>
 
 <style scoped>
-.toast-slide-in {
-  animation: toast-slide-in 0.5s ease-out;
+/* 登場: 右からスライドイン */
+.toast-enter-active {
+  transition: all 0.5s ease-out;
+}
+.toast-enter-from {
+  transform: translateX(100px);
+  opacity: 0;
 }
 
-@keyframes toast-slide-in {
-  from {
-    transform: translateX(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+/* 退場: 右へスライドアウト */
+.toast-leave-active {
+  transition: all 0.5s ease-in;
+  position: absolute;
+  right: 0;
+  white-space: nowrap;
+}
+.toast-leave-to {
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+/* 他のトーストが上に詰まるときの動き */
+.toast-move {
+  transition: transform 0.5s ease;
 }
 </style>

@@ -13,9 +13,10 @@ export function useToast() {
 
     toasts.value.push({ id, message, type });
 
+    // 自動削除
     setTimeout(() => {
       toasts.value = toasts.value.filter((toast) => toast.id !== id);
-    }, 3000); // 3秒で自動削除
+    }, 4000);
   }
 
   return {

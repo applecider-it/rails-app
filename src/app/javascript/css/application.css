@@ -8,8 +8,6 @@
 
 @plugin "@tailwindcss/typography";
 
-@source inline("bg-{red,blue}-200");
-
 /* PWAかの判別 */
 @custom-variant app-pwa (@media (display-mode: standalone));
 
