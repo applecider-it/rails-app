@@ -15,9 +15,9 @@ function computedClass(toast: Toast) {
   if (toast.type in otherColors) colors = otherColors[toast.type];
 
   return [
-    'relative',
+    'relative', // これがないと、.toast-leave-active適用時にposition: absoluteの影響で消えるトーストが前面になることがある
+    'whitespace-nowrap',  // これがないと、.toast-leave-active適用時にposition: absoluteの影響で潰れてしまう
     'text-sm',
-    'whitespace-nowrap',
     'border-2',
     'text-black',
     'px-3',
@@ -54,6 +54,7 @@ function computedClass(toast: Toast) {
 /* 退場: 右へスライドアウト */
 .toast-leave-active {
   transition: all 0.5s ease-in;
+  /* toast-moveを機能させるために必要 */
   position: absolute;
 }
 .toast-leave-to {
@@ -63,6 +64,6 @@ function computedClass(toast: Toast) {
 
 /* 他のトーストが上に詰まるときの動き */
 .toast-move {
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
 }
 </style>
