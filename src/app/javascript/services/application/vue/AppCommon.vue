@@ -5,9 +5,9 @@ import Toasts from '@/services/ui/vue/message/Toasts.vue';
 import Loading from '@/services/ui/vue/message/Loading.vue';
 import { useToast } from '@/services/ui/vue-hook/useToast';
 import { setupMessage } from '@/services/ui/message';
-import { setupImage } from '@/services/ui/image';
-import ImageModal from '@/services/ui/vue/popup/ImageModal.vue';
-import { useImageModal } from '@/services/ui/vue-hook/useImageModal';
+import { setupImage } from '@/services/image-modal/image';
+import ImageModal from '@/services/image-modal/vue/ImageModal.vue';
+import { useImageModal } from '@/services/image-modal/vue-hook/useImageModal';
 
 const { toasts, showToast } = useToast();
 

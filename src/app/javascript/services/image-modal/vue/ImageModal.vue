@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Modal from './Modal.vue';
-import type { useImageModal } from '../../vue-hook/useImageModal';
+import Modal from '@/services/ui/vue/popup/Modal.vue';
+import type { useImageModal } from '../vue-hook/useImageModal';
 
 interface Props {
   imageModal: ReturnType<typeof useImageModal>;

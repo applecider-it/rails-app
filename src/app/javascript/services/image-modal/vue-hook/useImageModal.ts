@@ -1,5 +1,5 @@
-import { ref, computed } from 'vue';
-import { useModal } from './useModal';
+import { ref } from 'vue';
+import { useModal } from '@/services/ui/vue-hook/useModal';
 import { getImages } from '../image';
 
 /**

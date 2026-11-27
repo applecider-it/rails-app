@@ -4,7 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { TextStyle, Color } from '@tiptap/extension-text-style';
 
 import { formatHtml } from '@/services/data/html';
-import { openImage } from '@/services/ui/image';
+import { openImage } from '@/services/image-modal/image';
 
 import { CustomImage, HEADING_LEVELS } from '../tiptap/parts';
 
