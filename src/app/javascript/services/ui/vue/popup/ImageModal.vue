@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, type Ref } from 'vue';
-/** モーダルウィンドウ動作確認 */
-import Modal from '@/services/ui/vue/popup/Modal.vue';
-import { useModal } from '@/services/ui/vue-hook/useModal';
+import Modal from './Modal.vue';
+import { useModal } from '../../vue-hook/useModal';
 
 import { getImages } from '../../image';
 
