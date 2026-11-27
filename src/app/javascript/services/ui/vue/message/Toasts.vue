@@ -17,6 +17,7 @@ function computedClass(toast: Toast) {
   return [
     'relative',
     'text-sm',
+    'whitespace-nowrap',
     'border-2',
     'text-black',
     'px-3',
@@ -54,8 +55,6 @@ function computedClass(toast: Toast) {
 .toast-leave-active {
   transition: all 0.5s ease-in;
   position: absolute;
-  right: 0;
-  white-space: nowrap;
 }
 .toast-leave-to {
   transform: translateX(100px);
