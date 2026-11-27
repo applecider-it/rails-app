@@ -2,7 +2,7 @@
 import { useMedia } from '../vue-hook/useMedia';
 
 import ResultArea from './media-area/ResultArea.vue';
-import ControlArea from './media-area/ControlArea.vue';
+import MainArea from './media-area/MainArea.vue';
 
 const {
   startCamera,
@@ -19,8 +19,7 @@ const {
 
 <template>
   <div class="camera-container">
-    <!-- 操作ボタンエリア -->
-    <ControlArea
+    <MainArea
       :isRecording="isRecording"
       @startCamera="startCamera"
       @stopCamera="stopCamera"

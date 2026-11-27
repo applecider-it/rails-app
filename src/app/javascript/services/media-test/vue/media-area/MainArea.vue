@@ -17,6 +17,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
+  <!-- 操作ボタンエリア -->
   <div class="space-x-3 mb-5">
     <button @click="emit('startCamera')" class="app-btn-primary">
       カメラを起動
@@ -45,6 +46,7 @@ const emit = defineEmits<{
     </button>
   </div>
 
+  <!-- 映像表示 -->
   <video
     ref="videoRef"
     autoplay
