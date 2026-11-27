@@ -16,3 +16,19 @@ export const createSlideElement = (type: ElementType) => {
 
   return newEl;
 };
+
+/** 保存データの後方互換 */
+export const NormalizeSaveData = (saveData: any[]): SlideElement[] => {
+  const list: SlideElement[] = [];
+
+  saveData.forEach((row, index) => {
+    const newRow = createSlideElement(row.type);
+    for (const [key, value] of Object.entries(row)) {
+      newRow[key] = value;
+    }
+
+    list.push(newRow);
+  });
+
+  return list;
+};

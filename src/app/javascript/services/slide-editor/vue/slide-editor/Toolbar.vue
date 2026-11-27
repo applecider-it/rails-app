@@ -9,7 +9,6 @@ const emit = defineEmits<{
 
 /** CSSクラス用定数 */
 const cssClass = {
-  /** ボタンのCSSクラス */
   btn: 'px-3 py-1.5 text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md border border-slate-300 transition-colors flex items-center gap-1',
 };
 </script>

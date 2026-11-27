@@ -5,6 +5,7 @@ import { showToast } from '@/services/ui/message';
 
 import { SlideElement } from '../../types';
 import { saveSlideData, loadSlideData } from '../../slide-editor/save';
+import { NormalizeSaveData } from '../../slide-editor/elements';
 
 /**
  * 保存管理用Hook
@@ -32,7 +33,9 @@ export function useSave(elements: Ref<SlideElement[]>) {
       return;
     }
 
-    console.log(saveData);
+    const normalizedSaveData = NormalizeSaveData(saveData);
+
+    console.log({ saveData, normalizedSaveData });
 
     if (
       needConfirm &&
@@ -42,7 +45,7 @@ export function useSave(elements: Ref<SlideElement[]>) {
     )
       return;
 
-    elements.value = saveData;
+    elements.value = normalizedSaveData;
 
     if (needConfirm) showToast('読み込みしました。');
   };
