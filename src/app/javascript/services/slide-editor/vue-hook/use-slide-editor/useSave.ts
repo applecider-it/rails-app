@@ -12,6 +12,8 @@ import { saveSlideData, loadSlideData } from '../../slide-editor/save';
 export function useSave(elements: Ref<SlideElement[]>) {
   /** 保存する */
   const save = async () => {
+    if (!confirm('保存しますが、よろしいですか？')) return;
+
     // JSONに変換
     const json = cloneJson(elements.value);
     console.log(json);
