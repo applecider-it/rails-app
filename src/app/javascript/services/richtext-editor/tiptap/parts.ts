@@ -13,7 +13,7 @@ export const CustomImage = Image.extend({
       ...this.parent?.(),
       style: {
         // style属性がない画像（新規挿入時など）に付けるデフォルトの幅
-        default: 'width: 20rem;',
+        default: 'width: 10rem;',
         // HTMLを読み込むとき: img要素のstyle属性をそのまま取り込む
         parseHTML: (element) => element.getAttribute('style'),
         // HTMLを出力するとき: 保持しているstyleをimg要素に付ける

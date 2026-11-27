@@ -4,6 +4,8 @@ import { ref, onMounted, type Ref } from 'vue';
 import Modal from '@/services/ui/vue/popup/Modal.vue';
 import { useModal } from '@/services/ui/vue-hook/useModal';
 
+import { getImages } from '../../image';
+
 interface Props {
   modal: ReturnType<typeof useModal<string>>;
 }
@@ -18,11 +20,10 @@ const onSelectImage = (src: string) => {
   props.modal.onCommit();
 };
 
-onMounted(() => {
-  Array.from({ length: 5 }).forEach((_, index) => {
-    images.value.push('http://localhost:3000/icon.svg');
-    images.value.push('http://localhost:3000/icon.png');
-  });
+onMounted(async () => {
+  const list = await getImages();
+
+  images.value = list;
 });
 </script>
 
