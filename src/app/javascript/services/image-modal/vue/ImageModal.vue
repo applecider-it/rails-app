@@ -18,7 +18,7 @@ const props = defineProps<Props>();
 
     <h3 class="font-bold my-2">一覧から選択</h3>
 
-    <div v-if="imageModal.loading.value">Loading...</div>
+    <div v-if="imageModal.loading.value" class="px-4 py-6">Loading...</div>
     <div v-else>
       <div>
         {{ imageModal.page.value }} / {{ imageModal.pageCount.value }}

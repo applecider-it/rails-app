@@ -19,6 +19,7 @@ export function useImageModal() {
 
   const loading = ref<boolean>(false);
 
+  /** 画像を設定 */
   const setImages = async () => {
     const result = await getImages(page.value);
 
@@ -37,6 +38,7 @@ export function useImageModal() {
     modal.onCommit();
   };
 
+  /** 画像モーダルを開く */
   const open = async (initialValue: string) => {
     images.value = [];
     loading.value = true;
@@ -46,20 +48,24 @@ export function useImageModal() {
     return await modal.open(initialValue);
   };
 
+  /** 次のページがあるか返す */
   const hasNext = () => {
     return page.value < pageCount.value;
   };
 
+  /** 前のページがあるか返す */
   const hasPrev = () => {
     return page.value > 1;
   };
 
+  /** 次のページに移動 */
   const next = () => {
     loading.value = true;
     page.value++;
     setImages();
   };
 
+  /** 前のページに移動 */
   const prev = () => {
     loading.value = true;
     page.value--;

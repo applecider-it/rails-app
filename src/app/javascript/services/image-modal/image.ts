@@ -1,4 +1,4 @@
-import type { useImageModal } from '@/services/ui/vue-hook/useImageModal';
+import type { useImageModal } from './vue-hook/useImageModal';
 import { sleep } from '@/services/system/date';
 
 /** 画像用モーダル */
