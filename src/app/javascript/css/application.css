@@ -61,7 +61,7 @@
 
 /* 通常のリンク */
 @utility app-link-normal {
-  @apply text-blue-600 hover:underline;
+  @apply text-blue-600 hover:underline cursor-pointer;
 }
 
 /* アクティブなリンク */

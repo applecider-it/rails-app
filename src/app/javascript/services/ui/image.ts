@@ -15,7 +15,9 @@ export async function openImage(initialValue: string = '') {
 }
 
 /** 画像取得 */
-export async function getImages() {
+export async function getImages(page: number) {
+  console.log('getImages', { page });
+
   await sleep(1000 * 0.5);
 
   const list = [];
@@ -26,5 +28,8 @@ export async function getImages() {
     list.push('http://localhost:3000/icon.png');
   });
 
-  return list;
+  return {
+    list,
+    pageCount: 3,
+  };
 }

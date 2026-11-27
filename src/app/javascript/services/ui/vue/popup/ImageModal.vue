@@ -19,14 +19,35 @@ const props = defineProps<Props>();
     <h3 class="font-bold my-2">一覧から選択</h3>
 
     <div v-if="imageModal.loading.value">Loading...</div>
-    <div v-else class="flex flex-wrap gap-1 items-center">
-      <img
-        v-for="(src, index) in imageModal.images.value"
-        :key="index"
-        :src="src"
-        class="w-10 object-cover"
-        @click="imageModal.onSelectImage(src)"
-      />
+    <div v-else>
+      <div>
+        {{ imageModal.page.value }} / {{ imageModal.pageCount.value }}
+
+        <span
+          v-if="imageModal.hasPrev()"
+          class="app-link-normal ml-4"
+          @click="imageModal.prev"
+        >
+          前のページ
+        </span>
+
+        <span
+          v-if="imageModal.hasNext()"
+          class="app-link-normal ml-4"
+          @click="imageModal.next"
+        >
+          次のページ
+        </span>
+      </div>
+      <div class="flex flex-wrap gap-1 items-center mt-2">
+        <img
+          v-for="(src, index) in imageModal.images.value"
+          :key="index"
+          :src="src"
+          class="w-10 object-cover"
+          @click="imageModal.onSelectImage(src)"
+        />
+      </div>
     </div>
 
     <h3 class="font-bold my-2">URL指定</h3>
