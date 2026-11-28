@@ -1,4 +1,5 @@
 import { cloneJson } from '@/services/data/json';
+import { sleep } from '@/services/system/date';
 
 import { SlideElement } from '../types';
 
@@ -34,11 +35,17 @@ let saveData = initailData;
 
 /** スライドデータの保存 */
 export const saveSlideData = async (json: any) => {
+  // 画面の挙動の確認用にスリープさせる
+  await sleep(1000 * 0.5);
+
   saveData = json;
 };
 
 /** スライドデータの読み込み */
 export const loadSlideData = async () => {
+  // 画面の挙動の確認用にスリープさせる
+  await sleep(1000 * 0.5);
+
   // cloneJson()で再生成しないと、Vueが変更を認識しない
   return cloneJson(saveData);
 };

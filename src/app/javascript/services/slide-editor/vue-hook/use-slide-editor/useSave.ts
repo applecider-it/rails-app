@@ -1,7 +1,7 @@
 import { onMounted, Ref } from 'vue';
 
 import { cloneJson } from '@/services/data/json';
-import { showToast } from '@/services/ui/message';
+import { showToast, setIsLoading } from '@/services/ui/message';
 
 import { SlideElement } from '../../types';
 import { saveSlideData, loadSlideData } from '../../slide-editor/save';
@@ -19,14 +19,26 @@ export function useSave(elements: Ref<SlideElement[]>) {
     const json = cloneJson(elements.value);
     console.log(json);
 
+    setIsLoading(true);
     await saveSlideData(json);
+    setIsLoading(false);
 
     showToast('保存しました。');
   };
 
   /** 読み込みをする */
   const load = async (needConfirm: boolean = true) => {
+    if (
+      needConfirm &&
+      !confirm(
+        '保存していない変更がある場合は、上書きされますが、よろしいですか？',
+      )
+    )
+      return;
+
+    setIsLoading(true);
     const saveData = await loadSlideData();
+    setIsLoading(false);
 
     if (!saveData) {
       showToast('セーブデータがありません。', 'alert');
@@ -36,14 +48,6 @@ export function useSave(elements: Ref<SlideElement[]>) {
     const normalizedSaveData = NormalizeSaveData(saveData);
 
     console.log({ saveData, normalizedSaveData });
-
-    if (
-      needConfirm &&
-      !confirm(
-        '保存していない変更がある場合は、上書きされますが、よろしいですか？',
-      )
-    )
-      return;
 
     elements.value = normalizedSaveData;
 
