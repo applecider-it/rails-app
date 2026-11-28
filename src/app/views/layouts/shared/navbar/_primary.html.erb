@@ -1,7 +1,7 @@
 <%
 link_style = "hover:text-indigo-500"
 %>
-<div class="max-w-7xl mx-auto px-6 py-4 hidden md:flex items-center justify-between">
+<div class="max-w-7xl mx-auto px-6 py-6 hidden md:flex items-center justify-between">
   <!-- Logo -->
   <a href="/">
     <div
@@ -12,7 +12,7 @@ link_style = "hover:text-indigo-500"
   </a>
 
   <!-- Desktop Menu -->
-  <nav class="flex space-x-8 text-gray-700 font-medium">
+  <nav class="flex space-x-7 text-gray-700 font-medium">
     <%= link_to 'Top', root_path, class: link_style %>
     <%= link_to 'Tweet', tweets_path, class: link_style %>
     <%= link_to 'Tweet(JS)', tweets_js_path, class: link_style %>
@@ -21,7 +21,15 @@ link_style = "hover:text-indigo-500"
     <%= link_to 'お知らせ', info_path, class: link_style %>
     <%= link_to 'ブログ', posts_path, class: link_style %>
     <% if user_signed_in? %>
-      <%= link_to current_user.name, edit_user_registration_path, class: link_style %>
+        <%= link_to edit_user_registration_path,
+        title: current_user.name,
+        class: link_style do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+        <% end %>
       <%= button_to 'Logout',
         destroy_user_session_path,
         method: :delete,
