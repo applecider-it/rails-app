@@ -1,7 +1,7 @@
 <%
 link_style = "hover:text-indigo-500"
 %>
-<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<div class="max-w-7xl mx-auto px-6 py-4 hidden md:flex items-center justify-between">
   <!-- Logo -->
   <a href="/">
     <div
@@ -12,7 +12,7 @@ link_style = "hover:text-indigo-500"
   </a>
 
   <!-- Desktop Menu -->
-  <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+  <nav class="flex space-x-8 text-gray-700 font-medium">
     <%= link_to 'Top', root_path, class: link_style %>
     <%= link_to 'Tweet', tweets_path, class: link_style %>
     <%= link_to 'Tweet(JS)', tweets_js_path, class: link_style %>
@@ -32,9 +32,4 @@ link_style = "hover:text-indigo-500"
       <%= link_to 'Sign up', new_user_registration_path, class: link_style %>
     <% end %>
   </nav>
-
-  <!-- Mobile Button -->
-  <button @click="open = !open" class="md:hidden text-2xl cursor-pointer">
-    ☰
-  </button>
 </div>
