@@ -1,6 +1,7 @@
 import { ref, computed, watch } from 'vue';
 
 import { cloneJson } from '@/services/data/json';
+import { setIsDirty } from '@/services/form/check-form-changes';
 
 import { createSlideElement } from '../../slide-editor/elements';
 import { ElementType, SlideElement } from '../../types';
@@ -74,6 +75,7 @@ export function useElements() {
   watch(
     elements,
     (newVal) => {
+      setIsDirty(true);
       // 変更が入るたびにタイマーをリセットする
       if (watchTimer) clearTimeout(watchTimer);
 

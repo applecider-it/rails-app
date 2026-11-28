@@ -6,14 +6,14 @@ let isInit = false;
 /** 離脱チェックの初期化 */
 function init() {
   if (!isInit) {
-    window.addEventListener("beforeunload", function (e) {
+    window.addEventListener('beforeunload', function (e) {
       if (isDirty) {
         e.preventDefault();
-        e.returnValue = "";
+        e.returnValue = '';
       }
     });
 
-    console.log("checkFormChanges init");
+    console.log('checkFormChanges init');
 
     isInit = true;
   }
@@ -30,7 +30,7 @@ function init() {
 export function checkFormChanges(form: HTMLFormElement, options: any = {}) {
   const clearOnly = !!options?.clearOnly;
 
-  console.log("checkFormChanges setup", { options, clearOnly });
+  console.log('checkFormChanges setup', { options, clearOnly });
 
   init();
 
@@ -38,15 +38,22 @@ export function checkFormChanges(form: HTMLFormElement, options: any = {}) {
     // 変更監視を有効にする場合
 
     // 変更時に変更監視フラグを有効化
-    form.addEventListener("change", () => {
-      console.log("checkFormChanges on");
+    form.addEventListener('change', () => {
+      console.log('checkFormChanges on');
       isDirty = true;
     });
   }
 
   // 送信時に変更監視フラグを無効化
-  form.addEventListener("submit", () => {
-    console.log("checkFormChanges off");
+  form.addEventListener('submit', () => {
+    console.log('checkFormChanges off');
     isDirty = false;
   });
+}
+
+/** フォーム変更チェックフラグ更新 */
+export function setIsDirty(val: boolean) {
+  init();
+
+  isDirty = val;
 }

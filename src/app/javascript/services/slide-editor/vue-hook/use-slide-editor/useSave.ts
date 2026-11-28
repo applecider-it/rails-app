@@ -1,7 +1,8 @@
-import { onMounted, Ref } from 'vue';
+import { onMounted, Ref, nextTick } from 'vue';
 
 import { cloneJson } from '@/services/data/json';
 import { showToast, setIsLoading } from '@/services/ui/message';
+import { setIsDirty } from '@/services/form/check-form-changes';
 
 import { SlideElement } from '../../types';
 import { saveSlideData, loadSlideData } from '../../slide-editor/save';
@@ -24,6 +25,8 @@ export function useSave(elements: Ref<SlideElement[]>) {
     setIsLoading(false);
 
     showToast('保存しました。');
+
+    setIsDirty(false);
   };
 
   /** 読み込みをする */
@@ -49,9 +52,14 @@ export function useSave(elements: Ref<SlideElement[]>) {
 
     console.log({ saveData, normalizedSaveData });
 
+    if (needConfirm) showToast('読み込みしました。');
+
     elements.value = normalizedSaveData;
 
-    if (needConfirm) showToast('読み込みしました。');
+    // elements.valueの時に、watchで、setIsDirty(true);が実行されるため１ティック待つ
+    await nextTick();
+
+    setIsDirty(false);
   };
 
   onMounted(async () => {
